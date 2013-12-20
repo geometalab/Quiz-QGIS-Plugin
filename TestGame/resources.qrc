@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="/plugins/testgame">
+    <file>Norway.png</file>
+    <file>Sweden.png</file>
+    <file>icon.png</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>europe-map-Start-Page.png</file>
+  </qresource>
+</RCC>

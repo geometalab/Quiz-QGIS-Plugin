@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TestGame</class>
+ <widget class="QDialog" name="TestGame">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>739</width>
+    <height>727</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TestGame</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>19</x>
+     <y>-2</y>
+     <width>711</width>
+     <height>691</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="startTitel">
+      <property name="styleSheet">
+       <string notr="true">
+font: italic 24pt &quot;Verdana&quot;;
+color: rgb(118, 118, 118);</string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:600; font-style:italic; color:#000000;&quot;&gt;Europa Quiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="startImage">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/newPrefix/europe-map-Start-Page.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="2" column="0">
+         <widget class="QPushButton" name="startGame">
+          <property name="styleSheet">
+           <string notr="true">
+font: 12pt &quot;Verdana&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Neues Quiz starten</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="chooseQuiz">
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;Verdana&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Quiz auswählen</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="startTraining">
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;Verdana&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Training</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <zorder>pushButton</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>pushButton_3</zorder>
+  <zorder>pushButton_4</zorder>
+  <zorder>startTitel</zorder>
+  <zorder>startGame</zorder>
+  <zorder>startTraining</zorder>
+  <zorder>chooseQuiz</zorder>
+  <zorder>splitter_2</zorder>
+  <zorder>startImage</zorder>
+  <zorder>splitter</zorder>
+  <zorder>startTitel</zorder>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
