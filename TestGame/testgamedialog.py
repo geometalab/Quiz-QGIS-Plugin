@@ -21,13 +21,13 @@
 """
 
 from PyQt4 import QtCore, QtGui
-from ui_testgame import Ui_TestGame
+from newStartScreen import Ui_MainWindow
 # create the dialog for zoom to point
 
 
-class TestGameDialog(QtGui.QDialog):
+class TestGameDialog(QtGui.QMainWindow):
     def __init__(self):
-        QtGui.QDialog.__init__(self)
+        QtGui.QMainWindow.__init__(self)
         # Set up the user interface from Designer.
-        self.ui = Ui_TestGame()
+        self.ui = Ui_MainWindow()
         self.ui.setupUi(self)

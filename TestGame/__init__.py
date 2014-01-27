@@ -20,7 +20,6 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
-
 def classFactory(iface):
     # load TestGame class from file TestGame
     from testgame import TestGame

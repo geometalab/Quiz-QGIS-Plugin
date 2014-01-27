@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>651</width>
+    <height>418</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Quiz-Plugin</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="startTitel">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Verdana</family>
+          <pointsize>24</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:normal; color:#000000;&quot;&gt;Quiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>586</width>
+        <height>97</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="startImage">
+        <property name="font">
+         <font>
+          <family>Verdana</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="startGame">
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="startTraining">
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="chooseQuiz">
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="font">
+           <font>
+            <family>Verdana</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>586</width>
+        <height>75</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>651</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="dataMenu">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <widget class="QMenu" name="menuLetzte_Quizzes">
+     <property name="title">
+      <string>Letzte Quizzes</string>
+     </property>
+     <addaction name="actionFd"/>
+     <addaction name="actionDf"/>
+     <addaction name="actionDf_2"/>
+     <addaction name="actionDf_3"/>
+     <addaction name="actionFd_2"/>
+    </widget>
+    <addaction name="quizLoader"/>
+    <addaction name="results"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuiz_starten"/>
+    <addaction name="actionQuiz_trainieren"/>
+    <addaction name="menuLetzte_Quizzes"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions_2">
+    <property name="title">
+     <string>Optionen</string>
+    </property>
+    <widget class="QMenu" name="language">
+     <property name="title">
+      <string>Sprache</string>
+     </property>
+     <addaction name="german"/>
+     <addaction name="english"/>
+     <addaction name="french"/>
+    </widget>
+    <widget class="QMenu" name="fontMenu">
+     <property name="title">
+      <string>Schrift</string>
+     </property>
+     <addaction name="actionBigger"/>
+     <addaction name="actionSmaller"/>
+    </widget>
+    <addaction name="language"/>
+    <addaction name="fontMenu"/>
+   </widget>
+   <widget class="QMenu" name="menuGames">
+    <property name="title">
+     <string>Weitere Lerngames</string>
+    </property>
+    <addaction name="geogame"/>
+    <addaction name="quizPlatform"/>
+   </widget>
+   <widget class="QMenu" name="menuHilf">
+    <property name="title">
+     <string>Hilfe</string>
+    </property>
+    <addaction name="actionContact"/>
+    <addaction name="actionWebhelp"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="dataMenu"/>
+   <addaction name="menuOptions_2"/>
+   <addaction name="menuGames"/>
+   <addaction name="menuHilf"/>
+  </widget>
+  <action name="quizLoader">
+   <property name="text">
+    <string>Quiz Laden</string>
+   </property>
+  </action>
+  <action name="results">
+   <property name="text">
+    <string>Resultate Speichern</string>
+   </property>
+  </action>
+  <action name="geogame">
+   <property name="text">
+    <string>das game</string>
+   </property>
+  </action>
+  <action name="actionStandard">
+   <property name="text">
+    <string>Standard</string>
+   </property>
+  </action>
+  <action name="quizPlatform">
+   <property name="text">
+    <string>plattform für quizzes</string>
+   </property>
+  </action>
+  <action name="actionQuiz_starten">
+   <property name="text">
+    <string>Quiz Starten</string>
+   </property>
+  </action>
+  <action name="actionQuiz_trainieren">
+   <property name="text">
+    <string>Quiz Trainieren</string>
+   </property>
+  </action>
+  <action name="german">
+   <property name="text">
+    <string>Deutsch</string>
+   </property>
+  </action>
+  <action name="english">
+   <property name="text">
+    <string>Englisch</string>
+   </property>
+  </action>
+  <action name="actionFd">
+   <property name="text">
+    <string>fd</string>
+   </property>
+  </action>
+  <action name="actionDf">
+   <property name="text">
+    <string>df</string>
+   </property>
+  </action>
+  <action name="actionDf_2">
+   <property name="text">
+    <string>df</string>
+   </property>
+  </action>
+  <action name="actionDf_3">
+   <property name="text">
+    <string>df</string>
+   </property>
+  </action>
+  <action name="actionFd_2">
+   <property name="text">
+    <string>fd</string>
+   </property>
+  </action>
+  <action name="actionContact">
+   <property name="text">
+    <string>Kontakt</string>
+   </property>
+  </action>
+  <action name="actionWebhelp">
+   <property name="text">
+    <string>Webhilfe</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>Über</string>
+   </property>
+  </action>
+  <action name="french">
+   <property name="text">
+    <string>Französisch</string>
+   </property>
+  </action>
+  <action name="actionBigger">
+   <property name="text">
+    <string>Grösser</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+   <property name="softKeyRole">
+    <enum>QAction::NoSoftKey</enum>
+   </property>
+  </action>
+  <action name="actionSmaller">
+   <property name="text">
+    <string>Kleiner</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
