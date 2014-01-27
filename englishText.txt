@@ -1,0 +1,64 @@
+Start quiz
+Train quiz
+Choose quiz
+Help
+Language: 
+Back
+Next
+Results
+On this page you can find information regarding this plugin
+http://giswiki.hsr.ch/QGIS-Materialien
+About: 
+Version: 0.1
+Author: Rafael Krucker
+Contakt: rkrucker@hsr.ch
+Last Question
+Next Question
+Quit training
+Results
+You now have 
+ Point out of 
+You now have 
+ Points out of 
+Your answer is correct
+Unfortunately, you answered this question wrongly
+The answer is 
+The right answer would have been 
+
+Your answer was correct
+Check for correctness 
+Question
+of 
+Fontsize 
+Data
+Load Quiz
+Save Results
+Start Quiz
+Last Used
+Options
+List of other geogames
+Platform To Get More Quizzes
+Font 
+English 
+German 
+More Educational Games 
+Contact
+Webhelp
+About 
+Version:  
+0.1
+Author:    
+Institute for Software HSR
+Website:    
+<a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Website</a>  
+Questions regarding the Plugin: 
+<a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Website</a>  
+Questions regarding the quizzes: 
+<a href="http://docs.moodle.org/23/en/GIFT" > Quiz-format rules</a>
+Questions regarding QGIS: 
+<a href="http://giswiki.hsr.ch/QGIS" >QGIS-Page</a>
+Contact: 
+rkrucker@hsr.ch 
+French
+Bigger 
+Smaller 

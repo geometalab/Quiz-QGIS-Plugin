@@ -1,0 +1,25 @@
+﻿//Titel:EuroQuiz
+//Anleitung:Einfaches Quiz, bei dem du einem Bild ein Land zuordnen musst
+::Q1::
+{pic =Zürich ~Schweden ~Schweiz ~Frankreich }
+
+::Q2::
+{pic ~Serbien =Afghanistan ~Spanien ~England }
+
+::Q3::
+{pic ~Ungarn ~Russland ~Italien =Rumänien }
+
+::Q4::
+{pic ~Malta =Andorra ~Portugal ~Bosnien }
+
+::Q5::
+{pic ~Finnland ~Estland =Lettland ~Albanien }
+
+::Q6::
+{pic =Irland ~England ~Frankreich ~Ukraine }
+
+::Q7::
+{pic ~Rumänien ~Türkei =Griechenland ~Norwegen }
+
+::Q8::
+{pic ~Serbien ~Kosovo ~Deutschland =Bosnien }
