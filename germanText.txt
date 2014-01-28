@@ -1,6 +1,6 @@
 ﻿Quiz starten
 Quiz trainieren
-Quiz wählen
+Quiz laden
 Hilfe
 Sprache
 Zurück

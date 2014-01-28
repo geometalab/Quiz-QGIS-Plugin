@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Ausleihe\.qgis2\python\plugins\TestGame\newStartScreen.ui'
 #
-# Created: Mon Jan 27 14:55:44 2014
+# Created: Tue Jan 28 08:48:29 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -107,10 +107,6 @@ class Ui_MainWindow(object):
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 651, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
-        self.dataMenu = QtGui.QMenu(self.menubar)
-        self.dataMenu.setObjectName(_fromUtf8("dataMenu"))
-        self.menuLetzte_Quizzes = QtGui.QMenu(self.dataMenu)
-        self.menuLetzte_Quizzes.setObjectName(_fromUtf8("menuLetzte_Quizzes"))
         self.menuOptions_2 = QtGui.QMenu(self.menubar)
         self.menuOptions_2.setObjectName(_fromUtf8("menuOptions_2"))
         self.language = QtGui.QMenu(self.menuOptions_2)
@@ -163,17 +159,6 @@ class Ui_MainWindow(object):
         self.actionBigger.setObjectName(_fromUtf8("actionBigger"))
         self.actionSmaller = QtGui.QAction(MainWindow)
         self.actionSmaller.setObjectName(_fromUtf8("actionSmaller"))
-        self.menuLetzte_Quizzes.addAction(self.actionFd)
-        self.menuLetzte_Quizzes.addAction(self.actionDf)
-        self.menuLetzte_Quizzes.addAction(self.actionDf_2)
-        self.menuLetzte_Quizzes.addAction(self.actionDf_3)
-        self.menuLetzte_Quizzes.addAction(self.actionFd_2)
-        self.dataMenu.addAction(self.quizLoader)
-        self.dataMenu.addAction(self.results)
-        self.dataMenu.addSeparator()
-        self.dataMenu.addAction(self.actionQuiz_starten)
-        self.dataMenu.addAction(self.actionQuiz_trainieren)
-        self.dataMenu.addAction(self.menuLetzte_Quizzes.menuAction())
         self.language.addAction(self.german)
         self.language.addAction(self.english)
         self.language.addAction(self.french)
@@ -186,7 +171,6 @@ class Ui_MainWindow(object):
         self.menuHilf.addAction(self.actionContact)
         self.menuHilf.addAction(self.actionWebhelp)
         self.menuHilf.addAction(self.actionAbout)
-        self.menubar.addAction(self.dataMenu.menuAction())
         self.menubar.addAction(self.menuOptions_2.menuAction())
         self.menubar.addAction(self.menuGames.menuAction())
         self.menubar.addAction(self.menuHilf.menuAction())
@@ -198,8 +182,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Quiz-Plugin", None))
         self.startTitel.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600; font-style:normal; color:#000000;\">Quiz</span></p></body></html>", None))
         self.startImage.setText(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>", None))
-        self.dataMenu.setTitle(_translate("MainWindow", "Datei", None))
-        self.menuLetzte_Quizzes.setTitle(_translate("MainWindow", "Letzte Quizzes", None))
         self.menuOptions_2.setTitle(_translate("MainWindow", "Optionen", None))
         self.language.setTitle(_translate("MainWindow", "Sprache", None))
         self.fontMenu.setTitle(_translate("MainWindow", "Schrift", None))

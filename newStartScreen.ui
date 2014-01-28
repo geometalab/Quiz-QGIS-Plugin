@@ -190,27 +190,6 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="dataMenu">
-    <property name="title">
-     <string>Datei</string>
-    </property>
-    <widget class="QMenu" name="menuLetzte_Quizzes">
-     <property name="title">
-      <string>Letzte Quizzes</string>
-     </property>
-     <addaction name="actionFd"/>
-     <addaction name="actionDf"/>
-     <addaction name="actionDf_2"/>
-     <addaction name="actionDf_3"/>
-     <addaction name="actionFd_2"/>
-    </widget>
-    <addaction name="quizLoader"/>
-    <addaction name="results"/>
-    <addaction name="separator"/>
-    <addaction name="actionQuiz_starten"/>
-    <addaction name="actionQuiz_trainieren"/>
-    <addaction name="menuLetzte_Quizzes"/>
-   </widget>
    <widget class="QMenu" name="menuOptions_2">
     <property name="title">
      <string>Optionen</string>
@@ -248,7 +227,6 @@
     <addaction name="actionWebhelp"/>
     <addaction name="actionAbout"/>
    </widget>
-   <addaction name="dataMenu"/>
    <addaction name="menuOptions_2"/>
    <addaction name="menuGames"/>
    <addaction name="menuHilf"/>
