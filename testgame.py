@@ -1623,7 +1623,7 @@ class TestGame:
 			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
 			
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
-		self.currWindow.ui.pushButton_8.setEnabled(False)
+		self.currWindow.ui.pushButton_13.setEnabled(False)
 		
 	
 	def matchingRightButtonClickedQuiz(self):
@@ -1697,7 +1697,7 @@ class TestGame:
 			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
 			
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
-		self.currWindow.ui.pushButton_8.setEnabled(False)
+		self.currWindow.ui.pushButton_13.setEnabled(False)
 		self.drawMatchingLines()
 		
 	def evaluateCheckBoxesTraining(self):
@@ -1747,7 +1747,7 @@ class TestGame:
 			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
 			
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
-		self.currWindow.ui.pushButton_8.setEnabled(False)
+		self.currWindow.ui.pushButton_13.setEnabled(False)
 	
 	def updateCheckBoxesTraining(self):
 		
