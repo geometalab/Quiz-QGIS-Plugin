@@ -588,10 +588,7 @@ class TestGame:
 			self.lines.append([])
 		self.currWindow = StartGameDialog()
 		self.addWidgets()
-		self.paintPanel = Painter(self, self.lines)
-		#self.paintPanel.close()
-		self.currWindow.ui.gridLayout.addWidget(self.paintPanel)
-		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)
+		
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
 			i.clicked.connect(self.scorePenalty)
@@ -674,6 +671,13 @@ class TestGame:
 		self.currWindow.ui.pushButton_13.clicked.connect(self.previousQuestion)
 		self.currWindow.ui.pushButton_13.setText(self.translator[self.language][5])
 		self.currWindow.show()
+		
+		
+		
+		self.paintPanel = Painter(self, self.lines)
+		#self.paintPanel.close()
+		self.currWindow.ui.stackedWidget.insertWidget(0,self.paintPanel)
+		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)
 	
 	def nextQuestion(self):
 		
@@ -787,6 +791,7 @@ class TestGame:
 					rightListShuffeldTemp.append(self.questions[self.questionNumber][1][i])
 					if not self.siteVisitedMatching[self.questionNumber]:
 						self.linesForMatching[self.questionNumber].append([])
+						self.lines[self.questionNumber].append([])
 					
 			random.shuffle(rightListShuffeldTemp)
 			
@@ -920,7 +925,8 @@ class TestGame:
 			self.siteVisitedMatching[self.questionNumber] = True
 	
 	def drawMatchingLines(self):
-		
+		self.paintPanel.update(self.questionNumber)
+		'''
 		#self.paintPanel.update()
 		for i in self.lines:
 			if not i == []:
@@ -930,8 +936,8 @@ class TestGame:
 				self.currWindow.ui.gridLayout.addWidget(self.currWindow.ui.newLine)
 				#.drawLine(i[0].pos().x(), i[0].pos().y(), i[1].pos().x(), i[1].pos().y())
 				print 'huhu'
-		
-		print 'hello'
+		'''
+		#print 'hello'
 		
 	def matchingLeftButtonClicked(self):
 		
@@ -958,9 +964,12 @@ class TestGame:
 						tempFont = self.currWindow.ui.matchingLabels[(i-1)*2].font()
 						tempFont.setBold(True)
 						self.currWindow.ui.matchingLabels[(i-1)*2].setFont(tempFont)
-						self.currWindow.ui.matchingLabels[(i-1)*2].update()
+						#self.currWindow.ui.matchingLabels[(i-1)*2].update()
 		else: 
 			self.linesForMatching[self.questionNumber][indexOfLeftButton] = []
+			self.lines[self.questionNumber][indexOfLeftButton] = []
+			
+		self.drawMatchingLines()
 
 	
 	def matchingRightButtonClicked(self):
@@ -992,10 +1001,17 @@ class TestGame:
 		else:
 			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(0)
 
-		self.lines[self.questionNumber].append(buttonLeft)
-		self.lines[self.questionNumber].append(buttonRight)
+
+		#print self.lines
+		self.lines[self.questionNumber][indexOfLeftButton].append(buttonLeft)
+		self.lines[self.questionNumber][indexOfLeftButton].append(buttonRight)
 		
-		self.paintPanel.update()
+		
+		print self.lines
+		print self.linesForMatching
+		
+		self.drawMatchingLines()
+		self.currWindow.repaint()
 		#self.drawMatchingLines()
 		
 		'''self.currWindow.paintEvent(buttonLeft.pos().x(),buttonLeft.pos().y(),buttonRight.pos().x(),buttonRight.pos().y())'''
@@ -1884,16 +1900,21 @@ class Painter(QtGui.QWidget):
 	
 
 	def __init__(self, parent, lines):
-		super(Painter, self).__init__()
+		self.parent = parent
 		self.lines = lines
-	
-	def update(self):
+		self.xOffset = 0
+		self.yOffset = 0
+		self.questionNumber = 0
+		super(Painter, self).__init__()
+		
+	def update(self, questionNumber):
 		self.repaint()
+		self.questionNumber=questionNumber
 	
 	def paintEvent(self, event):
-		super(paintEvent(event))
-		painter = QtGui.QPainter()
+		painter = QtGui.QPainter(self)
 		painter.begin(self)
+		painter.setRenderHint(QPainter.Antialiasing)
 		self.drawLines(event, painter)
 		painter.end()
 		
@@ -1901,8 +1922,20 @@ class Painter(QtGui.QWidget):
 		
 		pen = QtGui.QPen(QtCore.Qt.blue, 2, QtCore.Qt.SolidLine)
 		painter.setPen(pen)
-		for i in self.lines:
-			if not i == []:
-				painter.drawLine(i[0].pos().x(), i[0].pos().y(), i[1].pos().x(), i[1].pos().y())
+		
+		#xOffset = self.currWindow.ui.stackedWidget.mapTo(self.currWindow,QPoint(0,0)).x()
+		#yOffset = self.currWindow.ui.stackedWidget.mapTo(self.currWindow,QPoint(0,0)).y()
+		
+		self.xOffset = self.parentWidget().mapTo(self.parentWidget().parentWidget(), QPoint(0,0)).x()
+		self.yOffset = self.parentWidget().mapTo(self.parentWidget().parentWidget(), QPoint(0,0)).y()
+		
+		i = self.lines[self.questionNumber]
+		print i
+		for line in i:
+			if not line == []:
+				painter.drawLine(line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).x()-self.xOffset, line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).y()-self.yOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).x()-self.xOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).y()-self.yOffset)
+				#painter.drawLine(line[0].pos().x()-self.xOffset, line[0].pos().y()-self.yOffset, line[1].pos().x()-self.xOffset, line[1].pos().y()-self.yOffset)
+				#painter.drawLine(0, 0, line[1].pos().x()-self.xOffset, line[1].pos().y()-self.yOffset)
+				
 				print 'huhu'
-		painter.end()
+		
