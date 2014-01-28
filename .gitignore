@@ -18,3 +18,4 @@ ui_startGame.pyc
 ui_testgame.pyc
 ui_trainingQuiz.pyc
 __init__.pyc
+log.csv

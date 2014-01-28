@@ -581,17 +581,17 @@ class TestGame:
 
 		self.rightListShuffeld = []
 		self.linesForMatching = []
-		'''self.lines = []'''
+		self.lines = []
 		for i in range(0, len(self.questions)):
 			self.rightListShuffeld.append([])
 			self.linesForMatching.append([])
-			'''self.lines.append([])'''
+			self.lines.append([])
 		self.currWindow = StartGameDialog()
 		self.addWidgets()
-		'''self.paintPanel = Painter(self, self.lines)
-		self.paintPanel.close()
-		self.currWindow.ui.stackedWidget.insertWidget(0,self.paintPanel)
-		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)'''
+		self.paintPanel = Painter(self, self.lines)
+		#self.paintPanel.close()
+		self.currWindow.ui.gridLayout.addWidget(self.paintPanel)
+		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
 			i.clicked.connect(self.scorePenalty)
@@ -921,6 +921,16 @@ class TestGame:
 	
 	def drawMatchingLines(self):
 		
+		#self.paintPanel.update()
+		for i in self.lines:
+			if not i == []:
+				self.currWindow.ui.newLine = QFrame()
+				self.currWindow.ui.newLine.setGeometry(QRect(i[0].pos().x(), i[0].pos().y(), i[1].pos().x(), i[1].pos().y()))
+				self.currWindow.ui.newLine.setFrameShape(QFrame.HLine)
+				self.currWindow.ui.gridLayout.addWidget(self.currWindow.ui.newLine)
+				#.drawLine(i[0].pos().x(), i[0].pos().y(), i[1].pos().x(), i[1].pos().y())
+				print 'huhu'
+		
 		print 'hello'
 		
 	def matchingLeftButtonClicked(self):
@@ -982,11 +992,11 @@ class TestGame:
 		else:
 			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(0)
 
-		'''self.lines[self.questionNumber].append(buttonLeft)
+		self.lines[self.questionNumber].append(buttonLeft)
 		self.lines[self.questionNumber].append(buttonRight)
 		
-		self.paintPanel.update()'''
-		
+		self.paintPanel.update()
+		#self.drawMatchingLines()
 		
 		'''self.currWindow.paintEvent(buttonLeft.pos().x(),buttonLeft.pos().y(),buttonRight.pos().x(),buttonRight.pos().y())'''
 
@@ -1870,7 +1880,7 @@ class TestGame:
 	
 
 
-'''class Painter(QtGui.QWidget):
+class Painter(QtGui.QWidget):
 	
 
 	def __init__(self, parent, lines):
@@ -1881,6 +1891,7 @@ class TestGame:
 		self.repaint()
 	
 	def paintEvent(self, event):
+		super(paintEvent(event))
 		painter = QtGui.QPainter()
 		painter.begin(self)
 		self.drawLines(event, painter)
@@ -1894,4 +1905,4 @@ class TestGame:
 			if not i == []:
 				painter.drawLine(i[0].pos().x(), i[0].pos().y(), i[1].pos().x(), i[1].pos().y())
 				print 'huhu'
-		painter.end()'''
+		painter.end()
