@@ -68,6 +68,8 @@ class TestGame:
 	
 	def __init__(self, iface):
 		
+		
+		
 		global dirPath
 		global translator
 		
@@ -587,6 +589,7 @@ class TestGame:
 			self.linesForMatching.append([])
 			self.lines.append([])
 		self.currWindow = StartGameDialog()
+		
 		self.addWidgets()
 		
 		for i in self.currWindow.ui.buttonArray:
@@ -687,7 +690,9 @@ class TestGame:
 		global rightListShuffeld
 
 		self.questionNumber += 1
-
+		
+		self.drawMatchingLines(self.questionNumber)
+		
 		if self.questionNumber == len(self.questions) -1:
 			self.currWindow.ui.pushButton_14.setText(self.translator[self.language][7])
 			self.currWindow.ui.pushButton_14.clicked.disconnect()
@@ -806,7 +811,7 @@ class TestGame:
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
 			
-			self.drawMatchingLines()
+			
 
 			self.siteVisitedMatching[self.questionNumber] = True
 		
@@ -818,6 +823,9 @@ class TestGame:
 		global siteVisitedMatching
 		global rightListShuffeld
 		self.questionNumber -=1
+		
+		self.drawMatchingLines(self.questionNumber)
+		
 		self.currWindow.ui.pushButton_14.setEnabled(True)
 		self.currWindow.ui.pushButton_14.setText(self.translator[self.language][6])
 		self.currWindow.ui.pushButton_14.clicked.disconnect()
@@ -920,12 +928,13 @@ class TestGame:
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setVisible(True)
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(self.rightListShuffeld[self.questionNumber][i])
 				
-			self.drawMatchingLines()
+			
 			
 			self.siteVisitedMatching[self.questionNumber] = True
+		
 	
-	def drawMatchingLines(self):
-		self.paintPanel.update(self.questionNumber)
+	def drawMatchingLines(self, qNumber):
+		self.paintPanel.update(qNumber)
 		'''
 		#self.paintPanel.update()
 		for i in self.lines:
@@ -969,7 +978,7 @@ class TestGame:
 			self.linesForMatching[self.questionNumber][indexOfLeftButton] = []
 			self.lines[self.questionNumber][indexOfLeftButton] = []
 			
-		self.drawMatchingLines()
+		self.drawMatchingLines(self.questionNumber)
 
 	
 	def matchingRightButtonClicked(self):
@@ -1010,7 +1019,7 @@ class TestGame:
 		print self.lines
 		print self.linesForMatching
 		
-		self.drawMatchingLines()
+		self.drawMatchingLines(self.questionNumber)
 		self.currWindow.repaint()
 		#self.drawMatchingLines()
 		
@@ -1369,7 +1378,7 @@ class TestGame:
 					self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
 					self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
 			
-				self.drawMatchingLines()
+				self.drawMatchingLines(self.questionNumber)
 			
 				self.siteVisitedMatching[self.questionNumber] = True
 			
@@ -1562,7 +1571,7 @@ class TestGame:
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
 				
-			self.drawMatchingLines()	
+			
 			
 			if self.frameQuestionAnswered[self.questionFrame]:
 				self.updateMatchingLines()
@@ -1575,7 +1584,7 @@ class TestGame:
 				
 				for i in range(1,len(self.questions[self.questionNumber][0])):
 					self.currWindow.ui.matchingButtons[(i-1)*2].setEnabled(True)
-
+		self.drawMatchingLines(self.questionNumber)
 				
 	def scoreBonusQuiz(self):
 		
@@ -1681,7 +1690,7 @@ class TestGame:
 		else:
 			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(0)
 
-		self.drawMatchingLines
+		self.drawMatchingLines(self.questionNumber)
 	
 	def updateMatchingLines(self):
 		
@@ -1724,7 +1733,7 @@ class TestGame:
 			
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 		self.currWindow.ui.pushButton_13.setEnabled(False)
-		self.drawMatchingLines()
+		self.drawMatchingLines(self.questionNumber)
 		
 	def evaluateCheckBoxesTraining(self):
 		
@@ -1913,8 +1922,8 @@ class Painter(QtGui.QWidget):
 	
 	def paintEvent(self, event):
 		painter = QtGui.QPainter(self)
-		painter.begin(self)
 		painter.setRenderHint(QPainter.Antialiasing)
+		painter.begin(self)
 		self.drawLines(event, painter)
 		painter.end()
 		
@@ -1929,13 +1938,16 @@ class Painter(QtGui.QWidget):
 		self.xOffset = self.parentWidget().mapTo(self.parentWidget().parentWidget(), QPoint(0,0)).x()
 		self.yOffset = self.parentWidget().mapTo(self.parentWidget().parentWidget(), QPoint(0,0)).y()
 		
+		
+		
 		i = self.lines[self.questionNumber]
-		print i
+		#print i
+		#print self.questionNumber
 		for line in i:
 			if not line == []:
 				painter.drawLine(line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).x()-self.xOffset, line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).y()-self.yOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).x()-self.xOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).y()-self.yOffset)
 				#painter.drawLine(line[0].pos().x()-self.xOffset, line[0].pos().y()-self.yOffset, line[1].pos().x()-self.xOffset, line[1].pos().y()-self.yOffset)
 				#painter.drawLine(0, 0, line[1].pos().x()-self.xOffset, line[1].pos().y()-self.yOffset)
 				
-				print 'huhu'
+				#print 'huhu'
 		
