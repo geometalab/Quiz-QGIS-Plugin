@@ -2,7 +2,7 @@
 //Anleitung:Einfaches Quiz, bei dem du einem Bild ein Land zuordnen musst
 
 ::Q1::
-{pic ~Serbien =Afghanistan ~Spanien  }
+{pic?Welches Land ist das? ~Serbien =Afghanistan ~Spanien  }
 
 ::Q2::Was ist die Hauptstadt von Pakistan?
 { =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
@@ -14,13 +14,13 @@
 { =Surinam -> Paramarimbo =Andorra -> Andorra de la Ville =China ->Peking =Afghanistan -> Kabul }
 
 ::Q5::
-{pic ~Finnland ~Estland =Lettland ~Albanien }
+{pic?Welches Land ist das? ~Finnland ~Estland =Lettland ~Albanien }
 
 ::Q6::
-{pic =Irland ~England ~Frankreich ~Ukraine }
+{pic?Welches Land ist das? =Irland ~England ~Frankreich ~Ukraine }
 
 ::Q7::
 Momentan ist { ~der Iran =Indonesien ~Saudi Arabien ~Pakistan } das bevölkerungsreichste Land, das vorwiegend muslimisch ist.
 
 ::Q8::
-{pic ~Serbien ~Kosovo ~Deutschland =Bosnien }
+{pic?Welches Land ist das? ~Serbien ~Kosovo ~Deutschland =Bosnien }

@@ -73,4 +73,5 @@ Très bien!
 Bien!
 Vous derivez practiquer un peu plus!
 Etes-vous sûr de vouloir quitter?
-Taille standard 
+Taille standard
+Quiz 

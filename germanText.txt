@@ -73,4 +73,5 @@ Sehr gut!
 Gut!
 Du solltest ein wenig mehr üben!
 Bist du sicher, dass du das Fenster schliessen willst?
-Standardgrösse 
+Standardgrösse
+Quiz 

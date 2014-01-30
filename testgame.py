@@ -595,6 +595,7 @@ class TestGame:
 		global linesForMatching
 		global answers
 		
+		self.currMatchingButtonClicked = ''
 		self.timeElapsed = time.time()
 		self.Score = 0
 		self.questionNumber = 0
@@ -618,7 +619,7 @@ class TestGame:
 
 		self.currWindow = StartGameDialog(self.translator[self.language][74])
 		self.addWidgets()
-		self.currWindow.setWindowTitle(self.translator[self.language][66]+ ' - ' +self.quizTitle)
+		self.currWindow.setWindowTitle(self.translator[self.language][76]+'      '+self.translator[self.language][66]+ ' - ' +self.quizTitle)
 
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
@@ -638,11 +639,11 @@ class TestGame:
 			
 		for i in self.currWindow.ui.matchingButtonsLeft:
 			i.setVisible(False)
-			i.clicked.connect(self.matchingLeftButtonClicked)
+			i.clicked.connect(self.matchingButtonClicked)
 			
 		for i in self.currWindow.ui.matchingButtonsRight:
 			i.setVisible(False)
-			i.clicked.connect(self.matchingRightButtonClicked)
+			i.clicked.connect(self.matchingButtonClicked)
 			
 		if self.questionType[0] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[0][0][0] +"</p></body></html>")
@@ -685,10 +686,10 @@ class TestGame:
 					self.currWindow.ui.matchingButtons[(i-1)*2].setVisible(True)
 					self.currWindow.ui.matchingButtons[(i-1)*2].setObjectName(self.questions[0][0][i])
 					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setVisible(True)
-					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setEnabled(False)
 					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setObjectName(self.questions[0][0][i])
 					rightListShuffeld.append(self.questions[0][1][i])
 					self.linesForMatching[0].append([])
+					self.lines[0].append([])
 					
 			random.shuffle(rightListShuffeld)
 			for i in range(0, len(rightListShuffeld)):
@@ -747,6 +748,9 @@ class TestGame:
 			self.currWindow.ui.pushButton_13.setEnabled(True)
 		
 		for i in self.currWindow.ui.buttonArray:
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 			i.setText('')
 			i.setStyleSheet('')
 			i.setVisible(False)	
@@ -817,7 +821,9 @@ class TestGame:
 					self.currWindow.ui.buttonArray[nr-1].setEnabled(False)
 					if self.currWindow.ui.buttonArray[nr-1].text() == self.answers[self.questionNumber]:
 						self.currWindow.ui.buttonArray[nr-1].setStyleSheet('color: rgb(0,0,255)')
-				
+						tempFont = self.currWindow.ui.buttonArray[nr-1].font()
+						tempFont.setBold(True)
+						self.currWindow.ui.buttonArray[nr-1].setFont(tempFont)
 		
 		if self.questionType[self.questionNumber] == 'matching':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[self.questionNumber][0][0] +"</p></body></html>")
@@ -843,7 +849,6 @@ class TestGame:
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(self.rightListShuffeld[self.questionNumber][i])
 				self.currWindow.ui.matchingButtons[(i)*2].setObjectName(self.questions[self.questionNumber][0][i+1])
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
-				self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
 
 			self.siteVisitedMatching[self.questionNumber] = True
 		
@@ -870,6 +875,9 @@ class TestGame:
 			self.currWindow.ui.pushButton_13.setEnabled(True)
 			
 		for i in self.currWindow.ui.buttonArray:
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 			i.setVisible(False)
 			i.setText('')
 			i.setStyleSheet('')
@@ -916,6 +924,9 @@ class TestGame:
 					self.currWindow.ui.buttonArray[nr].setEnabled(False)
 					if self.currWindow.ui.buttonArray[nr].text() == self.answers[self.questionNumber]:
 						self.currWindow.ui.buttonArray[nr].setStyleSheet('color: rgb(0,0,255)')
+						tempFont = self.currWindow.ui.buttonArray[nr].font()
+						tempFont.setBold(True)
+						self.currWindow.ui.buttonArray[nr].setFont(tempFont)
 					if self.questions[self.questionNumber][1][nr]:
 						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p><p align=\"center\">" + self.questions[self.questionNumber][0][len(self.questions[self.questionNumber][0])-1]+"</p></body></html>")
 
@@ -940,6 +951,9 @@ class TestGame:
 					self.currWindow.ui.buttonArray[nr-1].setEnabled(False)
 					if self.currWindow.ui.buttonArray[nr-1].text() == self.answers[self.questionNumber]:
 						self.currWindow.ui.buttonArray[nr-1].setStyleSheet('color: rgb(0,0,255)')
+						tempFont = self.currWindow.ui.buttonArray[nr-1].font()
+						tempFont.setBold(True)
+						self.currWindow.ui.buttonArray[nr-1].setFont(tempFont)
 					if self.questions[self.questionNumber][1][nr-1]:
 						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[self.questionNumber][0][0] +"</p></body></html>")
 		
@@ -955,7 +969,6 @@ class TestGame:
 					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setVisible(True)
 					self.currWindow.ui.matchingButtons[(i-1)*2].setObjectName(self.questions[self.questionNumber][0][i])
 					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setObjectName(self.questions[self.questionNumber][1][i])
-					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setEnabled(False)
 					rightListShuffeldTemp.append(self.questions[self.questionNumber][1][i])
 
 			random.shuffle(rightListShuffeldTemp)
@@ -970,75 +983,90 @@ class TestGame:
 	
 	def drawMatchingLines(self, qNumber):
 		self.paintPanel.update(qNumber)
-		
-	def matchingLeftButtonClicked(self):
+	
+	def matchingButtonClicked(self):
 		
 		global leftChoiceMatching
 		global linesForMatching
 		
 		button = self.currWindow.sender()
 		
-		self.leftChoiceMatching = button.objectName()
 		
-		for i in range(0, len(self.questions[self.questionNumber][0])):			
-			if self.questions[self.questionNumber][0][i] == button.objectName():
-				indexOfLeftButton = i-1
+		for i in range (0, len(self.currWindow.ui.matchingButtons)):
 
-		if self.linesForMatching[self.questionNumber][indexOfLeftButton] == []:
+			if self.currWindow.ui.matchingButtons[i] == button:
+				positionButton = i
 		
-			for i in range(1,len(self.questions[self.questionNumber][0])+1):
-				if self.currWindow.ui.matchingButtons[(i-1) * 2].isVisible():
-					self.currWindow.ui.matchingButtons[((i-1) * 2) + 1].setEnabled(True)
-					self.currWindow.ui.matchingButtons[(i-1) * 2].setEnabled(False)
-					if self.currWindow.ui.matchingLabels[(i-1)*2].text() == self.leftChoiceMatching:
-						self.linesForMatching[self.questionNumber][(i-1)].append(self.leftChoiceMatching)
-						self.currWindow.ui.matchingLabels[(i-1)*2].setStyleSheet(u"color: rgb(0, 0, 255)")
-						tempFont = self.currWindow.ui.matchingLabels[(i-1)*2].font()
-						tempFont.setBold(True)
-						self.currWindow.ui.matchingLabels[(i-1)*2].setFont(tempFont)
-						
-		else: 
-			self.linesForMatching[self.questionNumber][indexOfLeftButton] = []
-			self.lines[self.questionNumber][indexOfLeftButton] = []
-		
-		self.drawMatchingLines(self.questionNumber)
-		
-	def matchingRightButtonClicked(self):
-		
-		global linesForMatching
-		
-		buttonRight = self.currWindow.sender()
+		if self.currMatchingButtonClicked == '':
+			delete = False
+			for i in self.lines[self.questionNumber]:
+				if button in i:
+					delete = True
+			if delete:
 
-		for i in range(0,len(self.questions[self.questionNumber][1])*2):
+				for i in range(0,len(self.lines[self.questionNumber])):
+					if button in self.lines[self.questionNumber][i]:
+						deletePos = i
+				self.lines[self.questionNumber][deletePos] = []
+				self.linesForMatching[self.questionNumber][deletePos] = [] 
+			else:
 			
-			if self.currWindow.ui.matchingButtons[i].isVisible():
-				if i % 2 == 0:
-					self.currWindow.ui.matchingButtons[i].setEnabled(True)
-					self.currWindow.ui.matchingLabels[i].setStyleSheet('')
-					tempFont = self.currWindow.ui.matchingLabels[i].font()
-					tempFont.setBold(False)
-					self.currWindow.ui.matchingLabels[i].setFont(tempFont)
-				else:
-					self.currWindow.ui.matchingButtons[i].setEnabled(False)
-					
-		for i in range(0, len(self.questions[self.questionNumber][0])):			
-			if self.currWindow.ui.matchingLabels[i*2].text() == self.leftChoiceMatching:
-				buttonLeft = self.currWindow.ui.matchingButtons[i*2]
-				indexOfLeftButton = i
-
-		self.linesForMatching[self.questionNumber][indexOfLeftButton].append(buttonRight.objectName())
-		if self.questions[self.questionNumber][1][indexOfLeftButton + 1] == buttonRight.objectName():
-			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(1)
+				self.currMatchingButtonClicked = button
+				self.currWindow.ui.matchingLabels[positionButton].setStyleSheet('color: rgb(0,0,255)')
+				tempFont = self.currWindow.ui.matchingLabels[positionButton].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.matchingLabels[positionButton].setFont(tempFont)
+			
 		else:
-			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(0)
-		
-
-		self.lines[self.questionNumber][indexOfLeftButton].append(buttonLeft)
-		self.lines[self.questionNumber][indexOfLeftButton].append(buttonRight)
-		
+			
+			for i in range (0, len(self.currWindow.ui.matchingButtons)):
+				if self.currWindow.ui.matchingButtons[i] == self.currMatchingButtonClicked:
+					positionButtonOld = i
+					
+			if button == self.currMatchingButtonClicked:
+				self.currWindow.ui.matchingLabels[positionButton].setStyleSheet('')
+				tempFont = self.currWindow.ui.matchingLabels[positionButton].font()
+				tempFont.setBold(False)
+				self.currWindow.ui.matchingLabels[positionButton].setFont(tempFont)
+				self.currMatchingButtonClicked = ''
+			
+			elif (button in self.currWindow.ui.matchingButtonsLeft and self.currMatchingButtonClicked in self.currWindow.ui.matchingButtonsLeft) or (button in self.currWindow.ui.matchingButtonsRight and self.currMatchingButtonClicked in self.currWindow.ui.matchingButtonsRight):
+				self.currWindow.ui.matchingLabels[positionButtonOld].setStyleSheet('')
+				tempFont = self.currWindow.ui.matchingLabels[positionButtonOld].font()
+				tempFont.setBold(False)
+				self.currWindow.ui.matchingLabels[positionButtonOld].setFont(tempFont)
+				self.currMatchingButtonClicked = button
+				self.currWindow.ui.matchingLabels[positionButton].setStyleSheet('color: rgb(0,0,255)')
+				tempFont = self.currWindow.ui.matchingLabels[positionButton].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.matchingLabels[positionButton].setFont(tempFont)
+			
+			else:
+				if button in self.currWindow.ui.matchingButtonsLeft:
+					buttonLeft = button
+					buttonRight = self.currMatchingButtonClicked
+					arrayPosition = positionButton / 2
+				else:
+					buttonLeft = self.currMatchingButtonClicked
+					buttonRight = button
+					arrayPosition = positionButtonOld / 2 
+				
+				self.lines[self.questionNumber][arrayPosition].append(buttonLeft)
+				self.lines[self.questionNumber][arrayPosition].append(buttonRight)
+				self.linesForMatching[self.questionNumber][arrayPosition].append(buttonLeft.objectName())
+				self.linesForMatching[self.questionNumber][arrayPosition].append(buttonRight.objectName())
+				if self.questions[self.questionNumber][1][arrayPosition + 1] == buttonRight.objectName():
+					self.linesForMatching[self.questionNumber][arrayPosition].append(1)
+				else:
+					self.linesForMatching[self.questionNumber][arrayPosition].append(0)
+				tempFont = self.currWindow.ui.matchingLabels[positionButtonOld].font()
+				tempFont.setBold(False)
+				self.currWindow.ui.matchingLabels[positionButtonOld].setFont(tempFont)
+				self.currWindow.ui.matchingLabels[positionButtonOld].setStyleSheet('')
+			
+				self.currMatchingButtonClicked = ''
 		self.drawMatchingLines(self.questionNumber)
 		self.currWindow.repaint()
-
 		
 	def checkState(self):
 		
@@ -1091,6 +1119,9 @@ class TestGame:
 		
 		self.answers[self.questionNumber] = button.text()
 		button.setStyleSheet('color: rgb(0, 0, 255)')
+		tempFont = button.font()
+		tempFont.setBold(True)
+		button.setFont(tempFont)
 		self.currWindow.ui.pushButton_14.setEnabled(True)	
 		self.Score += 1
 		self.frameQuestionAnswered[self.questionNumber] = True
@@ -1110,6 +1141,11 @@ class TestGame:
 		self.answers[self.questionNumber] = button.text()
 		button.setStyleSheet('color: rgb(0, 0, 255)')
 		
+		self.answers[self.questionNumber] = button.text()
+		button.setStyleSheet('color: rgb(0, 0, 255)')
+		tempFont = button.font()
+		tempFont.setBold(True)
+		button.setFont(tempFont)
 		self.currWindow.ui.pushButton_14.setEnabled(True)	
 		penalty = 0
 		
@@ -1127,11 +1163,12 @@ class TestGame:
 		global questions
 		global frameQuestionAnswered
 		global questionFrame
-	
+		global lines
 		
 		self.Score = 0
 		self.questionNumber = 0
 		self.questions = self.parseQuestion()
+		self.currMatchingButtonClicked = ''
 		self.answers =[]
 		self.questionFrame = 0
 		self.frameQuestionAnswered = [0 for x in range(len(self.questions))]
@@ -1143,8 +1180,10 @@ class TestGame:
 
 		self.rightListShuffeld = []
 		self.linesForMatching = []
+		self.lines = []
 		for i in range(0, len(self.questions)):
 			self.rightListShuffeld.append([])
+			self.lines.append([])
 			self.linesForMatching.append([])
 		for i in range(0, len(self.questions)):
 			self.frameQuestionAnswered[i] = False
@@ -1153,7 +1192,7 @@ class TestGame:
 		self.currWindow = TrainingQuizDialog(self.translator[self.language][74])
 		self.addWidgets()
 		
-		self.currWindow.setWindowTitle(self.translator[self.language][67]+ ' - ' +self.quizTitle)
+		self.currWindow.setWindowTitle(self.translator[self.language][76]+'     '+self.translator[self.language][67]+ ' - ' +self.quizTitle)
 		self.currWindow.ui.pushButton_13.setText(self.translator[self.language][28])
 		self.currWindow.ui.pushButton_13.setVisible(False)
 		self.currWindow.ui.pushButton_13.clicked.connect(self.evaluateCheckBoxesTraining)
@@ -1177,11 +1216,11 @@ class TestGame:
 			
 		for i in self.currWindow.ui.matchingButtonsLeft:
 			i.setVisible(False)
-			i.clicked.connect(self.matchingLeftButtonClicked)
+			i.clicked.connect(self.matchingButtonClicked)
 			
 		for i in self.currWindow.ui.matchingButtonsRight:
 			i.setVisible(False)
-			i.clicked.connect(self.matchingRightButtonClickedQuiz)
+			i.clicked.connect(self.matchingButtonClicked)
 			
 		if self.questionType[0] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[0][0][0] +"</p></body></html>")
@@ -1227,10 +1266,10 @@ class TestGame:
 					self.currWindow.ui.matchingButtons[(i-1)*2].setVisible(True)
 					self.currWindow.ui.matchingButtons[(i-1)*2].setObjectName(self.questions[0][0][i])
 					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setVisible(True)
-					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setEnabled(False)
 					self.currWindow.ui.matchingButtons[((i-1)*2)+1].setObjectName(self.questions[0][0][i])
 					rightListShuffeld.append(self.questions[0][1][i])
 					self.linesForMatching[0].append([])
+					self.lines[0].append([])
 					
 			random.shuffle(rightListShuffeld)
 			for i in range(0, len(rightListShuffeld)):
@@ -1251,6 +1290,9 @@ class TestGame:
 		self.currWindow.ui.pushButton_14.setFont(self.globalFont)
 		self.currWindow.ui.pushButton_16.setFont(self.globalFont)
 		self.currWindow.ui.pushButton_13.setFont(self.globalFont)
+		self.paintPanel = Painter(self, self.lines)
+		self.currWindow.ui.stackedWidget.insertWidget(0,self.paintPanel)
+		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)
 		
 		self.currWindow.show()
 	
@@ -1302,10 +1344,11 @@ class TestGame:
 		global questionFrame
 		global frameQuestionAnswered
 		global questionNumber
+		global lines
 		
 		self.questionFrame += 1
 		self.questionNumber += 1
-		
+		self.drawMatchingLines(self.questionNumber)
 		self.currWindow.ui.label_5.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
 		if self.questionFrame == len(self.questions) - 1:
 			self.currWindow.ui.pushButton_16.setText(self.translator[self.language][17])
@@ -1399,6 +1442,7 @@ class TestGame:
 					rightListShuffeldTemp.append(self.questions[self.questionNumber][1][i])
 					if not self.siteVisitedMatching[self.questionNumber]:
 						self.linesForMatching[self.questionNumber].append([])
+						self.lines[self.questionNumber].append([])
 					
 				random.shuffle(rightListShuffeldTemp)
 			
@@ -1411,7 +1455,6 @@ class TestGame:
 					self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(self.rightListShuffeld[self.questionNumber][i])
 					self.currWindow.ui.matchingButtons[(i)*2].setObjectName(self.questions[self.questionNumber][0][i+1])
 					self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
-					self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
 			
 				self.drawMatchingLines(self.questionNumber)
 			
@@ -1433,6 +1476,7 @@ class TestGame:
 		
 	def showOldQuestion(self):
 		
+		self.drawMatchingLines(self.questionNumber)
 		if self.questionFrame == 0:
 			self.currWindow.ui.pushButton_14.setVisible(False)
 		else:
@@ -1596,15 +1640,14 @@ class TestGame:
 				self.currWindow.ui.matchingLabels[(i-1) * 2].setVisible(True)
 				self.currWindow.ui.matchingButtons[(i-1)*2].setVisible(True)
 				self.currWindow.ui.matchingButtons[((i-1)*2)+1].setVisible(True)
-				self.currWindow.ui.matchingButtons[(i-1)*2].setEnabled(False)
-				self.currWindow.ui.matchingButtons[((i-1)*2)+1].setEnabled(False)
+
 			
 			for i in range(0, len(self.rightListShuffeld[self.questionNumber])):
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setVisible(True)
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(self.rightListShuffeld[self.questionNumber][i])
 				self.currWindow.ui.matchingButtons[(i)*2].setObjectName(self.questions[self.questionNumber][0][i+1])
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
-				self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
+
 				
 			
 			if self.frameQuestionAnswered[self.questionFrame]:
@@ -1694,36 +1737,6 @@ class TestGame:
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 		self.currWindow.ui.pushButton_13.setEnabled(False)
 		
-	def matchingRightButtonClickedQuiz(self):
-		
-		global linesForMatching
-		
-		buttonRight = self.currWindow.sender()
-
-		for i in range(0,len(self.questions[self.questionNumber][1])*2):
-			
-			if self.currWindow.ui.matchingButtons[i].isVisible():
-				if i % 2 == 0:
-					self.currWindow.ui.matchingButtons[i].setEnabled(True)
-					self.currWindow.ui.matchingLabels[i].setStyleSheet('')
-					tempFont = self.currWindow.ui.matchingLabels[i].font()
-					tempFont.setBold(False)
-					self.currWindow.ui.matchingLabels[i].setFont(tempFont)
-				else:
-					self.currWindow.ui.matchingButtons[i].setEnabled(False)
-					
-		for i in range(0, len(self.questions[self.questionNumber][0])):			
-			if self.currWindow.ui.matchingLabels[i*2].text() == self.leftChoiceMatching:
-				buttonLeft = self.currWindow.ui.matchingButtons[i*2]
-				indexOfLeftButton = i
-
-		self.linesForMatching[self.questionNumber][indexOfLeftButton].append(buttonRight.objectName())
-		if self.questions[self.questionNumber][1][indexOfLeftButton + 1] == buttonRight.objectName():
-			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(1)
-		else:
-			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(0)
-
-		self.drawMatchingLines(self.questionNumber)
 	
 	def updateMatchingLines(self):
 		
@@ -1989,5 +2002,5 @@ class Painter(PyQt4.QtGui.QWidget):
 		i = self.lines[self.questionNumber]
 
 		for line in i:
-			if not line == []:
+			if not line == [] :
 				painter.drawLine(line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).x()-self.xOffset, line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).y()-self.yOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).x()-self.xOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).y()-self.yOffset)
