@@ -21,10 +21,9 @@
 """
 from __future__ import unicode_literals
 import io
-from PyQt4.QtCore import *
-import PyQt4.QtGui
-from PyQt4.QtGui import *
 import PyQt4
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 from qgis.core import *
 import resources_rc
 from testgamedialog import TestGameDialog
@@ -78,7 +77,7 @@ class TestGame:
 
 		locale = QSettings().value("locale/userLocale")[0:2]
 		localePath = os.path.join(self.plugin_dir, 'i18n', 'testgame_{}.qm'.format(locale))
-		self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "python/plugins/TestGame"
+		self.user_plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "python/plugins/Quiz"
 		self.dirPath = self.user_plugin_dir
 		
 		if os.path.exists(localePath):
@@ -249,6 +248,7 @@ class TestGame:
 	def fontSmaller(self):
 		
 		global globalFont
+		
 		self.globalFont.setPointSize(self.globalFont.pointSize()-2) 
 		for i in self.buttonList:
 			tempFont = i.font()
@@ -258,6 +258,7 @@ class TestGame:
 	def fontBigger(self):
 		
 		global globalFont
+		
 		self.globalFont.setPointSize(self.globalFont.pointSize()+2) 
 		for i in self.buttonList:
 			tempFont = i.font()
@@ -265,8 +266,9 @@ class TestGame:
 			i.setFont(tempFont)
 	
 	def fontStandard(self):
-		print 'hello'
+	
 		global globalFont
+		
 		self.globalFont.setPointSize(8) 
 		for i in self.buttonList:
 			tempFont = i.font()
@@ -434,7 +436,18 @@ class TestGame:
 						self.questionType.append('pictureQuestion')
 						ans = line.split()
 						for i in range(0, len(ans)):
-				
+							
+							if ans[i][0:5] == '{pic?':
+								questionString = ''
+								questionString += ans[i][5:]
+								
+								k =1
+								while ((ans[i + k][0]) != '=') and (ans[i + k][0]) != '~' and (ans[i + k][0] != '}'):
+									questionString += ' '
+									questionString += ans[i+k]
+									k += 1
+								
+								
 							if ans[i][0]== '=':
 								quest[1].append(True)
 								answerString = ''
@@ -459,9 +472,11 @@ class TestGame:
 									answerString += ans[i+k]
 									k += 1
 								quest[0].append(answerString)	
+						quest[0].append(questionString)
 				if not (len(quest[0]) < 2):
 					allQuests.append(quest)
 		
+
 		return allQuests
 	
 	def help(self):
@@ -578,14 +593,17 @@ class TestGame:
 		global siteVisitedMatching
 		global rightListShuffeld
 		global linesForMatching
+		global answers
 		
 		self.timeElapsed = time.time()
 		self.Score = 0
 		self.questionNumber = 0
 		self.frameQuestionAnswered = [0 for x in range(len(self.questions))]
+		self.answers = [0 for x in range(len(self.questions))]
 		for i in range(0, len(self.questions)):
 			self.frameQuestionAnswered[i] = False
-		
+			self.answers[i] = ''
+			
 		self.siteVisitedMatching = [0 for x in range(len(self.questions))]
 		for i in range(0, len(self.questions)):
 			self.siteVisitedMatching[i] =  False
@@ -635,12 +653,12 @@ class TestGame:
 
 					
 		if self.questionType[0] == 'pictureQuestion' :
-			for i in range(0,len(self.questions[0][0])):
+			for i in range(0,len(self.questions[0][0])-1):
 				self.currWindow.ui.buttonArray[i].setText(self.questions[0][0][i])
 				self.currWindow.ui.buttonArray[i].setVisible(True)
 				
 				if self.questions[0][1][i]:
-					self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[0][0][i] +".png\"/></p></body></html>")
+					self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[0][0][i] +".png\"/></p><p align=\"center\">" + self.questions[0][0][len(self.questions[0][0])-1]+"</p></body></html>")
 					self.currWindow.ui.buttonArray[i].clicked.disconnect()
 					self.currWindow.ui.buttonArray[i].clicked.connect(self.scoreBonus)
 				
@@ -730,6 +748,7 @@ class TestGame:
 		
 		for i in self.currWindow.ui.buttonArray:
 			i.setText('')
+			i.setStyleSheet('')
 			i.setVisible(False)	
 		
 		for i in self.currWindow.ui.checkBoxes:
@@ -759,7 +778,7 @@ class TestGame:
 				self.currWindow.ui.buttonArray[nr].clicked.disconnect()
 				
 				if self.questions[self.questionNumber][1][nr]:
-					self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p></body></html>")
+					self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p><p align=\"center\">" + self.questions[self.questionNumber][0][len(self.questions[0][0])]+"</p></body></html>")
 					self.currWindow.ui.buttonArray[nr].clicked.connect(self.scoreBonus)		
 				else:
 					self.currWindow.ui.buttonArray[nr].clicked.connect(self.scorePenalty)		
@@ -770,6 +789,8 @@ class TestGame:
 			else:
 				self.currWindow.ui.pushButton_14.setEnabled(True)	
 				for nr in range(0,len(self.questions[self.questionNumber][1])):
+					if self.currWindow.ui.buttonArray[nr].text() == self.answers[self.questionNumber]:
+						self.currWindow.ui.buttonArray[nr].setStyleSheet('color: rgb(0,0,255)')
 					self.currWindow.ui.buttonArray[nr].setEnabled(False)
 				
 		
@@ -794,6 +815,8 @@ class TestGame:
 				self.currWindow.ui.pushButton_14.setEnabled(True)
 				for nr in range(1,len(self.questions[self.questionNumber][1])):
 					self.currWindow.ui.buttonArray[nr-1].setEnabled(False)
+					if self.currWindow.ui.buttonArray[nr-1].text() == self.answers[self.questionNumber]:
+						self.currWindow.ui.buttonArray[nr-1].setStyleSheet('color: rgb(0,0,255)')
 				
 		
 		if self.questionType[self.questionNumber] == 'matching':
@@ -849,6 +872,7 @@ class TestGame:
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
 			i.setText('')
+			i.setStyleSheet('')
 		
 		for i in self.currWindow.ui.checkBoxes:
 			i.setVisible(False)
@@ -880,7 +904,8 @@ class TestGame:
 					self.currWindow.ui.buttonArray[nr].clicked.disconnect()
 					
 					if self.questions[self.questionNumber][1][nr]:
-						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p></body></html>")
+					
+						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p><p align=\"center\">" + self.questions[self.questionNumber][0][len(self.questions[self.questionNumber][0])-1]+"</p></body></html>")
 						self.currWindow.ui.buttonArray[nr].clicked.connect(self.scoreBonus)				
 					else:
 						self.currWindow.ui.buttonArray[nr].clicked.connect(self.scorePenalty)					
@@ -889,8 +914,10 @@ class TestGame:
 					self.currWindow.ui.buttonArray[nr].setText(self.questions[self.questionNumber][0][nr])
 					self.currWindow.ui.buttonArray[nr].setVisible(True)
 					self.currWindow.ui.buttonArray[nr].setEnabled(False)
+					if self.currWindow.ui.buttonArray[nr].text() == self.answers[self.questionNumber]:
+						self.currWindow.ui.buttonArray[nr].setStyleSheet('color: rgb(0,0,255)')
 					if self.questions[self.questionNumber][1][nr]:
-						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p></body></html>")
+						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p><p align=\"center\">" + self.questions[self.questionNumber][0][len(self.questions[self.questionNumber][0])-1]+"</p></body></html>")
 
 		
 		if self.questionType[self.questionNumber] == 'missingWord' or self.questionType[self.questionNumber] == 'stringQuestion':
@@ -911,6 +938,8 @@ class TestGame:
 			else:
 				for nr in range(1,len(self.questions[self.questionNumber][1])):
 					self.currWindow.ui.buttonArray[nr-1].setEnabled(False)
+					if self.currWindow.ui.buttonArray[nr-1].text() == self.answers[self.questionNumber]:
+						self.currWindow.ui.buttonArray[nr-1].setStyleSheet('color: rgb(0,0,255)')
 					if self.questions[self.questionNumber][1][nr-1]:
 						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[self.questionNumber][0][0] +"</p></body></html>")
 		
@@ -1056,18 +1085,30 @@ class TestGame:
 		
 		global Score
 		global frameQuestionAnswered
+		global answers
 		
+		button = self.currWindow.sender()
+		
+		self.answers[self.questionNumber] = button.text()
+		button.setStyleSheet('color: rgb(0, 0, 255)')
 		self.currWindow.ui.pushButton_14.setEnabled(True)	
 		self.Score += 1
 		self.frameQuestionAnswered[self.questionNumber] = True
 		
 		for i in self.currWindow.ui.buttonArray:
 			i.setEnabled(False)
+			
 
 	def scorePenalty(self):
 
 		global Score
 		global frameQuestionAnswered
+		global answers
+		
+		button = self.currWindow.sender()
+		
+		self.answers[self.questionNumber] = button.text()
+		button.setStyleSheet('color: rgb(0, 0, 255)')
 		
 		self.currWindow.ui.pushButton_14.setEnabled(True)	
 		penalty = 0
@@ -1086,6 +1127,7 @@ class TestGame:
 		global questions
 		global frameQuestionAnswered
 		global questionFrame
+	
 		
 		self.Score = 0
 		self.questionNumber = 0
@@ -1153,11 +1195,11 @@ class TestGame:
 			
 			
 		if self.questionType[0] == 'pictureQuestion':
-			for i in range(0,len(self.questions[0][0])):
+			for i in range(0,len(self.questions[0][1])):
 				self.currWindow.ui.buttonArray[i].setText(self.questions[0][0][i])
 				self.currWindow.ui.buttonArray[i].setVisible(True)
 				if self.questions[0][1][i]:
-					self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[0][0][i] +".png\"/></p></body></html>")
+					self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[0][0][i] +".png\"/></p><p align=\"center\">" + self.questions[0][0][len(self.questions[0][0])-1]+"</p></body></html>")
 					self.currWindow.ui.buttonArray[i].clicked.disconnect()
 					self.currWindow.ui.buttonArray[i].clicked.connect(self.scoreBonusQuiz)
 			
@@ -1322,7 +1364,7 @@ class TestGame:
 					self.currWindow.ui.buttonArray[nr].clicked.disconnect()
 					
 					if self.questions[self.questionNumber][1][nr]:
-						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p></body></html>")
+						self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\":/df/Länder/" + self.questions[self.questionNumber][0][nr] +".png\"/></p><p align=\"center\">" + self.questions[self.questionNumber][0][len(self.questions[self.questionNumber][0])-1]+"</p></body></html>")
 						self.currWindow.ui.buttonArray[nr].clicked.connect(self.scoreBonusQuiz)
 					else:
 						self.currWindow.ui.buttonArray[nr].clicked.connect(self.scorePenaltyQuiz)
@@ -1469,7 +1511,7 @@ class TestGame:
 				
 				if self.questions[self.questionFrame][1][nr]:
 					rightAnswer = self.questions[self.questionFrame][0][nr]
-					self.currWindow.ui.label.setText("<html><head/><body><p align =\"center\"><img src=\":/df/Länder/" + self.questions[self.questionFrame][0][nr] +".png\"/></p></body></html>")
+					self.currWindow.ui.label.setText("<html><head/><body><p align =\"center\"><img src=\":/df/Länder/" + self.questions[self.questionFrame][0][nr] +".png\"/></p><p align=\"center\">" + self.questions[self.questionNumber][0][len(self.questions[self.questionNumber][0])-1]+"</p></body></html>")
 					self.currWindow.ui.buttonArray[nr].clicked.connect(self.scoreBonusQuiz)
 				else:
 					self.currWindow.ui.buttonArray[nr].clicked.connect(self.scorePenaltyQuiz)
