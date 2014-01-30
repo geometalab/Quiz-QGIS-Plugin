@@ -26,8 +26,8 @@ from ui_points import Ui_pointsMessage
 
 
 class PointsDialog(QtGui.QDialog):
-    def __init__(self, points, max):
+    def __init__(self):
         QtGui.QDialog.__init__(self)
         # Set up the user interface from Designer.
         self.ui =  Ui_pointsMessage()
-        self.ui.setupUi(self, points, max)
+        self.ui.setupUi(self)

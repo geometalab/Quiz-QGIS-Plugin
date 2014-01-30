@@ -16,19 +16,19 @@ Vorherige Frage
 Nächste Frage
 Training beenden
 Resultate
-Du hast bis jetzt 
- Punkt von 
-Du hast bis jetzt 
- Punkte von 
+Du hast bis jetzt
+Punkt von
+Du hast bis jetzt
+Punkte von
 Du hast richtig geantwortet
 Du hast die Frage leider falsch beantwortet
 Die Antwort ist 
 Die richtige Antworte wäre 
- gewesen
+gewesen
 Deine Antwort war richtig
 Auf Korrektheit prüfen 
 Frage
-von 
+von
 Schriftgrösse 
 Datei
 Quiz Laden
@@ -36,19 +36,19 @@ Resultate Speichern
 Quiz Starten
 Zuletzt verwendet
 Optionen
-Liste mit anderen Geogames
-Plattform für mehr Quizzes
+GeoGames im Web
+Quiz im Web
 Schrift 
 Englisch 
 Deutsch 
-Mehr Lernspiele 
-Kontakt
-Webhilfe
-Über 
+GeoGames
+Kontakt (E-Mail)
+Hilfe im Web
+Über ...
 Version:  
 0.1
 Autor:  
-Institut für Software HSR
+Geometalab am Institut für Software HSR
 Webseite:  
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Webseite</a>  
 Fragen zu dem Plugin: 
@@ -61,4 +61,16 @@ Kontakt:
 rkrucker@hsr.ch 
 Französisch 
 Grösser
-Kleiner 
+Kleiner
+Du hast
+Das sind
+Test
+Training
+Lizenz
+Lizenztyp
+Bravo!
+Sehr gut!
+Gut!
+Du solltest ein wenig mehr üben!
+Bist du sicher, dass du das Fenster schliessen willst?
+Standardgrösse 

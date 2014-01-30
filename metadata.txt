@@ -9,7 +9,7 @@
 
 
 [general]
-name=EuroQuiz
+name=Quiz
 qgisMinimumVersion=2.0
 description=test for quiz
 version=0.1

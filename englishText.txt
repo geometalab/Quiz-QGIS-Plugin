@@ -16,10 +16,10 @@ Last Question
 Next Question
 Quit training
 Results
-You now have 
- Point out of 
-You now have 
- Points out of 
+You now have
+Point out of
+You now have
+Points out of
 Your answer is correct
 Unfortunately, you answered this question wrongly
 The answer is 
@@ -28,7 +28,7 @@ The right answer would have been
 Your answer was correct
 Check for correctness 
 Question
-of 
+of
 Fontsize 
 Data
 Load Quiz
@@ -36,29 +36,41 @@ Save Results
 Start Quiz
 Last Used
 Options
-List of other geogames
-Platform To Get More Quizzes
+GeoGames online
+Quizzes online
 Font 
 English 
 German 
-More Educational Games 
-Contact
-Webhelp
-About 
+GeoGames
+Contact (E-Mail)
+Help online
+About ...
 Version:  
 0.1
 Author:    
-Institute for Software HSR
+Geometalab at the Institute for Software HSR
 Website:    
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Website</a>  
 Questions regarding the Plugin: 
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Website</a>  
 Questions regarding the quizzes: 
 <a href="http://docs.moodle.org/23/en/GIFT" > Quiz-format rules</a>
-Questions regarding QGIS: 
+Questions regarding QGIS:
 <a href="http://giswiki.hsr.ch/QGIS" >QGIS-Page</a>
-Contact: 
-rkrucker@hsr.ch 
+Contact:
+rkrucker@hsr.ch
 French
-Bigger 
-Smaller 
+Bigger
+Smaller
+You have
+That are
+Test
+Training
+License
+Licensetype
+Bravo!
+Very good!
+Good!
+You should practice a little more!
+Are you sure you want to quit?
+Standard size 

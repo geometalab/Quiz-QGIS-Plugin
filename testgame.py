@@ -22,17 +22,16 @@
 from __future__ import unicode_literals
 import io
 from PyQt4.QtCore import *
+import PyQt4.QtGui
 from PyQt4.QtGui import *
+import PyQt4
 from qgis.core import *
 import resources_rc
 from testgamedialog import TestGameDialog
 from startGameDialog import StartGameDialog
 import os.path
-from noPathNotification import *
 from pointsDialog import PointsDialog
 from trainingQuizDialog import TrainingQuizDialog
-from ui_chooseTrainingQuizDialog import ChooseTrainingQuizDialog
-from helpDialog import HelpDialog
 import time
 import sys
 import math
@@ -68,8 +67,6 @@ class TestGame:
 	
 	def __init__(self, iface):
 		
-		
-		
 		global dirPath
 		global translator
 		
@@ -77,7 +74,6 @@ class TestGame:
 		sys.setdefaultencoding('utf-8')
 	   
 		self.iface = iface
-
 		self.plugin_dir = os.path.dirname(__file__)
 
 		locale = QSettings().value("locale/userLocale")[0:2]
@@ -125,6 +121,7 @@ class TestGame:
 		self.iface.removeToolBarIcon(self.action)
 
 	def run(self):
+		
 		global buttonList
 		global language
 		global globalFont
@@ -137,7 +134,7 @@ class TestGame:
 		else:
 			self.language = 1
 		
-		globalFont = self.dlg.ui.startGame.font()
+		self.globalFont = self.dlg.ui.startGame.font()
 		self.dlg.ui.startGame.setText(self.translator[self.language][0])
 		self.buttonList.append(self.dlg.ui.startGame)
 		self.dlg.ui.startTraining.setText(self.translator[self.language][1])
@@ -161,18 +158,38 @@ class TestGame:
 		self.dlg.ui.actionContact.setText(self.translator[self.language][44])
 		self.dlg.ui.actionSmaller.setText(self.translator[self.language][63])
 		self.dlg.ui.actionBigger.setText(self.translator[self.language][62])
+		self.dlg.ui.actionStandard_2.setText(self.translator[self.language][75])
 		self.buttonList.append(self.dlg.ui.startTitel)
 		self.buttonList.append(self.dlg.ui.startImage)
-		'''self.dlg.ui.label.setText(self.translator[self.language][4])
-		self.dlg.ui.label_2.setText(self.translator[self.language][31])'''
-		'''self.dlg.ui.comboBox.setCurrentIndex(self.language)'''
-		'''print self.dlg.ui.label.font()
-		print self.dlg.ui.label.font().pixelSize()
-		print self.dlg.ui.label.font().pointSize()
-		@self.dlg.ui.comboBox.currentIndexChanged.connect
-		def handle(index):
-			self.changeLanguage()'''
-		
+		self.dlg.ui.label_3.setText(self.translator[self.language][53])
+		self.dlg.ui.label_3.setFont(self.globalFont)
+		self.dlg.ui.label_4.setText(self.translator[self.language][54])
+		self.dlg.ui.label_4.setOpenExternalLinks(True)
+		self.dlg.ui.label_5.setText(self.translator[self.language][55])
+		self.dlg.ui.label_6.setText(self.translator[self.language][56])
+		self.dlg.ui.label_6.setOpenExternalLinks(True)
+		self.dlg.ui.label_7.setText(self.translator[self.language][57])
+		self.dlg.ui.label_8.setText(self.translator[self.language][58])
+		self.dlg.ui.label_8.setOpenExternalLinks(True)
+		self.dlg.ui.label_9.setText(self.translator[self.language][59])
+		self.dlg.ui.label_10.setText("<a href='mailto:rkrucker@hsr.ch'>Rafael Krucker</a>")
+		self.dlg.ui.label_10.setOpenExternalLinks(True)
+		self.dlg.ui.label_4.setFont(self.globalFont)
+		self.dlg.ui.label_5.setFont(self.globalFont)
+		self.dlg.ui.label_6.setFont(self.globalFont)
+		self.dlg.ui.label_7.setFont(self.globalFont)
+		self.dlg.ui.label_8.setFont(self.globalFont)
+		self.dlg.ui.label_9.setFont(self.globalFont)
+		self.dlg.ui.label_10.setFont(self.globalFont)
+		self.buttonList.append(self.dlg.ui.label_3)
+		self.buttonList.append(self.dlg.ui.label_4)
+		self.buttonList.append(self.dlg.ui.label_5)
+		self.buttonList.append(self.dlg.ui.label_6)
+		self.buttonList.append(self.dlg.ui.label_7)
+		self.buttonList.append(self.dlg.ui.label_8)
+		self.buttonList.append(self.dlg.ui.label_9)
+		self.buttonList.append(self.dlg.ui.label_10)
+
 		self.dlg.ui.actionContact.triggered.connect(lambda: QDesktopServices.openUrl(QUrl("mailto:rkrucker@hsr.ch")))
 		self.dlg.ui.actionWebhelp.triggered.connect(lambda: QDesktopServices.openUrl(QUrl("http://giswiki.hsr.ch/QGIS-Materialien")))
 		self.dlg.ui.geogame.triggered.connect(lambda: QDesktopServices.openUrl(QUrl("http://giswiki.hsr.ch/GeoGames") ) )
@@ -189,18 +206,25 @@ class TestGame:
 		self.dlg.ui.pushButton.clicked.connect(self.help)
 		self.dlg.ui.actionSmaller.triggered.connect(self.fontSmaller)
 		self.dlg.ui.actionBigger.triggered.connect(self.fontBigger)
+		self.dlg.ui.actionStandard_2.triggered.connect(self.fontStandard)
 		self.dlg.show()
 		self.windowList.append(self.dlg)
-		
-		
-		
-		
 		
 	def changeLanguage(self, lang):
 		
 		global language
 		
 		self.language = lang
+		self.dlg.ui.label_3.setText(self.translator[self.language][53])
+		self.dlg.ui.label_4.setText(self.translator[self.language][54])
+		self.dlg.ui.label_4.setOpenExternalLinks(True)
+		self.dlg.ui.label_5.setText(self.translator[self.language][55])
+		self.dlg.ui.label_6.setText(self.translator[self.language][56])
+		self.dlg.ui.label_6.setOpenExternalLinks(True)
+		self.dlg.ui.label_7.setText(self.translator[self.language][57])
+		self.dlg.ui.label_8.setText(self.translator[self.language][58])
+		self.dlg.ui.label_8.setOpenExternalLinks(True)
+		self.dlg.ui.label_9.setText(self.translator[self.language][59])
 		self.dlg.ui.startGame.setText(self.translator[self.language][0])
 		self.dlg.ui.startTraining.setText(self.translator[self.language][1])
 		self.dlg.ui.chooseQuiz.setText(self.translator[self.language][2])
@@ -210,6 +234,7 @@ class TestGame:
 		self.dlg.ui.fontMenu.setTitle(self.translator[self.language][40])
 		self.dlg.ui.actionSmaller.setText(self.translator[self.language][63])
 		self.dlg.ui.actionBigger.setText(self.translator[self.language][62])
+		self.dlg.ui.actionStandard_2.setText(self.translator[self.language][75])
 		self.dlg.ui.german.setText(self.translator[self.language][42])
 		self.dlg.ui.english.setText(self.translator[self.language][41])
 		self.dlg.ui.french.setText(self.translator[self.language][61])
@@ -224,7 +249,7 @@ class TestGame:
 	def fontSmaller(self):
 		
 		global globalFont
-		
+		self.globalFont.setPointSize(self.globalFont.pointSize()-2) 
 		for i in self.buttonList:
 			tempFont = i.font()
 			tempFont.setPointSize(tempFont.pointSize() - 2)
@@ -233,12 +258,21 @@ class TestGame:
 	def fontBigger(self):
 		
 		global globalFont
-		
+		self.globalFont.setPointSize(self.globalFont.pointSize()+2) 
 		for i in self.buttonList:
 			tempFont = i.font()
 			tempFont.setPointSize(tempFont.pointSize() + 2)
 			i.setFont(tempFont)
 	
+	def fontStandard(self):
+		print 'hello'
+		global globalFont
+		self.globalFont.setPointSize(8) 
+		for i in self.buttonList:
+			tempFont = i.font()
+			tempFont.setPointSize(8)
+			i.setFont(tempFont)
+			
 	def selectQuiz(self):
 		
 		global path
@@ -251,13 +285,11 @@ class TestGame:
 			self.dlg.ui.actionQuiz_starten.setEnabled(True)
 			self.dlg.ui.startGame.setEnabled(True)
 			self.dlg.ui.startTraining.setEnabled(True)
-			self.dlg.ui.startTitel.setFont(globalFont)
+			self.dlg.ui.startTitel.setFont(self.globalFont)
 			self.dlg.ui.startTitel.setText(u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600; font-style:normal; color:#000000;\">" + self.quizTitle+"</span></p></body></html>")
-			self.dlg.ui.startImage.setFont(globalFont)
+			self.dlg.ui.startImage.setFont(self.globalFont)
 			self.dlg.ui.startImage.setWordWrap(True)
-			self.dlg.ui.startImage.setText("<html><head/><body><p align = \"center\">"+self.instruction+"<br/></p></body></html>")
-			
-			
+			self.dlg.ui.startImage.setText("<html><head/><body><p>"+self.instruction+"<br/></p></body></html>")
 	
 	def parseQuestion(self):
 		
@@ -430,50 +462,16 @@ class TestGame:
 				if not (len(quest[0]) < 2):
 					allQuests.append(quest)
 		
-		
-		
 		return allQuests
 	
 	def help(self):
 		
-		global buttonList
-		global windowList
-		
-		self.help = HelpDialog()
-		self.help.ui.label_3.setText(self.translator[self.language][53])
-		self.help.ui.label_3.setFont(globalFont)
-		self.help.ui.label_4.setText(self.translator[self.language][54])
-		self.help.ui.label_4.setOpenExternalLinks(True)
-		self.help.ui.label_5.setText(self.translator[self.language][55])
-		self.help.ui.label_6.setText(self.translator[self.language][56])
-		self.help.ui.label_6.setOpenExternalLinks(True)
-		self.help.ui.label_7.setText(self.translator[self.language][57])
-		self.help.ui.label_8.setText(self.translator[self.language][58])
-		self.help.ui.label_8.setOpenExternalLinks(True)
-		self.help.ui.label_9.setText(self.translator[self.language][59])
-		self.help.ui.label_10.setText(self.translator[self.language][60])
-		self.help.ui.label_4.setFont(globalFont)
-		self.help.ui.label_5.setFont(globalFont)
-		self.help.ui.label_6.setFont(globalFont)
-		self.help.ui.label_7.setFont(globalFont)
-		self.help.ui.label_8.setFont(globalFont)
-		self.help.ui.label_9.setFont(globalFont)
-		self.help.ui.label_10.setFont(globalFont)
-		self.windowList.append(self.help)
-		self.buttonList.append(self.help.ui.label_3)
-		self.buttonList.append(self.help.ui.label_4)
-		self.buttonList.append(self.help.ui.label_5)
-		self.buttonList.append(self.help.ui.label_6)
-		self.buttonList.append(self.help.ui.label_7)
-		self.buttonList.append(self.help.ui.label_8)
-		self.buttonList.append(self.help.ui.label_9)
-		self.buttonList.append(self.help.ui.label_10)
-		
-		self.help.show()
+		if self.dlg.ui.stackedWidget.currentIndex() == 0:
+			self.dlg.ui.stackedWidget.setCurrentIndex(1)
+		else:
+			self.dlg.ui.stackedWidget.setCurrentIndex(0)
 	
 	def about(self):
-	
-		global windowList
 		
 		self.aboutWindow = UberBoxDialog()
 		self.aboutWindow.ui.label_3.setText(self.translator[self.language][47])
@@ -482,20 +480,17 @@ class TestGame:
 		self.aboutWindow.ui.label_6.setText(self.translator[self.language][50])
 		self.aboutWindow.ui.label_7.setText(self.translator[self.language][51])
 		self.aboutWindow.ui.label_8.setText(self.translator[self.language][52])
+		self.aboutWindow.ui.label_9.setText(self.translator[self.language][68])
+		self.aboutWindow.ui.label_10.setText(self.translator[self.language][69])
 		self.aboutWindow.ui.label_8.setOpenExternalLinks(True)
-		self.aboutWindow.ui.label_3.setFont(globalFont)
-		self.aboutWindow.ui.label_4.setFont(globalFont)
-		self.aboutWindow.ui.label_5.setFont(globalFont)
-		self.aboutWindow.ui.label_6.setFont(globalFont)
-		self.aboutWindow.ui.label_7.setFont(globalFont)
-		self.aboutWindow.ui.label_8.setFont(globalFont)
-		self.buttonList.append(self.aboutWindow.ui.label_3)
-		self.buttonList.append(self.aboutWindow.ui.label_4)
-		self.buttonList.append(self.aboutWindow.ui.label_5)
-		self.buttonList.append(self.aboutWindow.ui.label_6)
-		self.buttonList.append(self.aboutWindow.ui.label_7)
-		self.buttonList.append(self.aboutWindow.ui.label_8)
-		self.windowList.append(self.aboutWindow)
+		self.aboutWindow.ui.label_3.setFont(self.globalFont)
+		self.aboutWindow.ui.label_4.setFont(self.globalFont)
+		self.aboutWindow.ui.label_5.setFont(self.globalFont)
+		self.aboutWindow.ui.label_6.setFont(self.globalFont)
+		self.aboutWindow.ui.label_7.setFont(self.globalFont)
+		self.aboutWindow.ui.label_8.setFont(self.globalFont)
+		self.aboutWindow.ui.label_9.setFont(self.globalFont)
+		self.aboutWindow.ui.label_10.setFont(self.globalFont)
 		self.aboutWindow.show()
 		
 	def addWidgets(self):
@@ -510,13 +505,14 @@ class TestGame:
 		self.currWindow.ui.matchingButtonsRight = []
 		
 		for i in range(0,12):
-			horizontalLayout = QtGui.QHBoxLayout()
+			horizontalLayout = PyQt4.QtGui.QHBoxLayout()
 			horizontalLayout.setObjectName("horizontalLayout")
-			spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-			label = QtGui.QLabel()
+			spacerItem = PyQt4.QtGui.QSpacerItem(40, 20, PyQt4.QtGui.QSizePolicy.Expanding, PyQt4.QtGui.QSizePolicy.Minimum)
+			label = PyQt4.QtGui.QLabel()
+			label.setFont(self.globalFont)
 			label.setObjectName("label")
 			self.currWindow.ui.matchingLabels.append(label)
-			pushButton = QtGui.QPushButton()
+			pushButton = PyQt4.QtGui.QPushButton()
 			pushButton.setText("")
 			pushButton.setObjectName("pushButton")
 			pushButton.setAutoFillBackground(True)
@@ -535,7 +531,8 @@ class TestGame:
 				self.currWindow.ui.matchingLabelsRight.append(label)
 			self.currWindow.ui.matches.append(horizontalLayout)
 			
-			checkBox = QtGui.QCheckBox()
+			checkBox = PyQt4.QtGui.QCheckBox()
+			checkBox.setFont(self.globalFont)
 			self.currWindow.ui.checkBoxes.append(checkBox)
 		
 		for currBox in range(0, len(self.currWindow.ui.checkBoxes)):
@@ -557,6 +554,18 @@ class TestGame:
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_10)
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_11)
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_12)
+		self.currWindow.ui.pushButton.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_2.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_3.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_4.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_5.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_6.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_7.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_8.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_9.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_10.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_11.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_12.setFont(self.globalFont)
 		
 		
 			
@@ -588,10 +597,11 @@ class TestGame:
 			self.rightListShuffeld.append([])
 			self.linesForMatching.append([])
 			self.lines.append([])
-		self.currWindow = StartGameDialog()
-		
+
+		self.currWindow = StartGameDialog(self.translator[self.language][74])
 		self.addWidgets()
-		
+		self.currWindow.setWindowTitle(self.translator[self.language][66]+ ' - ' +self.quizTitle)
+
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
 			i.clicked.connect(self.scorePenalty)
@@ -668,6 +678,10 @@ class TestGame:
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(rightListShuffeld[i])
 		
 		self.currWindow.ui.label_2.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
+		self.currWindow.ui.label_2.setFont(self.globalFont)
+		self.currWindow.ui.label.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_13.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_14.setFont(self.globalFont)
 		self.currWindow.ui.pushButton_14.clicked.connect(self.nextQuestion)
 		self.currWindow.ui.pushButton_14.setText(self.translator[self.language][6])
 		self.currWindow.ui.pushButton_13.setEnabled(False)
@@ -675,13 +689,10 @@ class TestGame:
 		self.currWindow.ui.pushButton_13.setText(self.translator[self.language][5])
 		self.currWindow.show()
 		
-		
-		
 		self.paintPanel = Painter(self, self.lines)
-		#self.paintPanel.close()
 		self.currWindow.ui.stackedWidget.insertWidget(0,self.paintPanel)
 		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)
-	
+		
 	def nextQuestion(self):
 		
 		global questionNumber
@@ -692,7 +703,7 @@ class TestGame:
 		self.questionNumber += 1
 		
 		self.drawMatchingLines(self.questionNumber)
-		
+
 		if self.questionNumber == len(self.questions) -1:
 			self.currWindow.ui.pushButton_14.setText(self.translator[self.language][7])
 			self.currWindow.ui.pushButton_14.clicked.disconnect()
@@ -797,7 +808,7 @@ class TestGame:
 					if not self.siteVisitedMatching[self.questionNumber]:
 						self.linesForMatching[self.questionNumber].append([])
 						self.lines[self.questionNumber].append([])
-					
+			
 			random.shuffle(rightListShuffeldTemp)
 			
 			if not self.siteVisitedMatching[self.questionNumber]:
@@ -810,8 +821,6 @@ class TestGame:
 				self.currWindow.ui.matchingButtons[(i)*2].setObjectName(self.questions[self.questionNumber][0][i+1])
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
-			
-			
 
 			self.siteVisitedMatching[self.questionNumber] = True
 		
@@ -822,10 +831,10 @@ class TestGame:
 		global questionNumber
 		global siteVisitedMatching
 		global rightListShuffeld
+		
+		
 		self.questionNumber -=1
-		
 		self.drawMatchingLines(self.questionNumber)
-		
 		self.currWindow.ui.pushButton_14.setEnabled(True)
 		self.currWindow.ui.pushButton_14.setText(self.translator[self.language][6])
 		self.currWindow.ui.pushButton_14.clicked.disconnect()
@@ -927,26 +936,11 @@ class TestGame:
 			for i in range(0, len(self.rightListShuffeld[self.questionNumber])):
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setVisible(True)
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(self.rightListShuffeld[self.questionNumber][i])
-				
-			
 			
 			self.siteVisitedMatching[self.questionNumber] = True
-		
 	
 	def drawMatchingLines(self, qNumber):
 		self.paintPanel.update(qNumber)
-		'''
-		#self.paintPanel.update()
-		for i in self.lines:
-			if not i == []:
-				self.currWindow.ui.newLine = QFrame()
-				self.currWindow.ui.newLine.setGeometry(QRect(i[0].pos().x(), i[0].pos().y(), i[1].pos().x(), i[1].pos().y()))
-				self.currWindow.ui.newLine.setFrameShape(QFrame.HLine)
-				self.currWindow.ui.gridLayout.addWidget(self.currWindow.ui.newLine)
-				#.drawLine(i[0].pos().x(), i[0].pos().y(), i[1].pos().x(), i[1].pos().y())
-				print 'huhu'
-		'''
-		#print 'hello'
 		
 	def matchingLeftButtonClicked(self):
 		
@@ -973,14 +967,13 @@ class TestGame:
 						tempFont = self.currWindow.ui.matchingLabels[(i-1)*2].font()
 						tempFont.setBold(True)
 						self.currWindow.ui.matchingLabels[(i-1)*2].setFont(tempFont)
-						#self.currWindow.ui.matchingLabels[(i-1)*2].update()
+						
 		else: 
 			self.linesForMatching[self.questionNumber][indexOfLeftButton] = []
 			self.lines[self.questionNumber][indexOfLeftButton] = []
-			
+		
 		self.drawMatchingLines(self.questionNumber)
-
-	
+		
 	def matchingRightButtonClicked(self):
 		
 		global linesForMatching
@@ -1009,22 +1002,15 @@ class TestGame:
 			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(1)
 		else:
 			self.linesForMatching[self.questionNumber][indexOfLeftButton].append(0)
+		
 
-
-		#print self.lines
 		self.lines[self.questionNumber][indexOfLeftButton].append(buttonLeft)
 		self.lines[self.questionNumber][indexOfLeftButton].append(buttonRight)
 		
-		
-		print self.lines
-		print self.linesForMatching
-		
 		self.drawMatchingLines(self.questionNumber)
 		self.currWindow.repaint()
-		#self.drawMatchingLines()
-		
-		'''self.currWindow.paintEvent(buttonLeft.pos().x(),buttonLeft.pos().y(),buttonRight.pos().x(),buttonRight.pos().y())'''
 
+		
 	def checkState(self):
 		
 		global Score
@@ -1122,9 +1108,10 @@ class TestGame:
 			self.frameQuestionAnswered[i] = False
 			self.answers[i] =''
 		
-		self.currWindow = TrainingQuizDialog()
+		self.currWindow = TrainingQuizDialog(self.translator[self.language][74])
 		self.addWidgets()
 		
+		self.currWindow.setWindowTitle(self.translator[self.language][67]+ ' - ' +self.quizTitle)
 		self.currWindow.ui.pushButton_13.setText(self.translator[self.language][28])
 		self.currWindow.ui.pushButton_13.setVisible(False)
 		self.currWindow.ui.pushButton_13.clicked.connect(self.evaluateCheckBoxesTraining)
@@ -1208,14 +1195,20 @@ class TestGame:
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setVisible(True)
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(rightListShuffeld[i])
 				
-				
+		
+		self.currWindow.ui.label.setFont(self.globalFont)
+		self.currWindow.ui.label_2.setFont(self.globalFont)
+		self.currWindow.ui.label_3.setFont(self.globalFont)
+		self.currWindow.ui.label_4.setFont(self.globalFont)
+		self.currWindow.ui.label_5.setFont(self.globalFont)
 		self.currWindow.ui.pushButton_14.setText(self.translator[self.language][14])
 		self.currWindow.ui.pushButton_14.clicked.connect(self.previousQuizQuestion)
 		self.currWindow.ui.pushButton_14.setVisible(False)
-		self.currWindow.ui.pushButton_15.clicked.connect(self.currWindow.close)
-		self.currWindow.ui.pushButton_15.setText(self.translator[self.language][16])
 		self.currWindow.ui.pushButton_16.setText(self.translator[self.language][15])
 		self.currWindow.ui.pushButton_16.clicked.connect(self.quizNextQuestion)
+		self.currWindow.ui.pushButton_14.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_16.setFont(self.globalFont)
+		self.currWindow.ui.pushButton_13.setFont(self.globalFont)
 		
 		self.currWindow.show()
 	
@@ -1248,15 +1241,15 @@ class TestGame:
 					buttonPressed = self.currWindow.ui.buttonArray[nr-1]
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] + str(self.Score) + self.translator[self.language][19] + str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
 		else:
-			points = self.translator[self.language][20] + str(self.Score) + self.translator[self.language][21] + str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
 		
 		if wasCorrect:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
 		else:
 			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
-			self.currWindow.ui.label_3.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][24] + correctAnswer +"<br/></p></body></html>")
+			self.currWindow.ui.label_3.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][24] +' '+ correctAnswer +"<br/></p></body></html>")
 			buttonPressed.setStyleSheet(u"color:rgb(255, 0, 0)")
 		
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
@@ -1409,9 +1402,9 @@ class TestGame:
 			self.currWindow.ui.pushButton_16.clicked.connect(self.showQuizResults)
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] + str(self.Score) + self.translator[self.language][19] + str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
 		else:
-			points = self.translator[self.language][20] + str(self.Score) + self.translator[self.language][21] + str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
 		
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
@@ -1491,7 +1484,7 @@ class TestGame:
 					self.currWindow.ui.label_3.setText('')
 					self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 				else:
-					rightAnswer = self.translator[self.language][25] + rightAnswer + self.translator[self.language][26]
+					rightAnswer = self.translator[self.language][25] +' '+ rightAnswer +' '+ self.translator[self.language][26]
 					self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
 					self.currWindow.ui.label_3.setText( "<html><head/><body><p align=\"center\"> " + rightAnswer + "<br/></p></body></html>")
 					self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")						
@@ -1532,7 +1525,7 @@ class TestGame:
 					self.currWindow.ui.label_3.setText('')
 					self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 				else:
-					rightAnswer = self.translator[self.language][25] + rightAnswer + self.translator[self.language][26]
+					rightAnswer = self.translator[self.language][25] +' '+ rightAnswer +' '+ self.translator[self.language][26]
 					self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
 					self.currWindow.ui.label_3.setText( "<html><head/><body><p align=\"center\"> " + rightAnswer + "<br/></p></body></html>")
 					self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")						
@@ -1571,7 +1564,6 @@ class TestGame:
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setEnabled(False)
 				
-			
 			
 			if self.frameQuestionAnswered[self.questionFrame]:
 				self.updateMatchingLines()
@@ -1648,9 +1640,9 @@ class TestGame:
 		self.roundScore()
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] + str(self.Score) + self.translator[self.language][19] + str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
 		else:
-			points = self.translator[self.language][20] + str(self.Score) + self.translator[self.language][21] + str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
 		
 		if allCorrectlyAnswered:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
@@ -1660,7 +1652,6 @@ class TestGame:
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 		self.currWindow.ui.pushButton_13.setEnabled(False)
 		
-	
 	def matchingRightButtonClickedQuiz(self):
 		
 		global linesForMatching
@@ -1693,7 +1684,6 @@ class TestGame:
 		self.drawMatchingLines(self.questionNumber)
 	
 	def updateMatchingLines(self):
-		
 		
 		global frameQuestionAnswered
 
@@ -1853,13 +1843,16 @@ class TestGame:
 		self.Score += tempScore
 	
 	def evaluateLines(self):
+	
 		allMatchingCorrect = True
 		for i in range(0,len(self.questions)):
 			if self.questionType[i] == 'matching':
 				allMatchingCorrect = True
+				
 				for currLine in self.linesForMatching[i]:
 					if len(currLine) < 3  or not(currLine[2]  == 1):
 						allMatchingCorrect = False
+				
 				if allMatchingCorrect:
 					self.Score += 1
 	
@@ -1868,10 +1861,10 @@ class TestGame:
 		global log
 				
 		self.roundScore()
-		self.currWindow = PointsDialog(self.Score, len(self.questions))
-		self.currWindow.ui.pushButton_2.clicked.connect(self.goToTraining)
+		self.currWindow = PointsDialog()
+		self.currWindow.setWindowTitle(self.translator[self.language][7])
 		self.currWindow.ui.pushButton.clicked.connect(self.currWindow.close)
-		self.currWindow.show()
+		percentage = (self.Score / len(self.questions))*100
 		
 		end = time.time()
 		self.timeElapsed = end - self.timeElapsed 
@@ -1888,10 +1881,25 @@ class TestGame:
 		logString += str(self.timeElapsed)
 		self.log.write('\n' + logString)
 		self.log.close()
-	
+		
+		if percentage > 90.0:
+			evaluation = self.translator[self.language][70]
+		elif percentage > 80.0:
+			evaluation = self.translator[self.language][71]
+		elif percentage > 70.0:
+			evaluation = self.translator[self.language][72]
+		else:
+			evaluation = self.translator[self.language][73]
+		
+		self.currWindow.ui.label.setFont(self.globalFont)
+		self.currWindow.ui.label.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][64]+ ' ' + str(self.Score) + ' ' + self.translator[self.language][21]+ str(len(self.questions))+ "<br/><br/>"+ self.translator[self.language][65] + str(percentage) +'% !' +'  ' + evaluation + "</p></body></html>")
+		self.currWindow.show()
+		
 	def showNormalResults(self):
+	
 		self.evaluateLines()
 		self.showScore()
+		
 	def showQuizResults(self):
 		
 		self.currWindow.close()
@@ -1901,14 +1909,13 @@ class TestGame:
 		
 		self.currWindow.close()
 		self.training()		
-			
 	
 
-
-class Painter(QtGui.QWidget):
+class Painter(PyQt4.QtGui.QWidget):
 	
 
 	def __init__(self, parent, lines):
+		
 		self.parent = parent
 		self.lines = lines
 		self.xOffset = 0
@@ -1917,11 +1924,13 @@ class Painter(QtGui.QWidget):
 		super(Painter, self).__init__()
 		
 	def update(self, questionNumber):
+		
 		self.repaint()
 		self.questionNumber=questionNumber
 	
 	def paintEvent(self, event):
-		painter = QtGui.QPainter(self)
+		
+		painter = PyQt4.QtGui.QPainter(self)
 		painter.setRenderHint(QPainter.Antialiasing)
 		painter.begin(self)
 		self.drawLines(event, painter)
@@ -1929,25 +1938,14 @@ class Painter(QtGui.QWidget):
 		
 	def drawLines(self, event, painter):
 		
-		pen = QtGui.QPen(QtCore.Qt.blue, 2, QtCore.Qt.SolidLine)
+		pen = PyQt4.QtGui.QPen(PyQt4.QtCore.Qt.blue, 2, PyQt4.QtCore.Qt.SolidLine)
 		painter.setPen(pen)
-		
-		#xOffset = self.currWindow.ui.stackedWidget.mapTo(self.currWindow,QPoint(0,0)).x()
-		#yOffset = self.currWindow.ui.stackedWidget.mapTo(self.currWindow,QPoint(0,0)).y()
 		
 		self.xOffset = self.parentWidget().mapTo(self.parentWidget().parentWidget(), QPoint(0,0)).x()
 		self.yOffset = self.parentWidget().mapTo(self.parentWidget().parentWidget(), QPoint(0,0)).y()
-		
-		
-		
+	
 		i = self.lines[self.questionNumber]
-		#print i
-		#print self.questionNumber
+
 		for line in i:
 			if not line == []:
 				painter.drawLine(line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).x()-self.xOffset, line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).y()-self.yOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).x()-self.xOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).y()-self.yOffset)
-				#painter.drawLine(line[0].pos().x()-self.xOffset, line[0].pos().y()-self.yOffset, line[1].pos().x()-self.xOffset, line[1].pos().y()-self.yOffset)
-				#painter.drawLine(0, 0, line[1].pos().x()-self.xOffset, line[1].pos().y()-self.yOffset)
-				
-				#print 'huhu'
-		

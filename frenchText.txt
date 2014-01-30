@@ -17,9 +17,9 @@ Question suivante
 Quitter l'entrainement
 Résultats
 Vous avez maintenant
-Point sur 
+Point sur
 Vous avez maintenant
-Points sur 
+Points sur
 Votre réponse est correcte
 Désolé, votre réponse est erronée
 La réponse est
@@ -36,19 +36,19 @@ Enregistre  les résultats
 Démearrez le quiz
 Utilisés récemment
 Options
-Liste d'autres jeux géographiques
-Plateform de plus quiz
+GeoGames en web
+Quiz en web
 Caractère
 Anglais
 Allemande
-Plus jeux éducatifs
-Contact
+GeoGames
+Contact (E-Mail)
 Assistance d'Internet
-Sujet
+Sujet ...
 Version:
 0.1
 Auteur:
-Institut für Software HSR
+Geometa Lab à Institut für Software HSR
 Page web
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Webseite</a> 
 Questions régardement le plugin:
@@ -61,4 +61,16 @@ Contact:
 rkrucker@hsr.ch
 Francais
 Plus grand
-Plus petit 
+Plus petit
+Tu as
+Ce sont
+Test
+Entraînement
+Licence
+Licencetyp
+Bravo!
+Très bien!
+Bien!
+Vous derivez practiquer un peu plus!
+Etes-vous sûr de vouloir quitter?
+Taille standard 

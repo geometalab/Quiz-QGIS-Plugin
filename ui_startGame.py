@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_startGame.ui'
 #
-# Created: Thu Jan 23 16:24:36 2014
+# Created: Wed Jan 29 09:15:02 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,10 +26,11 @@ except AttributeError:
 class Ui_testGame(object):
     def setupUi(self, testGame):
         testGame.setObjectName(_fromUtf8("testGame"))
-        testGame.resize(572, 701)
+        testGame.resize(559, 560)
         self.verticalLayout_3 = QtGui.QVBoxLayout(testGame)
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
         self.verticalLayout_2 = QtGui.QVBoxLayout()
+        self.verticalLayout_2.setContentsMargins(20, -1, 20, -1)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
@@ -51,6 +52,7 @@ class Ui_testGame(object):
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.gridLayout = QtGui.QGridLayout()
+        self.gridLayout.setMargin(20)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem3, 0, 0, 1, 1)
@@ -135,16 +137,15 @@ class Ui_testGame(object):
         spacerItem14 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem14, 5, 4, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout)
-        spacerItem15 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem15)
         self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setContentsMargins(20, -1, 20, -1)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.pushButton_13 = QtGui.QPushButton(testGame)
         self.pushButton_13.setText(_fromUtf8(""))
         self.pushButton_13.setObjectName(_fromUtf8("pushButton_13"))
         self.horizontalLayout.addWidget(self.pushButton_13)
-        spacerItem16 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem16)
+        spacerItem15 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem15)
         self.pushButton_14 = QtGui.QPushButton(testGame)
         self.pushButton_14.setText(_fromUtf8(""))
         self.pushButton_14.setObjectName(_fromUtf8("pushButton_14"))

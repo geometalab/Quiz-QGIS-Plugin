@@ -1,6 +1,0 @@
-Allgemeines:
-* Habe schnell HoPotatoes getestet: Das speicher wie es scheint nur zwei Formate: das eigene JCL-Format (XML) und das WebCT-Textformat (.txt; das ev. nur 2 Quiz-Typen kennt?). Vielleicht lässt sich ein externer Konverter JCL<->GIFT finden?
-
-User Interface:
-* Ein Luxus wäre, wenn man die Schriftgrösse verändern könnte: "A+|Default|A-"
-
