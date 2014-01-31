@@ -48,7 +48,7 @@ Hilfe im Web
 Version:  
 0.1
 Autor:  
-Geometalab am Institut für Software HSR
+Geometa Lab am Institut für Software HSR
 Webseite:  
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Webseite</a>  
 Fragen zu dem Plugin: 
