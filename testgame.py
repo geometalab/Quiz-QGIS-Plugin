@@ -596,7 +596,9 @@ class TestGame:
 		global linesForMatching
 		global answers
 		global questionsAnswered
+		global training
 		
+		self.training = False
 		self.questionsAnswered = 0
 		self.currMatchingButtonClicked = ''
 		self.timeElapsed = time.time()
@@ -996,7 +998,10 @@ class TestGame:
 		
 		if not self.frameQuestionAnswered[self.questionNumber]:
 			self.questionsAnswered += 1
-		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
+		if not self.training:
+			self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
+		else:
+			self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.frameQuestionAnswered[self.questionNumber] = True
 		
 		button = self.currWindow.sender()
@@ -1183,7 +1188,9 @@ class TestGame:
 		global questionFrame
 		global lines
 		global questionsAnswered
+		global training
 		
+		self.training = True
 		self.questionsAnswered = 0
 		self.Score = 0
 		self.questionNumber = 0
