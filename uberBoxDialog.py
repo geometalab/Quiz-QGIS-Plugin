@@ -26,10 +26,10 @@ from uberBox import Ui_uberBox
 
 
 class UberBoxDialog(QtGui.QDialog):
-	def __init__(self):
-		QtGui.QDialog.__init__(self)
+	def __init__(self, parent):
+		QtGui.QDialog.__init__(self, parent)
 		# Set up the user interface from Designer.
 		self.ui = Ui_uberBox()
 		self.ui.setupUi(self)
-		print 'hello'
+		
 		

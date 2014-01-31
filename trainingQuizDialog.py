@@ -34,7 +34,6 @@ class TrainingQuizDialog(QtGui.QDialog):
 		self.quitMessage = quitMessage
 		
 	def closeEvent(self, event):
-		print 'huhu'
 		quit_msg = "Are you sure you want to exit the program?"
 		reply = QtGui.QMessageBox.question(self, 'Message', 
                      self.quitMessage, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)

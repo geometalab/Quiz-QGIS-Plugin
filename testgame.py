@@ -47,6 +47,7 @@ class TestGame:
 	questionType = []
 	questionTitle = []
 	answers = []
+	questionsAnswered = 0
 	questionFrame = 0
 	frameQuestionAnswered = []
 	timeElapsed = 0
@@ -488,7 +489,7 @@ class TestGame:
 	
 	def about(self):
 		
-		self.aboutWindow = UberBoxDialog()
+		self.aboutWindow = UberBoxDialog(self.dlg)
 		self.aboutWindow.ui.label_3.setText(self.translator[self.language][47])
 		self.aboutWindow.ui.label_4.setText(self.translator[self.language][48])
 		self.aboutWindow.ui.label_5.setText(self.translator[self.language][49])
@@ -594,7 +595,9 @@ class TestGame:
 		global rightListShuffeld
 		global linesForMatching
 		global answers
+		global questionsAnswered
 		
+		self.questionsAnswered = 0
 		self.currMatchingButtonClicked = ''
 		self.timeElapsed = time.time()
 		self.Score = 0
@@ -619,7 +622,7 @@ class TestGame:
 
 		self.currWindow = StartGameDialog(self.translator[self.language][74])
 		self.addWidgets()
-		self.currWindow.setWindowTitle(self.translator[self.language][76]+'      '+self.translator[self.language][66]+ ' - ' +self.quizTitle)
+		self.currWindow.setWindowTitle(self.translator[self.language][76]+' '+self.translator[self.language][66]+ ' - ' +self.quizTitle)
 
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
@@ -696,7 +699,9 @@ class TestGame:
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setVisible(True)
 				self.currWindow.ui.matchingLabels[((i) * 2)+1].setText(rightListShuffeld[i])
 		
-		self.currWindow.ui.label_2.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
+		self.currWindow.ui.label_3.setFont(self.globalFont)
+		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
+		self.currWindow.ui.label_2.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.currWindow.ui.label_2.setFont(self.globalFont)
 		self.currWindow.ui.label.setFont(self.globalFont)
 		self.currWindow.ui.pushButton_13.setFont(self.globalFont)
@@ -768,7 +773,6 @@ class TestGame:
 			
 		if self.questionType[self.questionNumber] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[self.questionNumber][0][0] +"</p></body></html>")
-			self.frameQuestionAnswered[self.questionNumber] = True
 			for nr in range(1,len(self.questions[self.questionNumber][0])):
 				self.currWindow.ui.checkBoxes[nr-1].setText(self.questions[self.questionNumber][0][nr])
 				self.currWindow.ui.checkBoxes[nr-1].setObjectName(str(self.questions[self.questionNumber][1][nr]))
@@ -851,7 +855,7 @@ class TestGame:
 				self.currWindow.ui.matchingButtons[((i)*2)+1].setObjectName(self.rightListShuffeld[self.questionNumber][i])
 
 			self.siteVisitedMatching[self.questionNumber] = True
-		
+		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.currWindow.ui.label_2.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
 		
 	def previousQuestion(self):
@@ -868,6 +872,7 @@ class TestGame:
 		self.currWindow.ui.pushButton_14.clicked.disconnect()
 		self.currWindow.ui.pushButton_14.clicked.connect(self.nextQuestion)
 		self.currWindow.ui.label_2.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
+		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		
 		if self.questionNumber == 0:
 			self.currWindow.ui.pushButton_13.setEnabled(False)
@@ -989,6 +994,11 @@ class TestGame:
 		global leftChoiceMatching
 		global linesForMatching
 		
+		if not self.frameQuestionAnswered[self.questionNumber]:
+			self.questionsAnswered += 1
+		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
+		self.frameQuestionAnswered[self.questionNumber] = True
+		
 		button = self.currWindow.sender()
 		
 		
@@ -1073,6 +1083,11 @@ class TestGame:
 		global Score
 		global frameQuestionAnswered
 		
+		print self.frameQuestionAnswered
+		if not self.frameQuestionAnswered[self.questionNumber]:
+			self.questionsAnswered += 1
+		print 'hello'
+		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.frameQuestionAnswered[self.questionNumber] = True
 		
 		button = self.currWindow.sender()
@@ -1116,7 +1131,8 @@ class TestGame:
 		global answers
 		
 		button = self.currWindow.sender()
-		
+		self.questionsAnswered += 1
+		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.answers[self.questionNumber] = button.text()
 		button.setStyleSheet('color: rgb(0, 0, 255)')
 		tempFont = button.font()
@@ -1138,6 +1154,8 @@ class TestGame:
 		
 		button = self.currWindow.sender()
 		
+		self.questionsAnswered += 1
+		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.answers[self.questionNumber] = button.text()
 		button.setStyleSheet('color: rgb(0, 0, 255)')
 		
@@ -1164,7 +1182,9 @@ class TestGame:
 		global frameQuestionAnswered
 		global questionFrame
 		global lines
+		global questionsAnswered
 		
+		self.questionsAnswered = 0
 		self.Score = 0
 		self.questionNumber = 0
 		self.questions = self.parseQuestion()
@@ -1192,7 +1212,7 @@ class TestGame:
 		self.currWindow = TrainingQuizDialog(self.translator[self.language][74])
 		self.addWidgets()
 		
-		self.currWindow.setWindowTitle(self.translator[self.language][76]+'     '+self.translator[self.language][67]+ ' - ' +self.quizTitle)
+		self.currWindow.setWindowTitle(self.translator[self.language][76]+' '+self.translator[self.language][67]+ ' - ' +self.quizTitle)
 		self.currWindow.ui.pushButton_13.setText(self.translator[self.language][28])
 		self.currWindow.ui.pushButton_13.setVisible(False)
 		self.currWindow.ui.pushButton_13.clicked.connect(self.evaluateCheckBoxesTraining)
@@ -1282,6 +1302,8 @@ class TestGame:
 		self.currWindow.ui.label_3.setFont(self.globalFont)
 		self.currWindow.ui.label_4.setFont(self.globalFont)
 		self.currWindow.ui.label_5.setFont(self.globalFont)
+		self.currWindow.ui.label_6.setFont(self.globalFont)
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.currWindow.ui.pushButton_14.setText(self.translator[self.language][14])
 		self.currWindow.ui.pushButton_14.clicked.connect(self.previousQuizQuestion)
 		self.currWindow.ui.pushButton_14.setVisible(False)
@@ -1350,6 +1372,7 @@ class TestGame:
 		self.questionNumber += 1
 		self.drawMatchingLines(self.questionNumber)
 		self.currWindow.ui.label_5.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		if self.questionFrame == len(self.questions) - 1:
 			self.currWindow.ui.pushButton_16.setText(self.translator[self.language][17])
 			self.currWindow.ui.pushButton_16.clicked.disconnect()
@@ -1431,6 +1454,7 @@ class TestGame:
 				self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[self.questionNumber][0][0] +"</p></body></html>")
 				rightListShuffeldTemp = []
 				self.currWindow.ui.pushButton_13.setVisible(True)
+				self.currWindow.ui.pushButton_13.setEnabled(True)
 				self.currWindow.ui.pushButton_13.clicked.disconnect()
 				self.currWindow.ui.pushButton_13.clicked.connect(self.evaluateMatchingTraining)
 				
@@ -1512,7 +1536,7 @@ class TestGame:
 		
 		self.currWindow.ui.label_5.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
 		self.currWindow.ui.pushButton_13.setVisible(False)
-		
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		
 		if self.questionType[self.questionNumber] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.questions[self.questionNumber][0][0] +"</p></body></html>")
@@ -1634,6 +1658,7 @@ class TestGame:
 			self.currWindow.ui.pushButton_13.clicked.disconnect()
 			self.currWindow.ui.pushButton_13.clicked.connect(self.evaluateMatchingTraining)
 			self.currWindow.ui.pushButton_13.setVisible(True)
+			self.currWindow.ui.pushButton_13.setEnabled(True)
 			
 			for i in range(1,len(self.questions[self.questionNumber][0])):
 				self.currWindow.ui.matchingLabels[(i-1) * 2].setText(self.questions[self.questionNumber][0][i])
@@ -1667,7 +1692,8 @@ class TestGame:
 		
 		global Score
 		global answers
-	
+		self.questionsAnswered += 1
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		button = self.currWindow.sender()
 		self.answers[self.questionNumber]=button.text()
 		self.Score += 1
@@ -1678,7 +1704,8 @@ class TestGame:
 
 		global Score
 		global answers
-
+		self.questionsAnswered += 1
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		button = self.currWindow.sender()
 		answerGiven = button.text()
 		self.answers[self.questionNumber]=answerGiven
@@ -1695,7 +1722,8 @@ class TestGame:
 	
 		global Score
 		global frameQuestionAnswered
-
+		self.questionsAnswered += 1
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.frameQuestionAnswered[self.questionNumber] = True
 		allCorrectlyAnswered = True
 		
@@ -1767,9 +1795,9 @@ class TestGame:
 		self.roundScore()
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] + str(self.Score) + self.translator[self.language][19] + str(len(self.questions))
+			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
 		else:
-			points = self.translator[self.language][20] + str(self.Score) + self.translator[self.language][21] + str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
 		
 		if allCorrectlyAnswered:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
@@ -1784,7 +1812,8 @@ class TestGame:
 		
 		global Score
 		global frameQuestionAnswered
-		
+		self.questionsAnswered += 1
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		self.frameQuestionAnswered[self.questionNumber] = True
 		tempScore = 0
 		allCorrectlyAnswered = True
@@ -1817,9 +1846,9 @@ class TestGame:
 		self.roundScore()
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] + str(self.Score) + self.translator[self.language][19] + str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
 		else:
-			points = self.translator[self.language][20] + str(self.Score) + self.translator[self.language][21] + str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
 		
 		if allCorrectlyAnswered:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
@@ -1852,9 +1881,9 @@ class TestGame:
 		self.roundScore()
 
 		if self.Score == 1:
-			points = self.translator[self.language][18] + str(self.Score) + self.translator[self.language][19] + str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
 		else:
-			points = self.translator[self.language][20] + str(self.Score) + self.translator[self.language][21] + str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
 		
 		if allCorrectlyAnswered:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")

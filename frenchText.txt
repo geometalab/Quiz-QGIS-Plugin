@@ -27,7 +27,7 @@ La réponse correcte aurait d' être
 
 Votre réponse était correcte
 Vérifer correction
-Question
+Question:
 de
 Taille de caractères
 Fichier
@@ -74,4 +74,5 @@ Bien!
 Vous derivez practiquer un peu plus!
 Etes-vous sûr de vouloir quitter?
 Taille standard
-Quiz 
+Quiz
+Répondu: 

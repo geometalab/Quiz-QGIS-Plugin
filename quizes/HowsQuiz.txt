@@ -1,0 +1,26 @@
+//Titel:How's Quiz
+//Anleitung:Please test this application ;)
+
+::Q1::
+{pic?Which country is this? ~Serbien =Afghanistan ~Spanien  }
+
+::Q2::What's the capital of Pakistan?
+{ =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
+
+::Q3::These countries share a border with India:
+{ ~%-100%Thailand ~%33%Bangla Desh ~%33%Pakistan ~%33%China }
+
+::Q4::Match each country with its capital:
+{ =Surinam -> Paramarimbo =Andorra -> Andorra de la Ville =China ->Peking =Afghanistan -> Kabul }
+
+::Q5::
+{pic?Which country is this? ~Finnland ~Estland =Lettland ~Albanien }
+
+::Q6::
+{pic?Which country is this? =Irland ~England ~Frankreich ~Ukraine }
+
+::Q7::
+At the moment, { ~Iran =Indonesia ~Saudi Arabia ~Pakistan } is the most populous country with a muslim majority.
+
+::Q8::
+{pic?Which country is this? ~Serbien ~Kosovo ~Deutschland =Bosnien }

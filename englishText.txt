@@ -27,7 +27,7 @@ The right answer would have been
 
 Your answer was correct
 Check for correctness 
-Question
+Question:
 of
 Fontsize 
 Data
@@ -74,4 +74,5 @@ Good!
 You should practice a little more!
 Are you sure you want to quit?
 Standard size 
-Quiz 
+Quiz
+Answered: 

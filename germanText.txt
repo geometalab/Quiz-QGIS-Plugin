@@ -27,7 +27,7 @@ Die richtige Antworte wäre
 gewesen
 Deine Antwort war richtig
 Auf Korrektheit prüfen 
-Frage
+Frage:
 von
 Schriftgrösse 
 Datei
@@ -74,4 +74,5 @@ Gut!
 Du solltest ein wenig mehr üben!
 Bist du sicher, dass du das Fenster schliessen willst?
 Standardgrösse
-Quiz 
+Quiz
+Beantwortet: 
