@@ -331,7 +331,7 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QPushButton" name="startGame">
+            <widget class="QPushButton" name="startTest">
              <property name="font">
               <font>
                <family>Verdana</family>

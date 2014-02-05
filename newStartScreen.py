@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'newStartScreen.ui'
 #
-# Created: Wed Jan 29 15:00:00 2014
+# Created: Mon Feb 03 15:32:24 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -141,15 +141,15 @@ class Ui_MainWindow(object):
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.verticalLayout = QtGui.QVBoxLayout(self.groupBox)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.startGame = QtGui.QPushButton(self.groupBox)
+        self.startTest = QtGui.QPushButton(self.groupBox)
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Verdana"))
         font.setPointSize(8)
-        self.startGame.setFont(font)
-        self.startGame.setStyleSheet(_fromUtf8(""))
-        self.startGame.setText(_fromUtf8(""))
-        self.startGame.setObjectName(_fromUtf8("startGame"))
-        self.verticalLayout.addWidget(self.startGame)
+        self.startTest.setFont(font)
+        self.startTest.setStyleSheet(_fromUtf8(""))
+        self.startTest.setText(_fromUtf8(""))
+        self.startTest.setObjectName(_fromUtf8("startTest"))
+        self.verticalLayout.addWidget(self.startTest)
         self.startTraining = QtGui.QPushButton(self.groupBox)
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Verdana"))
