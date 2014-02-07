@@ -37,7 +37,7 @@ import math
 import codecs
 import random
 from uberBoxDialog import UberBoxDialog
-
+from QuestionClass import *
 class TestGame:
 	
 	Score = 0
@@ -100,7 +100,7 @@ class TestGame:
 				self.translator[2].append(line[:-1])
 			f.close()
 	
-		self.dlg = TestGameDialog()
+		
 			
 	def initGui(self):
 
@@ -113,7 +113,7 @@ class TestGame:
 
 		self.iface.removePluginMenu(u"Quiz", self.action)
 		self.iface.removeToolBarIcon(self.action)
-
+		del(self)
 	def run(self):
 
 		if QSettings().value("locale/userLocale")[0:2] == 'de':
@@ -122,6 +122,9 @@ class TestGame:
 			self.language = 2
 		else:
 			self.language = 1
+		print 'hello'
+
+		self.dlg = TestGameDialog()
 		
 		self.globalFont = self.dlg.ui.startTest.font()
 	
@@ -200,7 +203,9 @@ class TestGame:
 		self.dlg.ui.actionBigger.triggered.connect(self.fontBigger)
 		self.dlg.ui.actionStandard_2.setText(self.translator[self.language][75])
 		self.dlg.ui.actionStandard_2.triggered.connect(self.fontStandard)
-			
+		print 'hello2'
+
+		print 'hello3'
 		self.dlg.show()
 		
 	def changeLanguage(self, lang):
@@ -286,176 +291,93 @@ class TestGame:
 			allQuestions = f.read().split('\r\n\r\n')
 			
 			for question in allQuestions:
-				multipleWord = False
+				answersArray = []
+				boolArray = []
+				percentages = []
+				textArray = []
+				title = ''
 				
-				for line in question.split('\r\n'):
-					if "//Titel" in line:
-						self.quizTitle = line[8:]
-					if "//Anleitung" in line:
-						self.instruction = line[12:]
-					
-					if line[0] == ':':
-						titleSeperator = line.rsplit('::',1)
-						
-						if len(titleSeperator) == 2 and titleSeperator[1] != '':
-							multipleWord = True
-							title = titleSeperator[1]
-					
-					if '->' in line and multipleWord:
-						self.questionType.append('matching')
-						answersArray = []
-						matchPairs = line.split('=')
-						
-						for i in range(0, len(matchPairs)):
-							if '->' in matchPairs[i]:
-								if '}' in matchPairs[i]:
-									temp = matchPairs[i].split('}')
-									matchPair = temp[0].split('->')
-								else:
-									matchPair = matchPairs[i].split('->')
-								answersArray.append(matchPair[0])
-								answersArray.append(matchPair[1].lstrip())
-						self.currQuestion = MatchingQuestion(title, answersArray, [])
-						allQuests.append(self.currQuestion)
-						
-					elif line[0] == '{' and multipleWord:
-						tokens = line.split()
-						if tokens[2][1] == '%':
-							self.questionType.append('multipleChoice')
-							percentages = []
-							answersArray = []
-							for i in range(0, len(tokens)):
-						
-								if tokens[i][0]=='~':
-									percentage = tokens[i].split('%')
-									percentages.append(percentage[1])
-									answerString = ''
-									answerString += percentage[2]
+				if question.count('{') >=1:
+					if question.count('}') == 1:
+						titleSplit = question.split('::')
+						titleAndAnswers = titleSplit[2].split('{')
+						title = titleAndAnswers[0]
+						answers = titleAndAnswers[1].split('}')[0]
 
-									k = 1
-									while (tokens[i + k][0] != '=') and (tokens[i + k][0] != '~') and (tokens[i + k][0] != '}'):
-										answerString += ' '
-										answerString += tokens[i+k]
-										k += 1
-									answersArray.append(answerString)
-							self.currQuestion = MultipleChoiceQuestion(title, answersArray, [], percentages)
-							allQuests.append(self.currQuestion)
+						if '//Picture-Question' in question:
+							self.questionType.append('pictureQuestion')
+							correct = answers.split('=')
+							leftHalf = correct[0].split('~')[1:]
+							rightHalf = correct[1].split('~')
+							for i in leftHalf:
+								if i != '':
+									boolArray.append(False)
+									answersArray.append(i.strip())
+							answersArray.append(rightHalf[0].strip())
+							boolArray.append(True)
+							if len(rightHalf) > 1:
+								for i in rightHalf[1:]:
+									if i != '':
+										boolArray.append(False)
+										answersArray.append(i.strip())
+							currQuestion = PicQuestion(title, answersArray, boolArray)	
+						
+						elif '->' in question:
+							self.questionType.append('matching')
+							pairs = answers.split('=')
+							for i in pairs:
+								if len(i) > 1:
+									match = i.split('->')
+									answersArray.append(match[0].strip())
+									answersArray.append(match[1].strip())
+							currQuestion = MatchingQuestion(title, answersArray, [])
+						
+						elif '~%' in question:
+							self.questionType.append('multipleChoice')
+							options = answers.split('~')
+							for i in options[1:]:
+								part = i.split('%')
+								percentages.append(part[1])
+								answersArray.append(part[2].strip())
+							currQuestion = MultipleChoiceQuestion(title, answersArray, [], percentages)
+						
 						else:
 							self.questionType.append('stringQuestion')
-							boolArray = []
-							answersArray = []
-							for i in range(0, len(tokens)):
-								if tokens[i][0]== '=':
-									boolArray.append(True)
-									answerString = ''
-									answerString += tokens[i][1:]
-							
-									k =1
-									while ((tokens[i + k][0]) != '=') and (tokens[i + k][0]) != '~' and (tokens[i + k][0] != '}'):
-										answerString += ' '
-										answerString += tokens[i+k]
-										k += 1
-									answersArray.append(answerString)
-
-								elif tokens[i][0]=='~':
+							correct = answers.split('=')
+							leftHalf = correct[0].split('~')[1:]
+							rightHalf = correct[1].split('~')
+							for i in leftHalf:
+								if i != '':
 									boolArray.append(False)
-									answerString = ''
-									answerString += tokens[i][1:]
-
-									k = 1
-									while (tokens[i + k][0] != '=') and (tokens[i + k][0] != '~') and (tokens[i + k][0] != '}'):
-										answerString += ' '
-										answerString += tokens[i+k]
-										k += 1
-									answersArray.append(answerString)
-							self.currQuestion = Question(title, answersArray, boolArray)	
-							allQuests.append(self.currQuestion)
+									answersArray.append(i.strip())
+							answersArray.append(rightHalf[0].strip())
+							boolArray.append(True)
+							if len(rightHalf) > 1:
+								for i in rightHalf[1:]:
+									if i != '':
+										boolArray.append(False)
+										answersArray.append(i.strip())
+							currQuestion = Question(title, answersArray, boolArray)	
 					
-					if line[0] != '{' and line[0] != ':' and line[0] != '/' and (not line.strip()==''):
+					else:
 						self.questionType.append('missingWord')
-						firstQuestionPart = line.split('{')
-						secondQuestionPart = firstQuestionPart[1].split('}')
-						title = firstQuestionPart[0]  +' '+ '____________' +' '+ secondQuestionPart[1]
-						tokens = secondQuestionPart[0].split()
-						boolArray = []
-						answersArray = []
-						
-						for i in range(0, len(tokens)):
-						
-							if tokens[i][0]== '=':
-								boolArray.append(True)
-								answerString = ''
-								answerString += tokens[i][1:]
-		
-								k =1
-								while ( ( (k+i) != len(tokens)-1)and(tokens[i + k][0]) != '=') and (tokens[i + k][0]) != '~' and (tokens[i + k][0] != '}'):
-									answerString += ' '
-									answerString += tokens[i+k]
-									k += 1
-								answersArray.append(answerString)
-
-							elif tokens[i][0]=='~':
-								boolArray.append(False)
-								answerString = ''
-								answerString += tokens[i][1:]
-
-								k = 1
-								while ( (k+i) != len(tokens) and tokens[i + k][0] != '=') and (tokens[i + k][0] != '~') and (tokens[i + k][0] != '}'):
-									answerString += ' '
-									answerString += tokens[i+k]
-									k += 1
-								
-								answersArray.append(answerString)	
-						
-						self.currQuestion = Question(title, answersArray, boolArray)	
-						allQuests.append(self.currQuestion)
-					
-					if '{pic' in line:
-						self.questionType.append('pictureQuestion')
-						tokens = line.split()
-						answersArray = []
-						boolArray = []
-						for i in range(0, len(tokens)):
-							
-							if tokens[i][0:5] == '{pic?':
-								questionString = ''
-								questionString += tokens[i][5:]
-								
-								k =1
-								while ((tokens[i + k][0]) != '=') and (tokens[i + k][0]) != '~' and (tokens[i + k][0] != '}'):
-									questionString += ' '
-									questionString += tokens[i+k]
-									k += 1
-								
-								
-							if tokens[i][0]== '=':
-								boolArray.append(True)
-								answerString = ''
-								answerString += tokens[i][1:]
-							
-								k =1
-								while ((tokens[i + k][0]) != '=') and (tokens[i + k][0]) != '~' and (tokens[i + k][0] != '}'):
-									answerString += ' '
-									answerString += tokens[i+k]
-									k += 1
-								answersArray.append(answerString)
-
-							elif tokens[i][0]=='~':
-								boolArray.append(False)
-								answerString = ''
-								answerString += tokens[i][1:]
-
-								k = 1
-								while (tokens[i + k][0] != '=') and (tokens[i + k][0] != '~') and (tokens[i + k][0] != '}'):
-									answerString += ' '
-									answerString += tokens[i+k]
-									k += 1
-								answersArray.append(answerString)
-								
-						title = questionString
-						self.currQuestion = PicQuestion(title, answersArray, boolArray)	
-						allQuests.append(self.currQuestion)
-								
+						tempTuples = question.split('::')[2].strip()
+						tempTuples = tempTuples.split('{')
+						textArray.append(tempTuples[0].strip())
+						for tuple in tempTuples[1:]:
+							tuple = tuple.split('}')
+							answersArray.append(tuple[0].split('=')[1].split('~')[0].strip())
+							if len(tuple)>1:
+								textArray.append(tuple[1].strip())
+						currQuestion = MissingWordQuestion('', answersArray, boolArray, textArray)
+					allQuests.append(currQuestion)
+				else:
+					for line in question.split('\r\n'):
+						if "//Title" in line:
+							self.quizTitle = line[8:]
+						if "//Instruction" in line:
+							self.instruction = line[14:]
+											
 		return allQuests
 	
 	def help(self):
@@ -499,21 +421,36 @@ class TestGame:
 		self.currWindow.ui.matchingButtonsLeft = []
 		self.currWindow.ui.matchingLabelsRight = []
 		self.currWindow.ui.matchingButtonsRight = []
-		
+		self.currWindow.ui.lineEdits = []
+		self.currWindow.ui.gapLabels = []
+		self.currWindow.ui.edits = []
 		for i in range(0,12):
 			horizontalLayout = PyQt4.QtGui.QHBoxLayout()
 			horizontalLayout.setObjectName("horizontalLayout")
 			spacerItem = PyQt4.QtGui.QSpacerItem(40, 20, PyQt4.QtGui.QSizePolicy.Expanding, PyQt4.QtGui.QSizePolicy.Minimum)
+			horizontalLayout2 = PyQt4.QtGui.QHBoxLayout()
+			horizontalLayout2.setObjectName("horizontalLayout")
+			spacerItem1 = PyQt4.QtGui.QSpacerItem(40, 20, PyQt4.QtGui.QSizePolicy.Expanding, PyQt4.QtGui.QSizePolicy.Minimum)
 			label = PyQt4.QtGui.QLabel()
 			label.setFont(self.globalFont)
 			label.setObjectName("label")
 			self.currWindow.ui.matchingLabels.append(label)
+			label1 = PyQt4.QtGui.QLabel()
+			label1.setFont(self.globalFont)
+			label1.setObjectName("label")
+			self.currWindow.ui.gapLabels.append(label1)
 			pushButton = PyQt4.QtGui.QPushButton()
 			pushButton.setText("")
 			pushButton.setObjectName("pushButton")
 			pushButton.setAutoFillBackground(True)
 			self.currWindow.ui.matchingButtons.append(pushButton)
-			
+			lineEdit = PyQt4.QtGui.QLineEdit()
+			lineEdit.setText("")
+			lineEdit.setFont(self.globalFont)
+			self.currWindow.ui.lineEdits.append(lineEdit)
+			horizontalLayout2.addItem(spacerItem1)
+			horizontalLayout2.addWidget(label1)
+			horizontalLayout2.addWidget(lineEdit)
 			if i % 2 == 0:
 				horizontalLayout.addItem(spacerItem)
 				horizontalLayout.addWidget(label)
@@ -526,9 +463,9 @@ class TestGame:
 				horizontalLayout.addItem(spacerItem)
 				self.currWindow.ui.matchingButtonsRight.append(pushButton)
 				self.currWindow.ui.matchingLabelsRight.append(label)
-			
+		
 			self.currWindow.ui.matches.append(horizontalLayout)
-			
+			self.currWindow.ui.edits.append(horizontalLayout2)
 			checkBox = PyQt4.QtGui.QCheckBox()
 			checkBox.setFont(self.globalFont)
 			self.currWindow.ui.checkBoxes.append(checkBox)
@@ -538,6 +475,7 @@ class TestGame:
 			width = (currIndex % 2) * 2
 			self.currWindow.ui.gridLayout.addWidget(self.currWindow.ui.checkBoxes[currIndex], height, width + 1, 1, 1 )	
 			self.currWindow.ui.gridLayout.addLayout(self.currWindow.ui.matches[currIndex], height, width + 1, 1, 1 )	
+			self.currWindow.ui.gridLayout.addLayout(self.currWindow.ui.edits[currIndex], height, width + 1, 1, 1 )	
 		
 		self.currWindow.ui.buttonArray = []
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton)
@@ -553,7 +491,7 @@ class TestGame:
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_11)
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_12)
 		for i in self.currWindow.ui.buttonArray:
-			if not self.training:
+			if not self.trainingMode:
 				i.clicked.connect(self.scorePenalty)
 			else:
 				i.clicked.connect(self.scorePenaltyQuiz)
@@ -585,16 +523,24 @@ class TestGame:
 		for i in self.currWindow.ui.matchingLabels:
 			i.setVisible(False)
 			i.setText('')
-			
+	
 		for i in self.currWindow.ui.matchingButtons:
 			i.setVisible(False)
 			i.clicked.connect(self.matchingButtonClicked)	
 		
+		for i in self.currWindow.ui.gapLabels:
+			i.setVisible(False)
+			i.setText('')
+		
+		for i in self.currWindow.ui.lineEdits:
+			i.setVisible(False)
+			i.setText('')
+			
 		self.paintPanel = Painter(self, self.lines)
 		self.currWindow.ui.stackedWidget.insertWidget(0,self.paintPanel)
 		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)
-		
 		self.currWindow.ui.label.setFont(self.globalFont)
+		self.currWindow.ui.label.setWordWrap(True)
 		self.currWindow.ui.label_2.setFont(self.globalFont)
 		self.currWindow.ui.label_3.setFont(self.globalFont)
 		self.currWindow.ui.pushButton_13.setFont(self.globalFont)
@@ -603,10 +549,10 @@ class TestGame:
 		
 	def startQuiz(self):
 		
-		self.training = False
-		self.timeElapsed = time.time()
-
+		self.trainingMode = False
+	
 		self.currWindow = StartGameDialog(self.translator[self.language][74])
+
 		self.initializeSettings()
 		self.currWindow.setWindowTitle(self.translator[self.language][76]+' '+self.translator[self.language][66]+ ' - ' +self.quizTitle)
 		self.currWindow.ui.pushButton_13.clicked.connect(self.previousQuestion)
@@ -617,10 +563,10 @@ class TestGame:
 		self.instantiateQuestion()
 		for i in self.currWindow.ui.checkBoxes:
 			i.stateChanged.connect(self.checkState)
-		self.currWindow.show()
+		self.currWindow.exec_()
 			
 	def nextQuestion(self):
-		print self.Score
+
 		self.questionNumber += 1
 		self.currWindow.ui.pushButton_13.setVisible(True)
 		if self.questionNumber == len(self.questions) -1:
@@ -668,7 +614,15 @@ class TestGame:
 		for i in self.currWindow.ui.matchingLabels:
 			i.setText('')
 			i.setVisible(False)	
-			
+		
+		for i in self.currWindow.ui.gapLabels:
+			i.setVisible(False)
+			i.setText('')
+		
+		for i in self.currWindow.ui.lineEdits:
+			i.setVisible(False)
+			i.setText('')
+
 			
 		if self.questionType[self.questionNumber] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
@@ -700,8 +654,14 @@ class TestGame:
 			self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].clicked.disconnect()
 			self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].clicked.connect(self.scoreBonus)	
 			
-			
-		if self.questionType[self.questionNumber] == 'missingWord' or self.questionType[self.questionNumber] == 'stringQuestion':
+		if self.questionType[self.questionNumber] == 'missingWord':
+			self.currWindow.ui.label.setText("<html><head/><body><p>" + self.currQuestion.title +"</p></body></html>")
+			for nr in range(len(self.currQuestion.answers)):
+				self.currWindow.ui.lineEdits[nr].setVisible(True)
+				self.currWindow.ui.gapLabels[nr].setVisible(True)
+				self.currWindow.ui.gapLabels[nr].setText(str(nr + 1) + ':')
+		
+		if self.questionType[self.questionNumber] == 'stringQuestion':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			for nr in range(0,len(self.currQuestion.answers)):
 				self.currWindow.ui.buttonArray[nr].setText(self.currQuestion.answers[nr])
@@ -724,9 +684,10 @@ class TestGame:
 				
 				
 		if self.questionType[self.questionNumber] == 'matching':
+			
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			rightListShuffeldTemp = []
-			
+
 			for i in range(0,len(self.currQuestion.answers)):
 				self.currWindow.ui.matchingLabels[i].setText(self.currQuestion.answers[i])
 				self.currWindow.ui.matchingLabels[i].setVisible(True)
@@ -860,14 +821,14 @@ class TestGame:
 			self.Score += scoreDiff
 		else:
 			self.Score = 0
-		print self.Score	
+	
 	def updateScoreCheckboxUncheck(self, scoreDiff):
 
 		if self.Score - scoreDiff >= 0 :
 			self.Score -= scoreDiff
 		else:
 			self.Score = 0
-		print self.Score	
+
 	def scoreBonus(self):
 
 		button = self.currWindow.sender()
@@ -902,12 +863,13 @@ class TestGame:
 			i.setEnabled(False)
 				
 	def training(self):
-
-		self.training = True
-		self.currWindow = TrainingQuizDialog(self.translator[self.language][74])
-		self.currQuestion = self.questions[self.questionNumber]
-		self.initializeSettings()
 		
+		self.trainingMode = True
+		
+	
+		self.currWindow = TrainingQuizDialog(self.translator[self.language][74])
+		self.initializeSettings()
+		self.currQuestion = self.questions[self.questionNumber]
 		self.currWindow.setWindowTitle(self.translator[self.language][76]+' '+self.translator[self.language][67]+ ' - ' +self.quizTitle)
 		
 		self.currWindow.ui.label_4.setFont(self.globalFont)
@@ -924,11 +886,9 @@ class TestGame:
 		self.currWindow.ui.pushButton_16.clicked.connect(self.quizNextQuestion)
 		self.currWindow.ui.pushButton_16.setFont(self.globalFont)
 		
-		
-		
 		self.instantiateQuestionTraining()
 				
-		self.currWindow.show()
+		self.currWindow.exec_()
 	
 	def quizRefresh(self, wasCorrect, answerGiven):
 		
@@ -1161,8 +1121,10 @@ class TestGame:
 	
 		self.currWindow.ui.label_2.setText('')
 		self.currWindow.ui.label_3.setText('')
+
 		self.currWindow.ui.pushButton_13.setVisible(False)
-		self.currWindow.ui.pushButton_14.setVisible(True)					
+		if not self.questionNumber == 0:
+			self.currWindow.ui.pushButton_14.setVisible(True)					
 			
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
@@ -1446,7 +1408,7 @@ class TestGame:
 	def evaluateLines(self):
 	
 		allMatchingCorrect = True
-		for i in range(0,len(self.questions)):
+		for i in range(len(self.questionType)):
 			if self.questionType[i] == 'matching':
 				allMatchingCorrect = True
 				for currLine in self.linesForMatching[i]:
@@ -1458,9 +1420,9 @@ class TestGame:
 	def showScore(self):
 
 		self.roundScore()
-		self.currWindow = PointsDialog()
-		self.currWindow.setWindowTitle(self.translator[self.language][7])
-		self.currWindow.ui.pushButton.clicked.connect(self.currWindow.close)
+		self.dlg2 = PointsDialog()
+		self.dlg2.setWindowTitle(self.translator[self.language][7])
+		self.dlg2.ui.pushButton.clicked.connect(self.dlg2.close)
 		percentage = (self.Score / len(self.questions))*100
 		
 		end = time.time()
@@ -1488,20 +1450,20 @@ class TestGame:
 		else:
 			evaluation = self.translator[self.language][73]
 		
-		self.currWindow.ui.label.setFont(self.globalFont)
-		self.currWindow.ui.label.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][64]+ ' ' + str(self.Score) + ' ' + self.translator[self.language][21]+ str(len(self.questions))+ "<br/><br/>"+ self.translator[self.language][65] + str(percentage) +'% !' +'  ' + evaluation + "</p></body></html>")
-		self.currWindow.show()
+		self.dlg2.ui.label.setFont(self.globalFont)
+		self.dlg2.ui.label.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][64]+ ' ' + str(self.Score) + ' ' + self.translator[self.language][21]+ str(len(self.questions))+ "<br/><br/>"+ self.translator[self.language][65] + str(percentage) +'% !' +'  ' + evaluation + "</p></body></html>")
+		self.dlg2.show()
 		
 	def showNormalResults(self):
 		
-		self.currWindow.close()
-		self.evaluateLines()
-		self.showScore()
+		if self.currWindow.close():
+			self.evaluateLines()
+			self.showScore()
 		
 	def showQuizResults(self):
 		
-		self.currWindow.close()
-		self.showScore()
+		if self.currWindow.close():
+			self.showScore()
 	
 
 class Painter(PyQt4.QtGui.QWidget):
@@ -1542,35 +1504,3 @@ class Painter(PyQt4.QtGui.QWidget):
 		for line in i:
 			if not line == [] :
 				painter.drawLine(line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).x()-self.xOffset, line[0].mapTo(self.parentWidget().parentWidget(),QPoint(line[0].width(),line[0].height()/2)).y()-self.yOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).x()-self.xOffset, line[1].mapTo(self.parentWidget().parentWidget(),QPoint(0,line[1].height()/2)).y()-self.yOffset)
-
-
-class Question:
-	
-	def __init__(self, title = '', answersArray = [] , boolArray=[]):
-		self.title = title
-		for i in range(len(boolArray)):
-			if boolArray[i]:
-				self.rightAnswer = answersArray[i]
-				self.rightAnswerIndex = i
-		self.answers = answersArray
-		self.nrOfAnswers = len(self.answers)
-		
-class MatchingQuestion(Question):
-	
-	def __init__(self, titel = '', answersArray = [] , boolArray=[]):
-		Question.__init__(self, titel, answersArray, boolArray)
-		self.answersIndexes = {}
-		for i in range(len(answersArray)):
-			self.answersIndexes[answersArray[i]] = i
-			
-class MultipleChoiceQuestion(Question):
-	
-	def __init__(self, titel = '', answersArray = [] , boolArray=[], percentages = []):
-		Question.__init__(self, titel, answersArray, boolArray)
-		self.percentages = percentages
-	
-class PicQuestion(Question):
-
-	def __init__(self, titel = '', answersArray = [] , boolArray=[]):
-		Question.__init__(self, titel, answersArray, boolArray)
-		self.picPath = ":/df/Länder/" + self.rightAnswer +".png"
