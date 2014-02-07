@@ -38,6 +38,8 @@ import codecs
 import random
 from uberBoxDialog import UberBoxDialog
 from QuestionClass import *
+from questionParser import QuestionParser
+
 class TestGame:
 	
 	Score = 0
@@ -122,7 +124,6 @@ class TestGame:
 			self.language = 2
 		else:
 			self.language = 1
-		print 'hello'
 
 		self.dlg = TestGameDialog()
 		
@@ -203,9 +204,7 @@ class TestGame:
 		self.dlg.ui.actionBigger.triggered.connect(self.fontBigger)
 		self.dlg.ui.actionStandard_2.setText(self.translator[self.language][75])
 		self.dlg.ui.actionStandard_2.triggered.connect(self.fontStandard)
-		print 'hello2'
 
-		print 'hello3'
 		self.dlg.show()
 		
 	def changeLanguage(self, lang):
@@ -274,111 +273,16 @@ class TestGame:
 		self.path = QFileDialog.getOpenFileName(self.dlg, 'Open File', self.user_plugin_dir + '\quizes','*.txt')
 		
 		if self.path != '':
-			self.questions = self.parseQuestion()
+			parser = QuestionParser(self.path)
+			
+			self.questions = parser.allQuestions
+			self.questionType = parser.questionType
 			self.dlg.ui.startTest.setEnabled(True)
 			self.dlg.ui.startTraining.setEnabled(True)
-			self.dlg.ui.startTitel.setText(u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600; font-style:normal; color:#000000;\">" + self.quizTitle+"</span></p></body></html>")
+			self.dlg.ui.startTitel.setText(u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600; font-style:normal; color:#000000;\">" + parser.quizTitle+"</span></p></body></html>")
 			self.dlg.ui.startImage.setWordWrap(True)
-			self.dlg.ui.startImage.setText("<html><head/><body><p>"+self.instruction+"<br/></p></body></html>")
+			self.dlg.ui.startImage.setText("<html><head/><body><p>"+parser.instruction+"<br/></p></body></html>")
 	
-	def parseQuestion(self):
-
-		with codecs.open(self.path,'r','utf-8') as f:
-					
-			allQuests = []
-			self.questionType = []
-
-			allQuestions = f.read().split('\r\n\r\n')
-			
-			for question in allQuestions:
-				answersArray = []
-				boolArray = []
-				percentages = []
-				textArray = []
-				title = ''
-				
-				if question.count('{') >=1:
-					if question.count('}') == 1:
-						titleSplit = question.split('::')
-						titleAndAnswers = titleSplit[2].split('{')
-						title = titleAndAnswers[0]
-						answers = titleAndAnswers[1].split('}')[0]
-
-						if '//Picture-Question' in question:
-							self.questionType.append('pictureQuestion')
-							correct = answers.split('=')
-							leftHalf = correct[0].split('~')[1:]
-							rightHalf = correct[1].split('~')
-							for i in leftHalf:
-								if i != '':
-									boolArray.append(False)
-									answersArray.append(i.strip())
-							answersArray.append(rightHalf[0].strip())
-							boolArray.append(True)
-							if len(rightHalf) > 1:
-								for i in rightHalf[1:]:
-									if i != '':
-										boolArray.append(False)
-										answersArray.append(i.strip())
-							currQuestion = PicQuestion(title, answersArray, boolArray)	
-						
-						elif '->' in question:
-							self.questionType.append('matching')
-							pairs = answers.split('=')
-							for i in pairs:
-								if len(i) > 1:
-									match = i.split('->')
-									answersArray.append(match[0].strip())
-									answersArray.append(match[1].strip())
-							currQuestion = MatchingQuestion(title, answersArray, [])
-						
-						elif '~%' in question:
-							self.questionType.append('multipleChoice')
-							options = answers.split('~')
-							for i in options[1:]:
-								part = i.split('%')
-								percentages.append(part[1])
-								answersArray.append(part[2].strip())
-							currQuestion = MultipleChoiceQuestion(title, answersArray, [], percentages)
-						
-						else:
-							self.questionType.append('stringQuestion')
-							correct = answers.split('=')
-							leftHalf = correct[0].split('~')[1:]
-							rightHalf = correct[1].split('~')
-							for i in leftHalf:
-								if i != '':
-									boolArray.append(False)
-									answersArray.append(i.strip())
-							answersArray.append(rightHalf[0].strip())
-							boolArray.append(True)
-							if len(rightHalf) > 1:
-								for i in rightHalf[1:]:
-									if i != '':
-										boolArray.append(False)
-										answersArray.append(i.strip())
-							currQuestion = Question(title, answersArray, boolArray)	
-					
-					else:
-						self.questionType.append('missingWord')
-						tempTuples = question.split('::')[2].strip()
-						tempTuples = tempTuples.split('{')
-						textArray.append(tempTuples[0].strip())
-						for tuple in tempTuples[1:]:
-							tuple = tuple.split('}')
-							answersArray.append(tuple[0].split('=')[1].split('~')[0].strip())
-							if len(tuple)>1:
-								textArray.append(tuple[1].strip())
-						currQuestion = MissingWordQuestion('', answersArray, boolArray, textArray)
-					allQuests.append(currQuestion)
-				else:
-					for line in question.split('\r\n'):
-						if "//Title" in line:
-							self.quizTitle = line[8:]
-						if "//Instruction" in line:
-							self.instruction = line[14:]
-											
-		return allQuests
 	
 	def help(self):
 		
