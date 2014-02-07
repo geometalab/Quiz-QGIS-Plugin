@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_trainingQuiz.ui'
 #
-# Created: Fri Jan 31 08:40:47 2014
+# Created: Wed Feb 05 10:47:35 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -78,6 +78,8 @@ class Ui_trainingQuiz(object):
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QtGui.QWidget()
         self.page_2.setObjectName(_fromUtf8("page_2"))
+        self.verticalLayout_5 = QtGui.QVBoxLayout(self.page_2)
+        self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
         self.stackedWidget.addWidget(self.page_2)
         self.gridLayout.addWidget(self.stackedWidget, 0, 2, 6, 1)
         self.pushButton_2 = QtGui.QPushButton(trainingQuiz)
@@ -199,6 +201,7 @@ class Ui_trainingQuiz(object):
         self.verticalLayout_4.addLayout(self.verticalLayout_3)
 
         self.retranslateUi(trainingQuiz)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(trainingQuiz)
 
     def retranslateUi(self, trainingQuiz):

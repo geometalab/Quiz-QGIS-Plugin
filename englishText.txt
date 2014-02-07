@@ -72,7 +72,7 @@ Bravo!
 Very good!
 Good!
 You should practice a little more!
-Are you sure you want to quit?
+Are you sure you want to end the quiz?
 Standard size 
 Quiz
 Answered: 

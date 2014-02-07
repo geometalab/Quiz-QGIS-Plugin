@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_startGame.ui'
 #
-# Created: Fri Jan 31 08:31:49 2014
+# Created: Wed Feb 05 10:47:41 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -77,6 +77,8 @@ class Ui_testGame(object):
         self.stackedWidget.addWidget(self.page)
         self.page_2 = QtGui.QWidget()
         self.page_2.setObjectName(_fromUtf8("page_2"))
+        self.verticalLayout_4 = QtGui.QVBoxLayout(self.page_2)
+        self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
         self.stackedWidget.addWidget(self.page_2)
         self.gridLayout.addWidget(self.stackedWidget, 0, 2, 6, 1)
         self.pushButton_2 = QtGui.QPushButton(testGame)
@@ -163,6 +165,7 @@ class Ui_testGame(object):
         self.verticalLayout_3.addLayout(self.verticalLayout)
 
         self.retranslateUi(testGame)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(testGame)
 
     def retranslateUi(self, testGame):

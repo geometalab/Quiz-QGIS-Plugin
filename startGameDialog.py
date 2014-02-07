@@ -39,6 +39,6 @@ class StartGameDialog(QtGui.QDialog):
                      self.quitMessage, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
 
 		if reply == QtGui.QMessageBox.Yes:
-			event.accept()
+			self.hide()
 		else:
 			event.ignore()

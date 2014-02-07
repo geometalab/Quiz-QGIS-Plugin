@@ -1,8 +1,12 @@
-//Titel:EuroQuiz
-//Anleitung:Einfaches Quiz, bei dem du einem Bild ein Land zuordnen musst
+//Title:EuroQuiz
+//Instruction:Einfaches Quiz, bei dem du einem Bild ein Land zuordnen musst
 
-::Q1::
-{pic?Welches Land ist das? ~Serbien =Afghanistan ~Spanien  }
+//Picture-Question
+::Q1::Welches Land ist das?
+{ ~Serbien
+ =Afghanistan 
+ ~Spanien  
+ }
 
 ::Q2::Was ist die Hauptstadt von Pakistan?
 { =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
@@ -11,16 +15,38 @@
 { ~%-100%Thailand ~%33%Bangla Desh ~%33%Pakistan ~%33%China }
 
 ::Q4::Ordne diesen Ländern ihre Hauptstädte zu:
-{ =Surinam -> Paramarimbo =Andorra -> Andorra de la Ville =China ->Peking =Afghanistan -> Kabul }
+{=Surinam -> Paramarimbo 
+	=Andorra -> Andorra de la Ville 
+	=China ->Peking 
+	=Afghanistan -> Kabul }
 
-::Q5::
-{pic?Welches Land ist das? ~Finnland ~Estland =Lettland ~Albanien }
+//Picture-Question
+::Q5::Welches Land ist das?
+{ ~Finnland ~Estland =Lettland ~Albanien }
 
-::Q6::
-{pic?Welches Land ist das? =Irland ~England ~Frankreich ~Ukraine }
+//Picture-Question
+::Q6::Welches Land ist das?
+{ =Irland ~England ~Frankreich ~Ukraine }
 
 ::Q7::
-Momentan ist { ~der Iran =Indonesien ~Saudi Arabien ~Pakistan } das bevölkerungsreichste Land, das vorwiegend muslimisch ist.
+Momentan ist 
+{ 
+~der Iran =Indonesien ~Saudi Arabien ~Pakistan 
+}
+ das bevölkerungsreichste Land, das vorwiegend muslimisch ist.
+Natürlich ist südlich davon 
+{
+ =Australien
+ }
+ . Man kann dort Kängurus fangen, und zwar mit einem 
+{
+ =Netz 
+ }
+ .
 
-::Q8::
-{pic?Welches Land ist das? ~Serbien ~Kosovo ~Deutschland =Bosnien }
+//Picture-Question
+::Q8::Welches Land ist das?
+{~Serbien 
+	~Kosovo 
+	~Deutschland 
+	=Bosnien}

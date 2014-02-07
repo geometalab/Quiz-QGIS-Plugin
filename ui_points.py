@@ -52,10 +52,10 @@ class Ui_pointsMessage(object):
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.horizontalLayout.addWidget(self.pushButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
-
+        
         self.retranslateUi(pointsMessage)
         QtCore.QMetaObject.connectSlotsByName(pointsMessage)
-
+		
     def retranslateUi(self, pointsMessage):
         pointsMessage.setWindowTitle(_translate("pointsMessage", "Punkte", None))
         self.pushButton.setText(_translate("pointsMessage", "Ok", None))

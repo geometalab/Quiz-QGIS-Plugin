@@ -143,8 +143,13 @@
        </item>
        <item row="0" column="2" rowspan="6">
         <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
          <widget class="QWidget" name="page"/>
-         <widget class="QWidget" name="page_2"/>
+         <widget class="QWidget" name="page_2">
+          <layout class="QVBoxLayout" name="verticalLayout_5"/>
+         </widget>
         </widget>
        </item>
        <item row="0" column="3">
