@@ -43,27 +43,26 @@ from questionParser import QuestionParser
 class TestGame:
 	
 	Score = 0
-	path = ''
-	questionNumber = 0
-	questions = []
-	questionType = []
-	answers = []
-	questionsAnswered = 0
-	frameQuestionAnswered = []
+	language = 0
 	timeElapsed = 0
-	dirPath = ''
+	questionNumber = 0
+	questionsAnswered = 0
 	log = ''
+	path = ''
+	dirPath = ''
 	quizTitle = ''
 	instruction =''
-	language = 0
-	translator = [[],[],[]]
+	leftChoiceMatching = ''
+	lines = []
+	answers = []
+	questions = []
+	buttonList = []
+	questionType = []
+	linesForMatching = []
 	rightListShuffled = []
 	siteVisitedMatching = []
-	leftChoiceMatching = ''
-	linesForMatching = []
-	lines = []
-	buttonList = []
-
+	frameQuestionAnswered = []
+	translator = [[],[],[]]
 	
 	def __init__(self, iface):
 		
@@ -101,9 +100,7 @@ class TestGame:
 			for line in f:
 				self.translator[2].append(line[:-1])
 			f.close()
-	
-		
-			
+				
 	def initGui(self):
 
 		self.action = QAction(QIcon(":/df/Länder/icon.png"),u"Quiz", self.iface.mainWindow())
@@ -115,7 +112,7 @@ class TestGame:
 
 		self.iface.removePluginMenu(u"Quiz", self.action)
 		self.iface.removeToolBarIcon(self.action)
-		del(self)
+
 	def run(self):
 
 		if QSettings().value("locale/userLocale")[0:2] == 'de':
@@ -253,7 +250,6 @@ class TestGame:
 	def fontBigger(self):
 		
 		self.globalFont.setPointSize(self.globalFont.pointSize() + 2) 
-		
 		for i in self.buttonList:
 			tempFont = i.font()
 			tempFont.setPointSize(tempFont.pointSize() + 2)
@@ -262,7 +258,6 @@ class TestGame:
 	def fontStandard(self):
 		
 		self.globalFont.setPointSize(8) 
-		
 		for i in self.buttonList:
 			tempFont = i.font()
 			tempFont.setPointSize(8)
@@ -271,18 +266,18 @@ class TestGame:
 	def selectQuiz(self):
 		
 		self.path = QFileDialog.getOpenFileName(self.dlg, 'Open File', self.user_plugin_dir + '\quizes','*.txt')
-		
+
 		if self.path != '':
 			parser = QuestionParser(self.path)
-			
 			self.questions = parser.allQuestions
 			self.questionType = parser.questionType
+			self.instruction = parser.instruction
+			self.quizTitle = parser.quizTitle
 			self.dlg.ui.startTest.setEnabled(True)
 			self.dlg.ui.startTraining.setEnabled(True)
-			self.dlg.ui.startTitel.setText(u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600; font-style:normal; color:#000000;\">" + parser.quizTitle+"</span></p></body></html>")
+			self.dlg.ui.startTitel.setText(u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600; font-style:normal; color:#000000;\">" + self.quizTitle+"</span></p></body></html>")
 			self.dlg.ui.startImage.setWordWrap(True)
-			self.dlg.ui.startImage.setText("<html><head/><body><p>"+parser.instruction+"<br/></p></body></html>")
-	
+			self.dlg.ui.startImage.setText("<html><head/><body><p>"+self.instruction+"<br/></p></body></html>")
 	
 	def help(self):
 		
@@ -316,45 +311,30 @@ class TestGame:
 		self.aboutWindow.show()
 		
 	def addWidgets(self):
-	
-		self.currWindow.ui.checkBoxes = []
+		
 		self.currWindow.ui.matches = []
+		self.currWindow.ui.checkBoxes = []
 		self.currWindow.ui.matchingLabels = []
 		self.currWindow.ui.matchingButtons = []
 		self.currWindow.ui.matchingLabelsLeft = []
 		self.currWindow.ui.matchingButtonsLeft = []
 		self.currWindow.ui.matchingLabelsRight = []
 		self.currWindow.ui.matchingButtonsRight = []
-		self.currWindow.ui.lineEdits = []
-		self.currWindow.ui.gapLabels = []
-		self.currWindow.ui.edits = []
-		for i in range(0,12):
+		
+		for i in range(12):
 			horizontalLayout = PyQt4.QtGui.QHBoxLayout()
 			horizontalLayout.setObjectName("horizontalLayout")
 			spacerItem = PyQt4.QtGui.QSpacerItem(40, 20, PyQt4.QtGui.QSizePolicy.Expanding, PyQt4.QtGui.QSizePolicy.Minimum)
-			horizontalLayout2 = PyQt4.QtGui.QHBoxLayout()
-			horizontalLayout2.setObjectName("horizontalLayout")
-			spacerItem1 = PyQt4.QtGui.QSpacerItem(40, 20, PyQt4.QtGui.QSizePolicy.Expanding, PyQt4.QtGui.QSizePolicy.Minimum)
 			label = PyQt4.QtGui.QLabel()
 			label.setFont(self.globalFont)
 			label.setObjectName("label")
 			self.currWindow.ui.matchingLabels.append(label)
-			label1 = PyQt4.QtGui.QLabel()
-			label1.setFont(self.globalFont)
-			label1.setObjectName("label")
-			self.currWindow.ui.gapLabels.append(label1)
 			pushButton = PyQt4.QtGui.QPushButton()
 			pushButton.setText("")
 			pushButton.setObjectName("pushButton")
 			pushButton.setAutoFillBackground(True)
 			self.currWindow.ui.matchingButtons.append(pushButton)
-			lineEdit = PyQt4.QtGui.QLineEdit()
-			lineEdit.setText("")
-			lineEdit.setFont(self.globalFont)
-			self.currWindow.ui.lineEdits.append(lineEdit)
-			horizontalLayout2.addItem(spacerItem1)
-			horizontalLayout2.addWidget(label1)
-			horizontalLayout2.addWidget(lineEdit)
+			
 			if i % 2 == 0:
 				horizontalLayout.addItem(spacerItem)
 				horizontalLayout.addWidget(label)
@@ -369,7 +349,6 @@ class TestGame:
 				self.currWindow.ui.matchingLabelsRight.append(label)
 		
 			self.currWindow.ui.matches.append(horizontalLayout)
-			self.currWindow.ui.edits.append(horizontalLayout2)
 			checkBox = PyQt4.QtGui.QCheckBox()
 			checkBox.setFont(self.globalFont)
 			self.currWindow.ui.checkBoxes.append(checkBox)
@@ -379,7 +358,6 @@ class TestGame:
 			width = (currIndex % 2) * 2
 			self.currWindow.ui.gridLayout.addWidget(self.currWindow.ui.checkBoxes[currIndex], height, width + 1, 1, 1 )	
 			self.currWindow.ui.gridLayout.addLayout(self.currWindow.ui.matches[currIndex], height, width + 1, 1, 1 )	
-			self.currWindow.ui.gridLayout.addLayout(self.currWindow.ui.edits[currIndex], height, width + 1, 1, 1 )	
 		
 		self.currWindow.ui.buttonArray = []
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton)
@@ -394,6 +372,43 @@ class TestGame:
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_10)
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_11)
 		self.currWindow.ui.buttonArray.append(self.currWindow.ui.pushButton_12)
+		
+		self.currWindow.ui.editLabels = []
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_2)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_3)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_4)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_5)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_6)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_7)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_8)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_9)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_10)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_11)
+		self.currWindow.ui.editLabels.append(self.currWindow.ui.editLabel_12)
+		
+		self.currWindow.ui.editGaps = []
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_2)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_3)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_4)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_5)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_6)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_7)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_8)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_9)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_10)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_11)
+		self.currWindow.ui.editGaps.append(self.currWindow.ui.lineEditGap_12)
+		
+		for i in range(len(self.currWindow.ui.editGaps)):
+			self.currWindow.ui.editGaps[i].textEdited.connect(self.gapStoreAnswers)
+			self.currWindow.ui.editGaps[i].setObjectName(str(i))
+			self.currWindow.ui.editGaps[i].setFont(self.globalFont)
+			self.currWindow.ui.editLabels[i].setFont(self.globalFont)
+		
+		self.currWindow.ui.labelGap.setFont(self.globalFont)
+			
 		for i in self.currWindow.ui.buttonArray:
 			if not self.trainingMode:
 				i.clicked.connect(self.scorePenalty)
@@ -403,43 +418,30 @@ class TestGame:
 		
 	def initializeSettings(self):
 	
-		self.questionsAnswered = 0
 		self.Score = 0
 		self.questionNumber = 0
+		self.questionsAnswered = 0
 		self.currMatchingButtonClicked = ''
-		self.frameQuestionAnswered = [0 for x in range(len(self.questions))]
+		self.lines = []
+		self.linesForMatching = []
+		self.rightListShuffeld = []
 		self.answers = [0 for x in range(len(self.questions))]
 		self.siteVisitedMatching = [0 for x in range(len(self.questions))]
-		self.rightListShuffeld = []
-		self.linesForMatching = []
-		self.lines = []
+		self.frameQuestionAnswered = [0 for x in range(len(self.questions))]
 		
 		for i in range(0, len(self.questions)):
-			self.frameQuestionAnswered[i] = False
 			self.answers[i] = ''
 			self.siteVisitedMatching[i] =  False
-			self.rightListShuffeld.append([])
-			self.linesForMatching.append([])
+			self.frameQuestionAnswered[i] = False
 			self.lines.append([])
-
+			self.linesForMatching.append([])
+			self.rightListShuffeld.append([])
+			
 		self.addWidgets()	
 		
-		for i in self.currWindow.ui.matchingLabels:
-			i.setVisible(False)
-			i.setText('')
-	
 		for i in self.currWindow.ui.matchingButtons:
-			i.setVisible(False)
 			i.clicked.connect(self.matchingButtonClicked)	
 		
-		for i in self.currWindow.ui.gapLabels:
-			i.setVisible(False)
-			i.setText('')
-		
-		for i in self.currWindow.ui.lineEdits:
-			i.setVisible(False)
-			i.setText('')
-			
 		self.paintPanel = Painter(self, self.lines)
 		self.currWindow.ui.stackedWidget.insertWidget(0,self.paintPanel)
 		self.currWindow.ui.stackedWidget.setCurrentWidget(self.paintPanel)
@@ -464,9 +466,11 @@ class TestGame:
 		self.currWindow.ui.pushButton_14.clicked.connect(self.nextQuestion)
 		self.currWindow.ui.pushButton_14.setText(self.translator[self.language][6])
 		
-		self.instantiateQuestion()
 		for i in self.currWindow.ui.checkBoxes:
 			i.stateChanged.connect(self.checkState)
+		
+		self.instantiateQuestion()
+		
 		self.currWindow.exec_()
 			
 	def nextQuestion(self):
@@ -499,7 +503,9 @@ class TestGame:
 		self.drawMatchingLines(self.questionNumber)
 		self.currWindow.ui.label_2.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
 		self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
-
+		
+		self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_3)
+		
 		for i in self.currWindow.ui.buttonArray:
 			tempFont = i.font()
 			tempFont.setBold(False)
@@ -519,15 +525,15 @@ class TestGame:
 			i.setText('')
 			i.setVisible(False)	
 		
-		for i in self.currWindow.ui.gapLabels:
-			i.setVisible(False)
-			i.setText('')
+		self.currWindow.ui.labelGap.setVisible(False)
 		
-		for i in self.currWindow.ui.lineEdits:
+		for i in self.currWindow.ui.editLabels:
+			i.setVisible(False)
+		
+		for i in self.currWindow.ui.editGaps:
 			i.setVisible(False)
 			i.setText('')
-
-			
+	
 		if self.questionType[self.questionNumber] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			
@@ -558,13 +564,24 @@ class TestGame:
 			self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].clicked.disconnect()
 			self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].clicked.connect(self.scoreBonus)	
 			
+			
 		if self.questionType[self.questionNumber] == 'missingWord':
-			self.currWindow.ui.label.setText("<html><head/><body><p>" + self.currQuestion.title +"</p></body></html>")
+			self.currWindow.ui.labelGap.setText(self.currQuestion.title)
+			self.currWindow.ui.labelGap.setVisible(True)
+			self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_4)
 			for nr in range(len(self.currQuestion.answers)):
-				self.currWindow.ui.lineEdits[nr].setVisible(True)
-				self.currWindow.ui.gapLabels[nr].setVisible(True)
-				self.currWindow.ui.gapLabels[nr].setText(str(nr + 1) + ':')
-		
+				self.currWindow.ui.editGaps[nr].setVisible(True)
+				self.currWindow.ui.editLabels[nr].setVisible(True)
+			
+			if self.frameQuestionAnswered[self.questionNumber]:			
+				for i in range(len (self.currQuestion.answers)):
+					self.currWindow.ui.editGaps[i].setText(self.answers[self.questionNumber][i])
+			else:
+				self.answers[self.questionNumber] = []
+				for i in range(len (self.currQuestion.answers)):
+					self.answers[self.questionNumber].append('')
+
+			
 		if self.questionType[self.questionNumber] == 'stringQuestion':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			for nr in range(0,len(self.currQuestion.answers)):
@@ -765,12 +782,22 @@ class TestGame:
 		self.frameQuestionAnswered[self.questionNumber] = True
 		for i in self.currWindow.ui.buttonArray:
 			i.setEnabled(False)
+			
+	def gapStoreAnswers(self):
+		
+		if not self.frameQuestionAnswered[self.questionNumber] and not self.training:
+			self.questionsAnswered += 1
+			self.frameQuestionAnswered[self.questionNumber] = True
+			self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
+		
+		editor = self.currWindow.sender()
+		editorIndex = int(editor.objectName())
+		self.answers[self.questionNumber][editorIndex] = editor.text()
 				
 	def training(self):
 		
 		self.trainingMode = True
 		
-	
 		self.currWindow = TrainingQuizDialog(self.translator[self.language][74])
 		self.initializeSettings()
 		self.currQuestion = self.questions[self.questionNumber]
@@ -888,6 +915,20 @@ class TestGame:
 		for i in self.currWindow.ui.matchingLabels:
 			i.setVisible(False)
 			i.setStyleSheet("")
+		
+		self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_3)
+		
+		for i in self.currWindow.ui.editLabels:
+			i.setVisible(False)
+		
+		for i in self.currWindow.ui.editGaps:
+			i.setVisible(False)
+			i.setText('')
+			i.setToolTip('')
+			i.setStyleSheet('')
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 			
 		self.currWindow.ui.label_5.setText(self.translator[self.language][29] + ' ' + str(self.questionNumber +1) + ' ' + self.translator[self.language][30]+ ' ' + str(len(self.questions)))
 		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
@@ -959,7 +1000,7 @@ class TestGame:
 					self.currWindow.ui.buttonArray[nr].setEnabled(True)
 					
 					
-		if self.questionType[self.questionNumber] == 'missingWord' or self.questionType[self.questionNumber] == 'stringQuestion':
+		if self.questionType[self.questionNumber] == 'stringQuestion':
 			self.currWindow.ui.label.setText("<html><head/><body><p align =\"center\">" + self.currQuestion.title +"</p></body></html>")
 			for nr in range(len(self.currQuestion.answers)):
 				self.currWindow.ui.buttonArray[nr].setVisible(True)
@@ -992,7 +1033,50 @@ class TestGame:
 				for nr in range(len(self.currQuestion.answers)):
 					self.currWindow.ui.buttonArray[nr].setEnabled(True)
 		
-
+		
+		if self.questionType[self.questionNumber] == 'missingWord':
+			self.currWindow.ui.labelGap.setText(self.currQuestion.title)
+			self.currWindow.ui.labelGap.setVisible(True)
+			self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_4)
+			self.currWindow.ui.pushButton_13.setVisible(True)
+			self.currWindow.ui.pushButton_13.clicked.disconnect()
+			self.currWindow.ui.pushButton_13.clicked.connect(self.evaluateGapsTraining)
+			
+			for nr in range(len(self.currQuestion.answers)):
+				self.currWindow.ui.editGaps[nr].setVisible(True)
+				self.currWindow.ui.editLabels[nr].setVisible(True)
+				self.currWindow.ui.editGaps[nr].setText(self.answers[self.questionNumber][nr])
+				
+			if self.frameQuestionAnswered[self.questionNumber]:			
+				self.currWindow.ui.pushButton_13.setEnabled(False)
+				allCorrect = True
+				for nr in range(len(self.currQuestion.answers)):
+					if self.currWindow.ui.editGaps[nr].text().strip().lower() == self.currQuestion.answers[nr].strip().lower():
+						tempFont = self.currWindow.ui.editGaps[nr].font()
+						tempFont.setBold(True)
+						self.currWindow.ui.editGaps[nr].setFont(tempFont)
+						self.currWindow.ui.editGaps[nr].setStyleSheet(u"color:rgb(0, 184, 0)")	
+					else:
+						allCorrect = False
+						tempFont = self.currWindow.ui.editGaps[nr].font()
+						tempFont.setBold(True)
+						self.currWindow.ui.editGaps[nr].setFont(tempFont)
+						self.currWindow.ui.editGaps[nr].setStyleSheet(u"color:rgb(255, 0, 0)")	
+						self.currWindow.ui.editGaps[nr].setToolTip(self.currQuestion.answers[nr])
+						
+						self.currWindow.ui.label_3.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][78] + "<br/></p></body></html>")
+				self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
+				if allCorrect:
+					self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][27] + "<br/></p></body></html>")
+				else:
+					self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
+			else:
+				self.currWindow.ui.pushButton_13.setEnabled(True)
+				self.currWindow.ui.label_2.setText("")
+				self.currWindow.ui.label_3.setText("")
+				self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
+					
+					
 		if self.questionType[self.questionNumber] == 'matching':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			self.currWindow.ui.pushButton_13.clicked.disconnect()
@@ -1029,7 +1113,9 @@ class TestGame:
 		self.currWindow.ui.pushButton_13.setVisible(False)
 		if not self.questionNumber == 0:
 			self.currWindow.ui.pushButton_14.setVisible(True)					
-			
+		
+		self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_3)
+		
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
 			i.setEnabled(True)
@@ -1052,8 +1138,20 @@ class TestGame:
 			i.setEnabled(True)
 			i.setText('')
 			i.setStyleSheet("")
+		
+		for i in self.currWindow.ui.editLabels:
+			i.setVisible(False)
+		
+		for i in self.currWindow.ui.editGaps:
+			i.setVisible(False)
+			i.setText('')
+			i.setToolTip('')
+			i.setStyleSheet('')
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 			
-				
+			
 		if self.questionType[self.questionNumber] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			self.currWindow.ui.pushButton_13.setVisible(True)
@@ -1079,7 +1177,7 @@ class TestGame:
 			self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].clicked.connect(self.scoreBonusQuiz)
 				
 			
-		if self.questionType[self.questionNumber] == 'missingWord' or self.questionType[self.questionNumber] == 'stringQuestion':
+		if self.questionType[self.questionNumber] == 'stringQuestion':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			for nr in range(len(self.currQuestion.answers)):
 				self.currWindow.ui.buttonArray[nr].setText(self.currQuestion.answers[nr])
@@ -1089,7 +1187,29 @@ class TestGame:
 			self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].clicked.disconnect()
 			self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].clicked.connect(self.scoreBonusQuiz)
 			
-						
+		
+		if self.questionType[self.questionNumber] == 'missingWord':
+			self.currWindow.ui.labelGap.setText(self.currQuestion.title)
+			self.currWindow.ui.labelGap.setVisible(True)
+			self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_4)
+			self.currWindow.ui.pushButton_13.setVisible(True)
+			self.currWindow.ui.pushButton_13.setEnabled(True)
+			self.currWindow.ui.pushButton_13.clicked.disconnect()
+			self.currWindow.ui.pushButton_13.clicked.connect(self.evaluateGapsTraining)
+			
+			for nr in range(len(self.currQuestion.answers)):
+				self.currWindow.ui.editGaps[nr].setVisible(True)
+				self.currWindow.ui.editLabels[nr].setVisible(True)
+			
+			if not self.answers[self.questionNumber] == '':			
+				for i in range(len (self.currQuestion.answers)):
+					self.currWindow.ui.editGaps[i].setText(self.answers[self.questionNumber][i])
+			else:
+				self.answers[self.questionNumber] = []
+				for i in range(len (self.currQuestion.answers)):
+					self.answers[self.questionNumber].append('')
+					
+					
 		if self.questionType[self.questionNumber] == 'matching':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
 			rightListShuffeldTemp = []
@@ -1122,8 +1242,7 @@ class TestGame:
 			
 			self.drawMatchingLines(self.questionNumber)
 			self.siteVisitedMatching[self.questionNumber] = True
-			
-			
+				
 	def scoreBonusQuiz(self):
 
 		self.questionsAnswered += 1
@@ -1155,13 +1274,52 @@ class TestGame:
 		
 		self.updateMatchingLines()
 		
-		self.Score += 1
-		self.roundScore()	
-		if self.Score == 1:
-			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
-		else:
-			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))		
+		allCorrectlyAnswered = True
+		for i in range(len(self.linesForMatching[self.questionNumber])):
+			if len(self.linesForMatching[self.questionNumber][i]) < 3 or not (self.linesForMatching[self.questionNumber][i][2] == 1):
+				allCorrectlyAnswered = False
+		
+		if allCorrectlyAnswered:
+			self.Score += 1
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
+	
+	def evaluateGapsTraining(self):
+		
+		self.questionsAnswered += 1
+		self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' '+ str(self.questionsAnswered)+' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
+		self.frameQuestionAnswered[self.questionNumber] = True
+		
+		allCorrectlyAnswered = True
+		
+		for nr in range(len(self.currQuestion.answers)):
+			if self.currWindow.ui.editGaps[nr].text().strip().lower() == self.currQuestion.answers[nr].strip().lower() :
+				self.currWindow.ui.editGaps[nr].setStyleSheet(u"color:rgb(0, 184, 0)")
+				tempFont = self.currWindow.ui.editGaps[nr].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.editGaps[nr].setFont(tempFont)
+			else:
+				allCorrectlyAnswered = False
+				self.currWindow.ui.editGaps[nr].setToolTip(self.currQuestion.answers[nr])
+				self.currWindow.ui.editGaps[nr].setStyleSheet(u"color:rgb(255, 0, 0)")
+				tempFont = self.currWindow.ui.editGaps[nr].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.editGaps[nr].setFont(tempFont)
+
+		if allCorrectlyAnswered:
+			self.Score += 1
+			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
+		else:
+			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
+			self.currWindow.ui.label_3.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][78] + "<br/></p></body></html>")
+		self.roundScore()
+		
+		if self.Score == 1:
+			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
+		else:
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
+		
+		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
+		self.currWindow.ui.pushButton_13.setEnabled(False)
 		
 	def updateMatchingLines(self):
 
@@ -1186,7 +1344,12 @@ class TestGame:
 		for i in range(0, len(self.linesForMatching[self.questionNumber])):
 			if self.currWindow.ui.matchingLabels[(i * 2)+ 1].styleSheet() == '':
 				self.currWindow.ui.matchingLabels[(i * 2)+ 1].setStyleSheet(u"color:rgb(255, 0, 0)")
-			
+		
+		if allCorrectlyAnswered:
+			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
+		else:
+			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
+		
 		self.roundScore()
 		if self.Score == 1:
 			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
@@ -1195,11 +1358,6 @@ class TestGame:
 		
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 		self.currWindow.ui.pushButton_13.setEnabled(False)
-		
-		if allCorrectlyAnswered:
-			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
-		else:
-			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
 		
 		self.drawMatchingLines(self.questionNumber)
 		
@@ -1321,6 +1479,18 @@ class TestGame:
 				if allMatchingCorrect:
 					self.Score += 1
 	
+	def evaluateGaps(self):
+		
+		allGapsCorrect = True
+		for i in range(len(self.questionType)):
+			if self.questionType[i] == 'missingWord':
+				allGapsCorrect = True
+				for nr in range (len(self.answers[i])):
+					if not self.answers[i][nr].strip().lower() == self.questions[i].answers[nr].strip().lower():
+						allGapsCorrect = False
+				if allGapsCorrect:
+					self.Score += 1
+					
 	def showScore(self):
 
 		self.roundScore()
@@ -1362,6 +1532,7 @@ class TestGame:
 		
 		if self.currWindow.close():
 			self.evaluateLines()
+			self.evaluateGaps()
 			self.showScore()
 		
 	def showQuizResults(self):
@@ -1385,7 +1556,7 @@ class Painter(PyQt4.QtGui.QWidget):
 	def update(self, questionNumber):
 		
 		self.repaint()
-		self.questionNumber=questionNumber
+		self.questionNumber = questionNumber
 	
 	def paintEvent(self, event):
 		

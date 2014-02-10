@@ -75,4 +75,5 @@ Vous derivez practiquer un peu plus!
 Etes-vous sûr de vouloir quitter?
 Taille standard
 Quiz
-Répondu: 
+Répondu:
+Déplacez la souris sur vos erreurs afin d'apprendre la bonne réponse 

@@ -57,5 +57,14 @@ class MissingWordQuestion(Question):
 		Question.__init__(self, titel, answersArray, boolArray)
 		self.textArray = textArray
 		self.title = textArray[0]
+		undScores = ''
 		for i in range(1, len(textArray)):
-			self.title += '__' + str(i) + '__' +textArray[i]
+			if len(textArray[i]) < 4:
+				undScores = '____'
+			elif len(textArray[i]) > 20:
+				for q in range(20):
+					undScores += '_'
+			else:
+				for q in range(len(textArray[i])):
+					undScores += '_'
+			self.title += ' ' + undScores +'('+ str(i) + ') ' +textArray[i]

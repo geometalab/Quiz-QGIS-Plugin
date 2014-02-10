@@ -75,4 +75,5 @@ Du solltest ein wenig mehr üben!
 Bist du sicher, dass du das Quiz abschliessen willst?
 Standardgrösse
 Quiz
-Beantwortet: 
+Beantwortet:
+Bewege die Maus über deinen Fehler, um die richtige Antwort zu erfahren 
