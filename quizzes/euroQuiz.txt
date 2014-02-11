@@ -1,25 +1,34 @@
-//Titel:EuroQuiz
-//Anleitung:Einfaches Quiz, bei dem du einem Bild ein Land zuordnen musst
-::Q1::
-{pic?Welches Land ist das? =Zürich ~Schweden ~Schweiz ~Frankreich }
+//Title:EuroQuiz
+//Instruction:Einfaches Quiz, bei dem du einem Bild ein Land zuordnen musst
 
-::Q2::
-{pic?Welches Land ist das? ~Serbien =Afghanistan ~Spanien ~England }
+//Picture-Question
+::Q1::Welches Land ist das?
+{=Zürich ~Schweden ~Schweiz ~Frankreich }
 
-::Q3::
-{pic?Welches Land ist das? ~Ungarn ~Russland ~Italien =Rumänien }
+//Picture-Question
+::Q2:://Welches Land ist das?
+{~Serbien =Afghanistan ~Spanien ~England }
 
-::Q4::
-{pic?Welches Land ist das? ~Malta =Andorra ~Portugal ~Bosnien }
+//Picture-Question
+::Q3::Welches Land ist das?
+{~Ungarn ~Russland ~Italien =Rumänien }
 
-::Q5::
-{pic?Welches Land ist das? ~Finnland ~Estland =Lettland ~Albanien }
+//Picture-Question
+::Q4::Welches Land ist das?
+{~Malta =Andorra ~Portugal ~Bosnien }
 
-::Q6::
-{pic?Welches Land ist das? =Irland ~England ~Frankreich ~Ukraine }
+//Picture-Question
+::Q5::Welches Land ist das?
+{~Finnland ~Estland =Lettland ~Albanien }
 
-::Q7::
-{pic?Welches Land ist das? ~Rumänien ~Türkei =Griechenland ~Norwegen }
+//Picture-Question
+::Q6::Welches Land ist das?
+{=Irland ~England ~Frankreich ~Ukraine }
 
-::Q8::
-{pic?Welches Land ist das? ~Serbien ~Kosovo ~Deutschland =Bosnien }
+//Picture-Question
+::Q7::Welches Land ist das? 
+{~Rumänien ~Türkei =Griechenland ~Norwegen }
+
+//Picture-Question
+::Q8::Welches Land ist das? 
+{~Serbien ~Kosovo ~Deutschland =Bosnien }

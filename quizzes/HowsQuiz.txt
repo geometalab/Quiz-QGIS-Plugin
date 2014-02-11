@@ -1,8 +1,9 @@
-//Titel:How's Quiz
-//Anleitung:Please test this application ;)
+//Title:How's Quiz
+//Instruction:Please test this application ;)
 
-::Q1::
-{pic?Which country is this? ~Serbien =Afghanistan ~Spanien  }
+//Picture-Question
+::Q1::Which country is this?
+{~Serbien =Afghanistan ~Spanien  }
 
 ::Q2::What's the capital of Pakistan?
 { =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
@@ -13,14 +14,17 @@
 ::Q4::Match each country with its capital:
 { =Surinam -> Paramarimbo =Andorra -> Andorra de la Ville =China ->Peking =Afghanistan -> Kabul }
 
-::Q5::
-{pic?Which country is this? ~Finnland ~Estland =Lettland ~Albanien }
+//Picture-Question
+::Q5::Which country is this? 
+{~Finnland ~Estland =Lettland ~Albanien }
 
-::Q6::
-{pic?Which country is this? =Irland ~England ~Frankreich ~Ukraine }
+//Picture-Question
+::Q6::Which country is this?
+{=Irland ~England ~Frankreich ~Ukraine }
 
 ::Q7::
 At the moment, { ~Iran =Indonesia ~Saudi Arabia ~Pakistan } is the most populous country with a muslim majority.
 
-::Q8::
-{pic?Which country is this? ~Serbien ~Kosovo ~Deutschland =Bosnien }
+//Picture-Question
+::Q8::Which country is this?
+{~Serbien ~Kosovo ~Deutschland =Bosnien }

@@ -1551,18 +1551,20 @@ class TestGame:
 					self.Score += 1
 					
 	def showScore(self):
-
+		
+		import time
+		
 		self.roundScore()
 		self.dlg2 = PointsDialog()
 		self.dlg2.setWindowTitle(self.translator[self.language][7])
 		self.dlg2.ui.pushButton.clicked.connect(self.dlg2.close)
 		percentage = int((self.Score / len(self.questions))*100)
-		
+		date = time.strftime("%d/%m/%Y")
 		end = time.time()
 		self.timeElapsed = end - self.timeElapsed 
-		self.log = open(self.user_plugin_dir + '/log.csv', 'a')
-		logString = ''
-		logString = self.path.split('/')[len(self.path.split('/'))-1]
+		self.log = open(self.user_plugin_dir + '/quiz.csv', 'a')
+		logString = '' 
+		logString = date + self.path.split('/')[len(self.path.split('/'))-1]
 		logString +=';'
 		logString += self.quizTitle
 		logString += ';'

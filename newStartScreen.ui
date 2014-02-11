@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>424</width>
-    <height>254</height>
+    <width>553</width>
+    <height>310</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,7 +51,7 @@
          <string notr="true">font: 24pt &quot;MS Shell Dlg 2&quot;;</string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Quiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/df/logoFinal.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -409,7 +409,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>424</width>
+     <width>553</width>
      <height>21</height>
     </rect>
    </property>
@@ -573,6 +573,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

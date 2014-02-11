@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'newStartScreen.ui'
 #
-# Created: Mon Feb 03 15:32:24 2014
+# Created: Tue Feb 11 14:46:09 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(424, 254)
+        MainWindow.resize(553, 310)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.centralwidget)
@@ -185,7 +185,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 424, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 553, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuOptions_2 = QtGui.QMenu(self.menubar)
         self.menuOptions_2.setObjectName(_fromUtf8("menuOptions_2"))
@@ -264,7 +264,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Quiz", None))
-        self.startTitel.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" color:#000000;\">Quiz</span></p></body></html>", None))
+        self.startTitel.setText(_translate("MainWindow", "<html><head/><body><p><img src=\":/df/logoFinal.png\"/></p></body></html>", None))
         self.startImage.setText(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>", None))
         self.label_3.setText(_translate("MainWindow", "TextLabel", None))
         self.label_5.setText(_translate("MainWindow", "TextLabel", None))
@@ -304,3 +304,4 @@ class Ui_MainWindow(object):
         self.actionStandard_2.setText(_translate("MainWindow", "Standard", None))
         self.actionStandard_2.setShortcut(_translate("MainWindow", "Ctrl+T", None))
 
+import resources_rc

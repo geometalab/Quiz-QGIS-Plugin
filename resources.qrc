@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="df">
+    <file>logoFinal.png</file>
+    <file>final01_noBG.png</file>
     <file>inst_hsr.gif</file>
     <file>logo.png</file>
     <file>Länder/Thurgau.png</file>

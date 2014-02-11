@@ -48,8 +48,8 @@ Sujet ...
 Version:
 0.1
 Auteur:
-Geometa Lab à Institut für Software HSR
-Page web
+Geometa Lab - Institute for Software - HSR
+Information
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Webseite</a> 
 Questions régardement le plugin:
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Webseite</a> 

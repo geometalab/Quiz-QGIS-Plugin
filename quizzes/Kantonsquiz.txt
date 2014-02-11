@@ -1,25 +1,34 @@
-//Titel:Kantonsquiz
-//Anleitung:Ordne jedem Bild den entsprechenden Kanton zu
-::Q1::
-{pic?Welches Kanton ist das? =Zürich ~Thurgau ~Aargau ~Waadt }
+//Title:Kantonsquiz
+//Instruction:Ordne jedem Bild den entsprechenden Kanton zu
 
-::Q2::
-{pic?Welches Kanton ist das? ~Graubünden =Freiburg ~Jura ~Genf }
+//Picture-Question
+::Q1::Welches Kanton ist das?
+{=Zürich ~Thurgau ~Aargau ~Waadt }
 
-::Q3::
-{pic?Welches Kanton ist das? ~St Gallen ~Zug ~Obwalden =Nidwalden }
+//Picture-Question
+::Q2::Welches Kanton ist das?
+{~Graubünden =Freiburg ~Jura ~Genf }
 
-::Q4::
-{pic?Welches Kanton ist das? ~Luzern =Basel Land ~Basel Stadt ~Solothurn }
+//Picture-Question
+::Q3::Welches Kanton ist das?
+{~St Gallen ~Zug ~Obwalden =Nidwalden }
 
-::Q5::
-{pic?Welches Kanton ist das? ~Wallis ~Genf =Waadt ~Uri }
+//Picture-Question
+::Q4::Welches Kanton ist das? 
+{~Luzern =Basel Land ~Basel Stadt ~Solothurn }
 
-::Q6::
-{pic?Welches Kanton ist das? =Glarus ~Uri ~Nidwalden ~Obwalden }
+//Picture-Question
+::Q5::Welches Kanton ist das?
+{~Wallis ~Genf =Waadt ~Uri }
 
-::Q7::
-{pic?Welches Kanton ist das? ~Appenzell Ausserrhoden ~St Gallen =Appenzell Innerrhoden ~Thurgau }
+//Picture-Question
+::Q6::Welches Kanton ist das? 
+{=Glarus ~Uri ~Nidwalden ~Obwalden }
 
-::Q8::
-{pic?Welches Kanton ist das? ~Nidwalden ~Uri ~Graubünden =Tessin }
+//Picture-Question
+::Q7::Welches Kanton ist das? 
+{~Appenzell Ausserrhoden ~St Gallen =Appenzell Innerrhoden ~Thurgau }
+
+//Picture-Question
+::Q8::Welches Kanton ist das?
+{~Nidwalden ~Uri ~Graubünden =Tessin }
