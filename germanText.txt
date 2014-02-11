@@ -20,12 +20,12 @@ Du hast bis jetzt
 Punkt von
 Du hast bis jetzt
 Punkte von
-Du hast richtig geantwortet
-Du hast die Frage leider falsch beantwortet
+Du hast richtig geantwortet!
+Du hast die Frage leider falsch beantwortet.
 Die Antwort ist 
 Die richtige Antworte wäre 
 gewesen
-Deine Antwort war richtig
+Deine Antwort war richtig!
 Auf Korrektheit prüfen 
 Frage:
 von
@@ -76,4 +76,5 @@ Bist du sicher, dass du das Quiz abschliessen willst?
 Standardgrösse
 Quiz
 Beantwortet:
-Bewege die Maus über deinen Fehler, um die richtige Antwort zu erfahren 
+Bewege die Maus über deinen Fehler, um die richtige Antwort zu erfahren
+Punkten erreicht.

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_trainingQuiz.ui'
 #
-# Created: Mon Feb 10 12:56:27 2014
+# Created: Mon Feb 10 16:23:08 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -330,25 +330,20 @@ class Ui_trainingQuiz(object):
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.verticalLayout.addWidget(self.label_4)
         self.verticalLayout_3.addLayout(self.verticalLayout)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        spacerItem19 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem19)
-        self.pushButton_13 = QtGui.QPushButton(trainingQuiz)
-        self.pushButton_13.setText(_fromUtf8(""))
-        self.pushButton_13.setObjectName(_fromUtf8("pushButton_13"))
-        self.horizontalLayout.addWidget(self.pushButton_13)
-        spacerItem20 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem20)
-        self.verticalLayout_3.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.pushButton_14 = QtGui.QPushButton(trainingQuiz)
         self.pushButton_14.setText(_fromUtf8(""))
         self.pushButton_14.setObjectName(_fromUtf8("pushButton_14"))
         self.horizontalLayout_2.addWidget(self.pushButton_14)
-        spacerItem21 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem21)
+        spacerItem19 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem19)
+        self.pushButton_13 = QtGui.QPushButton(trainingQuiz)
+        self.pushButton_13.setText(_fromUtf8(""))
+        self.pushButton_13.setObjectName(_fromUtf8("pushButton_13"))
+        self.horizontalLayout_2.addWidget(self.pushButton_13)
+        spacerItem20 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem20)
         self.pushButton_16 = QtGui.QPushButton(trainingQuiz)
         self.pushButton_16.setText(_fromUtf8(""))
         self.pushButton_16.setObjectName(_fromUtf8("pushButton_16"))

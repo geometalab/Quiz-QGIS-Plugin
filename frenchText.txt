@@ -20,12 +20,12 @@ Vous avez maintenant
 Point sur
 Vous avez maintenant
 Points sur
-Votre réponse est correcte
-Désolé, votre réponse est erronée
+Votre réponse est correcte!
+Désolé, votre réponse est erronée.
 La réponse est
 La réponse correcte aurait d' être
 
-Votre réponse était correcte
+Votre réponse était correcte!
 Vérifer correction
 Question:
 de

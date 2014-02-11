@@ -20,12 +20,12 @@ You now have
 Point out of
 You now have
 Points out of
-Your answer is correct
-Unfortunately, you answered this question wrongly
+Your answer is correct!
+Unfortunately, you answered this question wrongly.
 The answer is 
 The right answer would have been 
 
-Your answer was correct
+Your answer was correct!
 Check for correctness 
 Question:
 of

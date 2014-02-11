@@ -265,7 +265,7 @@ class TestGame:
 			
 	def selectQuiz(self):
 		
-		self.path = QFileDialog.getOpenFileName(self.dlg, 'Open File', self.user_plugin_dir + '\quizes','*.txt')
+		self.path = QFileDialog.getOpenFileName(self.dlg, 'Open File', self.user_plugin_dir + '\quizzes')
 
 		if self.path != '':
 			parser = QuestionParser(self.path)
@@ -308,7 +308,7 @@ class TestGame:
 		self.aboutWindow.ui.label_10.setText(self.translator[self.language][69])
 		self.aboutWindow.ui.label_10.setFont(self.globalFont)
 		
-		self.aboutWindow.show()
+		self.aboutWindow.exec_()
 		
 	def addWidgets(self):
 		
@@ -640,7 +640,7 @@ class TestGame:
 			self.questionsAnswered += 1
 			self.frameQuestionAnswered[self.questionNumber] = True
 		
-		if not self.training:
+		if not self.trainingMode:
 			self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
 		else:
 			self.currWindow.ui.label_6.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
@@ -785,7 +785,7 @@ class TestGame:
 			
 	def gapStoreAnswers(self):
 		
-		if not self.frameQuestionAnswered[self.questionNumber] and not self.training:
+		if not self.frameQuestionAnswered[self.questionNumber] and not self.trainingMode:
 			self.questionsAnswered += 1
 			self.frameQuestionAnswered[self.questionNumber] = True
 			self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
@@ -832,11 +832,14 @@ class TestGame:
 		
 		correctAnswer = self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].text()
 		self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setStyleSheet(u"color:rgb(0, 184, 0)")
+		tempFont = self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].font()
+		tempFont.setBold(True)
+		self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setFont(tempFont)
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions)) + ' ' + self.translator[self.language][79]
 		else:
-			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions)) + ' ' + self.translator[self.language][79]
 		
 		if wasCorrect:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
@@ -844,6 +847,9 @@ class TestGame:
 			self.currWindow.ui.label_2.setText("<html><head/><body><p align=\"center\"> " + self.translator[self.language][23] + "<br/></p></body></html>")
 			self.currWindow.ui.label_3.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][24] +' '+ correctAnswer +"<br/></p></body></html>")
 			buttonPressed.setStyleSheet(u"color:rgb(255, 0, 0)")
+			tempFont = buttonPressed.font()
+			tempFont.setBold(True)
+			buttonPressed.setFont(tempFont)
 		
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 		self.frameQuestionAnswered[self.questionNumber] = True		
@@ -892,15 +898,18 @@ class TestGame:
 			self.currWindow.ui.pushButton_16.clicked.connect(self.showQuizResults)
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		else:
-			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 	
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
 			i.setEnabled(True)
 			i.setText('')
 			i.setStyleSheet("")
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 			
 		for i in self.currWindow.ui.checkBoxes:
 			i.setVisible(False)
@@ -976,7 +985,11 @@ class TestGame:
 			if self.frameQuestionAnswered[self.questionNumber]:
 				for nr in range(len(self.currQuestion.answers)):
 					self.currWindow.ui.buttonArray[nr].setEnabled(False)
-				self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setStyleSheet(u"color:rgb(0, 184, 0)")		
+				self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setStyleSheet(u"color:rgb(0, 184, 0)")
+				tempFont = self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setFont(tempFont)
+				
 				
 				if self.answers[self.questionNumber] == rightAnswer:
 					self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][27] + "<br/></p></body></html>")
@@ -992,6 +1005,9 @@ class TestGame:
 						if self.currQuestion.answers[nr] == self.answers[self.questionNumber]:
 							wrongButton = self.currWindow.ui.buttonArray[nr]
 					wrongButton.setStyleSheet(u"color:rgb(255, 0, 0)")
+					tempFont = wrongButton.font()
+					tempFont.setBold(True)
+					wrongButton.setFont(tempFont)
 			else:
 				self.currWindow.ui.label_2.setText("")
 				self.currWindow.ui.label_3.setText("")
@@ -1012,7 +1028,10 @@ class TestGame:
 			rightAnswer = self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].text()
 			
 			if self.frameQuestionAnswered[self.questionNumber]:
-				self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setStyleSheet(u"color:rgb(0, 184, 0)")		
+				self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setStyleSheet(u"color:rgb(0, 184, 0)")
+				tempFont = self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.buttonArray[self.currQuestion.rightAnswerIndex].setFont(tempFont)
 				if self.answers[self.questionNumber] == rightAnswer:
 					self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][27] + "<br/></p></body></html>")
 					self.currWindow.ui.label_3.setText('')
@@ -1026,6 +1045,9 @@ class TestGame:
 						if self.currQuestion.answers[nr] == self.answers[self.questionNumber]:
 							wrongButton = self.currWindow.ui.buttonArray[nr]	
 					wrongButton.setStyleSheet(u"color:rgb(255, 0, 0)")	
+					tempFont = wrongButton.font()
+					tempFont.setBold(True)
+					wrongButton.setFont(tempFont)
 			else:
 				self.currWindow.ui.label_2.setText("")
 				self.currWindow.ui.label_3.setText("")
@@ -1121,6 +1143,9 @@ class TestGame:
 			i.setEnabled(True)
 			i.setText('')
 			i.setStyleSheet("")
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 			
 		for i in self.currWindow.ui.checkBoxes:
 			i.setVisible(False)
@@ -1281,6 +1306,10 @@ class TestGame:
 		
 		if allCorrectlyAnswered:
 			self.Score += 1
+		if self.Score == 1:
+			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
+		else:
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 	
 	def evaluateGapsTraining(self):
@@ -1314,9 +1343,9 @@ class TestGame:
 		self.roundScore()
 		
 		if self.Score == 1:
-			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
+			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		else:
-			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 		self.currWindow.ui.pushButton_13.setEnabled(False)
@@ -1337,13 +1366,25 @@ class TestGame:
 			if len(self.linesForMatching[self.questionNumber][i]) < 3 or not (self.linesForMatching[self.questionNumber][i][2] == 1):
 				allCorrectlyAnswered = False
 				self.currWindow.ui.matchingLabels[i * 2].setStyleSheet(u"color:rgb(255, 0, 0)")
+				tempFont = self.currWindow.ui.matchingLabels[i * 2].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.matchingLabels[i * 2].setFont(tempFont)
 			else: 
 				self.currWindow.ui.matchingLabels[i * 2].setStyleSheet(u"color:rgb(0, 184, 0)")
 				rightLabel.setStyleSheet(u"color:rgb(0, 184, 0)")
+				tempFont = self.currWindow.ui.matchingLabels[i * 2].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.matchingLabels[i * 2].setFont(tempFont)
+				tempFont = rightLabel.font()
+				tempFont.setBold(True)
+				rightLabel.setFont(tempFont)
 		
 		for i in range(0, len(self.linesForMatching[self.questionNumber])):
 			if self.currWindow.ui.matchingLabels[(i * 2)+ 1].styleSheet() == '':
 				self.currWindow.ui.matchingLabels[(i * 2)+ 1].setStyleSheet(u"color:rgb(255, 0, 0)")
+				tempFont = self.currWindow.ui.matchingLabels[(i * 2)+ 1].font()
+				tempFont.setBold(True)
+				self.currWindow.ui.matchingLabels[(i * 2)+ 1].setFont(tempFont)
 		
 		if allCorrectlyAnswered:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
@@ -1352,9 +1393,9 @@ class TestGame:
 		
 		self.roundScore()
 		if self.Score == 1:
-			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
+			points = self.translator[self.language][18] + ' '+str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		else:
-			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 		self.currWindow.ui.pushButton_13.setEnabled(False)
@@ -1377,12 +1418,21 @@ class TestGame:
 				if i.objectName()[0] == '-':
 					allCorrectlyAnswered = False
 					i.setStyleSheet(u"color:rgb(255, 0, 0)")
+					tempFont = i.font()
+					tempFont.setBold(True)
+					i.setFont(tempFont)
 				else:
 					i.setStyleSheet(u"color:rgb(0, 184, 0)")	
+					tempFont = i.font()
+					tempFont.setBold(True)
+					i.setFont(tempFont)
 			else:
 				if i.objectName()[0] != '-' and i.objectName() != ' ':
 					allCorrectlyAnswered = False
 					i.setStyleSheet(u"color:rgb(255, 0, 0)")
+					tempFont = i.font()
+					tempFont.setBold(True)
+					i.setFont(tempFont)
 		
 		if tempScore < 0:
 			tempScore = 0
@@ -1392,9 +1442,9 @@ class TestGame:
 		self.roundScore()
 
 		if self.Score == 1:
-			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		else:
-			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		
 		if allCorrectlyAnswered:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
@@ -1414,19 +1464,28 @@ class TestGame:
 				if i.objectName()[0] == '-':
 					allCorrectlyAnswered = False
 					i.setStyleSheet(u"color:rgb(255, 0, 0)")
+					tempFont = i.font()
+					tempFont.setBold(True)
+					i.setFont(tempFont)
 				else:
 					i.setStyleSheet(u"color:rgb(0, 184, 0)")
+					tempFont = i.font()
+					tempFont.setBold(True)
+					i.setFont(tempFont)
 			else:
 				if i.objectName()[0] != '-' and i.objectName() != ' ':
 					allCorrectlyAnswered = False
 					i.setStyleSheet(u"color:rgb(255, 0, 0)")
+					tempFont = i.font()
+					tempFont.setBold(True)
+					i.setFont(tempFont)
 
 		self.roundScore()
 
 		if self.Score == 1:
-			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))
+			points = self.translator[self.language][18] +' '+ str(self.Score) +' '+ self.translator[self.language][19] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		else:
-			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))
+			points = self.translator[self.language][20] +' '+ str(self.Score) +' '+ self.translator[self.language][21] +' '+ str(len(self.questions))+ ' ' + self.translator[self.language][79]
 		
 		if allCorrectlyAnswered:
 			self.currWindow.ui.label_2.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][22] +  "<br/></p></body></html>")
@@ -1497,7 +1556,7 @@ class TestGame:
 		self.dlg2 = PointsDialog()
 		self.dlg2.setWindowTitle(self.translator[self.language][7])
 		self.dlg2.ui.pushButton.clicked.connect(self.dlg2.close)
-		percentage = (self.Score / len(self.questions))*100
+		percentage = int((self.Score / len(self.questions))*100)
 		
 		end = time.time()
 		self.timeElapsed = end - self.timeElapsed 
@@ -1526,7 +1585,7 @@ class TestGame:
 		
 		self.dlg2.ui.label.setFont(self.globalFont)
 		self.dlg2.ui.label.setText( "<html><head/><body><p align=\"center\"> " + self.translator[self.language][64]+ ' ' + str(self.Score) + ' ' + self.translator[self.language][21]+ str(len(self.questions))+ "<br/><br/>"+ self.translator[self.language][65] + str(percentage) +'% !' +'  ' + evaluation + "</p></body></html>")
-		self.dlg2.show()
+		self.dlg2.exec_()
 		
 	def showNormalResults(self):
 		
