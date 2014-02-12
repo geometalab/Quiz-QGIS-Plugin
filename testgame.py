@@ -467,7 +467,7 @@ class TestGame:
 		self.currWindow.ui.pushButton_14.setText(self.translator[self.language][6])
 		
 		for i in self.currWindow.ui.checkBoxes:
-			i.stateChanged.connect(self.checkState)
+			i.clicked.connect(self.checkState)
 		
 		self.instantiateQuestion()
 		
@@ -517,6 +517,7 @@ class TestGame:
 		for i in self.currWindow.ui.checkBoxes:
 			i.setVisible(False)
 			i.setText('')
+			i.setCheckState(Qt.Unchecked)
 		
 		for i in self.currWindow.ui.matchingButtons:
 			i.setVisible(False)
@@ -536,12 +537,18 @@ class TestGame:
 	
 		if self.questionType[self.questionNumber] == 'multipleChoice':
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\">" + self.currQuestion.title +"</p></body></html>")
-			
+			if not self.frameQuestionAnswered[self.questionNumber]:	
+				self.answers[self.questionNumber] = []
 			for nr in range(len(self.currQuestion.answers)):
 				self.currWindow.ui.checkBoxes[nr].setText(self.currQuestion.answers[nr])
 				self.currWindow.ui.checkBoxes[nr].setObjectName(str(self.currQuestion.percentages[nr]))
 				self.currWindow.ui.checkBoxes[nr].setVisible(True)
-			
+				if not self.frameQuestionAnswered[self.questionNumber]:			
+					self.answers[self.questionNumber].append('')				
+				else:
+					for i in self.answers[self.questionNumber]:
+						if self.currWindow.ui.checkBoxes[nr].text() == i:
+							self.currWindow.ui.checkBoxes[nr].setCheckState(Qt.Checked)
 			
 		if self.questionType[self.questionNumber] == 'pictureQuestion':	
 			self.currWindow.ui.label.setText("<html><head/><body><p align=\"center\"><img src=\""+ self.currQuestion.picPath+"\"/></p><p align=\"center\">" + self.currQuestion.title+"</p></body></html>")
@@ -726,30 +733,34 @@ class TestGame:
 			self.questionsAnswered += 1
 			self.frameQuestionAnswered[self.questionNumber] = True
 			self.currWindow.ui.label_3.setText(self.translator[self.language][77] + ' ' + str(self.questionsAnswered) + ' ' + self.translator[self.language][30] + ' ' + str(len(self.questions)))
-
+		
 		button = self.currWindow.sender()
 		scoreTemp = float(button.objectName())
 		scoreDiff = scoreTemp/ 100
-
+		index = self.currQuestion.answersIndexes[button.text()]
 		if button.isChecked():
-			self.updateScoreCheckboxCheck(scoreDiff)
+			self.updateScoreCheckboxCheck(scoreDiff, index, button.text())
 		else:
-			self.updateScoreCheckboxUncheck(scoreDiff)
+			self.updateScoreCheckboxUncheck(scoreDiff, index)
 	
-	def updateScoreCheckboxCheck(self, scoreDiff):
+	def updateScoreCheckboxCheck(self, scoreDiff, index, text):
 		
 		if self.Score + scoreDiff >= 0:
 			self.Score += scoreDiff
 		else:
 			self.Score = 0
-	
-	def updateScoreCheckboxUncheck(self, scoreDiff):
+		self.answers[self.questionNumber][index] = text
+		self.roundScore()
+		
+	def updateScoreCheckboxUncheck(self, scoreDiff, index):
 
 		if self.Score - scoreDiff >= 0 :
 			self.Score -= scoreDiff
 		else:
 			self.Score = 0
-
+		self.answers[self.questionNumber][index] = ''
+		self.roundScore()
+		
 	def scoreBonus(self):
 
 		button = self.currWindow.sender()
@@ -817,6 +828,8 @@ class TestGame:
 		self.currWindow.ui.pushButton_16.clicked.connect(self.quizNextQuestion)
 		self.currWindow.ui.pushButton_16.setFont(self.globalFont)
 		
+		for i in self.currWindow.ui.checkBoxes:
+			i.clicked.connect(self.storeChecksTraining)
 		self.instantiateQuestionTraining()
 				
 		self.currWindow.exec_()
@@ -917,7 +930,11 @@ class TestGame:
 			i.setText('')
 			i.setStyleSheet("")
 			i.setObjectName(' ')
-		
+			i.setCheckState(Qt.Unchecked)
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
+			
 		for i in self.currWindow.ui.matchingButtons:
 			i.setVisible(False)
 			
@@ -956,13 +973,14 @@ class TestGame:
 				self.currWindow.ui.checkBoxes[nr].setVisible(True)
 			
 			if self.frameQuestionAnswered[self.questionNumber]:
-				self.updateCheckBoxesTraining()
+				
 				self.currWindow.ui.pushButton_13.setEnabled(False)
 				for i in self.answers[self.questionNumber].split():
 					for k in self.currWindow.ui.checkBoxes:
 						k.setEnabled(False)
-						if i == k.objectName():
-							k.setCheckState(Qt.Checked)				
+						if i == k.text():
+							k.setCheckState(Qt.Checked)		
+				self.updateCheckBoxesTraining()		
 			else:
 				self.currWindow.ui.pushButton_13.setEnabled(True)
 				self.currWindow.ui.label_2.setText("")
@@ -970,6 +988,8 @@ class TestGame:
 				self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 				for nr in range(len(self.currQuestion.answers)):
 					self.currWindow.ui.checkBoxes[nr].setEnabled(True)
+					if self.currQuestion.answersChecked[nr] == self.currWindow.ui.checkBoxes[nr].text():
+						self.currWindow.ui.checkBoxes[nr].setCheckState(Qt.Checked)
 				
 		
 		if self.questionType[self.questionNumber] == 'pictureQuestion':
@@ -1149,9 +1169,14 @@ class TestGame:
 			
 		for i in self.currWindow.ui.checkBoxes:
 			i.setVisible(False)
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 			i.setText('')
 			i.setStyleSheet("")
 			i.setObjectName(' ')
+			i.setCheckState(Qt.Unchecked)
+			i.setEnabled(True)
 			
 		for i in self.currWindow.ui.matchingLabels:
 			i.setVisible(False)
@@ -1188,6 +1213,8 @@ class TestGame:
 				self.currWindow.ui.checkBoxes[nr].setText(self.currQuestion.answers[nr])
 				self.currWindow.ui.checkBoxes[nr].setObjectName(str(self.currQuestion.percentages[nr]))
 				self.currWindow.ui.checkBoxes[nr].setVisible(True)
+				if self.currQuestion.answersChecked[nr] == self.currWindow.ui.checkBoxes[nr].text():
+					self.currWindow.ui.checkBoxes[nr].setCheckState(Qt.Checked)
 			
 						
 		if self.questionType[self.questionNumber] == 'pictureQuestion':
@@ -1467,6 +1494,7 @@ class TestGame:
 					tempFont = i.font()
 					tempFont.setBold(True)
 					i.setFont(tempFont)
+
 				else:
 					i.setStyleSheet(u"color:rgb(0, 184, 0)")
 					tempFont = i.font()
@@ -1494,6 +1522,15 @@ class TestGame:
 			
 		self.currWindow.ui.label_4.setText( "<html><head/><body><p align=\"center\"> " + points + "<br/></p></body></html>")
 	
+	def storeChecksTraining(self):
+		
+		checkBox = self.currWindow.sender()
+		index = self.currQuestion.answersIndexes[checkBox.text()]
+		if checkBox.isChecked():
+			self.currQuestion.answersChecked[index] = checkBox.text()
+		else:
+			self.currQuestion.answersChecked[index] = ''
+
 	def roundScore (self):
 
 		tempScore = self.Score %1 
@@ -1564,7 +1601,7 @@ class TestGame:
 		self.timeElapsed = end - self.timeElapsed 
 		self.log = open(self.user_plugin_dir + '/quiz.csv', 'a')
 		logString = '' 
-		logString = date + self.path.split('/')[len(self.path.split('/'))-1]
+		logString = date +';'+ self.path.split('/')[len(self.path.split('/'))-1]
 		logString +=';'
 		logString += self.quizTitle
 		logString += ';'

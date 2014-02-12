@@ -17,8 +17,8 @@
 { ~%-100%A nuclear warhead ~%33%tomatoes ~%33%magazins ~%33%Asparin ~%-100%A swimming Pool }
 
 ::Q6::Which is a color?
-{ ~%-100%Albert Einstein ~%35%blue ~%25%red ~%-33%a table ~%25%orange ~%25%green
-~%a plant%}
+{ ~%-100%Albert Einstein ~%25%blue ~%25%red ~%-33%a table ~%25%orange ~%25%green
+~%-33%a plant}
 
 ::Q7::How many years does a day have?
 { ~%-100%2 ~%100%That's a stupid question ~%-100%too many  }

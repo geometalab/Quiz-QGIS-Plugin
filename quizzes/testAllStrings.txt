@@ -18,7 +18,7 @@
 ::Q4::How tall is Rafael
 { ~1.20 meters 
 ~5.8 meters ~500 kilometers
-~1 micrometer ~1.80 meters}
+~1 micrometer =1.80 meters}
 
 ::Q5::How tall is Stefan?
 { =I don't know}

@@ -44,7 +44,12 @@ class MultipleChoiceQuestion(Question):
 	def __init__(self, titel = '', answersArray = [] , boolArray=[], percentages = []):
 		Question.__init__(self, titel, answersArray, boolArray)
 		self.percentages = percentages
-	
+		self.answersChecked = []
+		self.answersIndexes = {}
+		for i in range(len(answersArray)):
+			self.answersIndexes[answersArray[i]] = i
+			self.answersChecked.append('')
+			
 class PicQuestion(Question):
 
 	def __init__(self, titel = '', answersArray = [] , boolArray=[]):
