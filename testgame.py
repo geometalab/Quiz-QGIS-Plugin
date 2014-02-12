@@ -938,6 +938,7 @@ class TestGame:
 			
 		for i in self.currWindow.ui.matchingButtons:
 			i.setVisible(False)
+			i.setEnabled(True)
 			
 		for i in self.currWindow.ui.matchingLabels:
 			i.setVisible(False)
@@ -946,6 +947,7 @@ class TestGame:
 			tempFont.setBold(False)
 			i.setFont(tempFont)
 			
+		self.currMatchingButtonClicked = ''	
 		self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_3)
 		
 		for i in self.currWindow.ui.editLabels:
@@ -1161,6 +1163,7 @@ class TestGame:
 			self.currWindow.ui.pushButton_14.setVisible(True)					
 		
 		self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_3)
+		self.currMatchingButtonClicked = ''
 		
 		for i in self.currWindow.ui.buttonArray:
 			i.setVisible(False)
@@ -1301,7 +1304,7 @@ class TestGame:
 			
 			self.drawMatchingLines(self.questionNumber)
 			self.siteVisitedMatching[self.questionNumber] = True
-				
+	
 	def scoreBonusQuiz(self):
 
 		self.questionsAnswered += 1
