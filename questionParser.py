@@ -37,14 +37,14 @@ class QuestionParser:
 			self.questionType = []
 
 			allQuestions = f.read().split('\r\n\r\n')
-			
+
 			for question in allQuestions:
 				answersArray = []
 				boolArray = []
 				percentages = []
 				textArray = []
 				title = ''
-				
+
 				if question.count('{') >=1:
 					if question.count('}') == 1:
 						titleSplit = question.split('::')
@@ -74,7 +74,7 @@ class QuestionParser:
 							self.questionType.append('matching')
 							pairs = answers.split('=')
 							for i in pairs:
-								if len(i) > 1:
+								if '->' in i:
 									match = i.split('->')
 									answersArray.append(match[0].strip())
 									answersArray.append(match[1].strip())

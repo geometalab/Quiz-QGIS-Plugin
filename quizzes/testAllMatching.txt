@@ -1,7 +1,6 @@
 //Title:MatchingQuiz
 //Instruction:Match all that belongs together
 
-
 ::Q1::Match countries and capital:
 {=Surinam -> Paramarimbo 
 	=Andorra -> Andorra de la Ville 
@@ -13,13 +12,13 @@
 	=Cat -> Catfood
 	=horse -> horsepeople
 	=Computers -> mouses }
-	
+
 ::Q3::What are synonyms:
 {=cheap -> inexpensive 
 	=great -> grand
 	=mistakes ->errors
 	=authors -> Bookwriters}
-	
+
 ::Q4::Match countries and their languages:
 {=Switzerland -> Swissgerman/French/Italian
 	=Italy-> Italian
@@ -33,17 +32,16 @@
 	=20014 -> today
 		=0->christians claim a magic carpenter was born
 		=3077 -> timetravel is invented}	
-	
+
 ::Q6::Order famous couples:
 {=Bonny  -> Clyde
 	=Romeo -> Julia
 	=Bill ->Hilary
 	=Adam -> Eve }
-	
+
 ::Q7::Map countries that went to war with eachother:
 {
 	=Japan-> China
-
 	=Burundi -> Ruanda }
 
 ::Q8::What should you always do together:
@@ -51,4 +49,3 @@
 	=kill somebody -> not leave evidence
 	=Skydive ->wear a parachute 
 	=eat spaghetti ->wear a napkin }
-	

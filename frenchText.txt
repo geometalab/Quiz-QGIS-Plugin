@@ -76,4 +76,5 @@ Etes-vous sûr de vouloir quitter?
 Taille standard
 Quiz
 Répondu:
-Déplacez la souris sur vos erreurs afin d'apprendre la bonne réponse 
+Déplacez la souris sur vos erreurs afin d'apprendre la bonne réponse
+  

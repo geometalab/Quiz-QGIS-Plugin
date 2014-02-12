@@ -328,6 +328,7 @@ class TestGame:
 			label = PyQt4.QtGui.QLabel()
 			label.setFont(self.globalFont)
 			label.setObjectName("label")
+			label.setWordWrap(True)
 			self.currWindow.ui.matchingLabels.append(label)
 			pushButton = PyQt4.QtGui.QPushButton()
 			pushButton.setText("")
@@ -941,7 +942,10 @@ class TestGame:
 		for i in self.currWindow.ui.matchingLabels:
 			i.setVisible(False)
 			i.setStyleSheet("")
-		
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
+			
 		self.currWindow.ui.stackedWidget_2.setCurrentWidget(self.currWindow.ui.page_3)
 		
 		for i in self.currWindow.ui.editLabels:
@@ -1182,6 +1186,9 @@ class TestGame:
 			i.setVisible(False)
 			i.setText('')
 			i.setStyleSheet("")
+			tempFont = i.font()
+			tempFont.setBold(False)
+			i.setFont(tempFont)
 		
 		for i in self.currWindow.ui.matchingButtons:
 			i.setVisible(False)
