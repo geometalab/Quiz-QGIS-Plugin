@@ -48,7 +48,7 @@ About ...
 Version:  
 0.1
 Author:    
-Geometa Lab - Institute for Software - HSR
+<a href="http://www.ifs.hsr.ch/Geometa-Lab.12520.0.html" >Geometa Lab - Institute for Software - HSR</a>  
 Information:    
 <a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Website</a>  
 Questions regarding the Plugin: 
@@ -67,7 +67,7 @@ That are
 Test
 Training
 License
-Licensetype
+GPL
 Bravo!
 Very good!
 Good!
@@ -78,3 +78,7 @@ Quiz
 Answered:
 Move the mouse above your mistake to learn the right answer
   
+Disclaimer:
+The author of the plugin is in no way liable for damages that are a result of usage of the plugin. The authors of the quizzes are responsible for their contents.
+Log-File for evaluation of tests:
+quiz.log in the plugin-directory 

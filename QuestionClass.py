@@ -54,7 +54,7 @@ class PicQuestion(Question):
 
 	def __init__(self, titel = '', answersArray = [] , boolArray=[]):
 		Question.__init__(self, titel, answersArray, boolArray)
-		self.picPath = ":/df/Länder/" + self.rightAnswer +".png"
+		self.picPath = ":/df/countries/" + self.rightAnswer +".png"
 
 class MissingWordQuestion(Question):
 

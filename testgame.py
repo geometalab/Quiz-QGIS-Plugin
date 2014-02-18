@@ -103,7 +103,7 @@ class TestGame:
 				
 	def initGui(self):
 
-		self.action = QAction(QIcon(":/df/Länder/icon.png"),u"Quiz", self.iface.mainWindow())
+		self.action = QAction(QIcon(":/df/quiz_logo4.tif"),u"Quiz", self.iface.mainWindow())
 		self.action.triggered.connect(self.run)
 		self.iface.addToolBarIcon(self.action)
 		self.iface.addPluginToMenu(u"Quiz", self.action)
@@ -137,6 +137,10 @@ class TestGame:
 		self.dlg.ui.startTest.clicked.connect(self.startQuiz)
 		self.dlg.ui.startTraining.clicked.connect(self.training)
 		
+		self.dlg.ui.label.setText(self.translator[self.language][82])
+		self.dlg.ui.label.setFont(self.globalFont)
+		self.dlg.ui.label_2.setText(self.translator[self.language][83])
+		self.dlg.ui.label_2.setFont(self.globalFont)
 		self.dlg.ui.label_3.setText(self.translator[self.language][53])
 		self.dlg.ui.label_3.setFont(self.globalFont)
 		self.dlg.ui.label_4.setText(self.translator[self.language][54])
@@ -298,6 +302,7 @@ class TestGame:
 		self.aboutWindow.ui.label_5.setFont(self.globalFont)
 		self.aboutWindow.ui.label_6.setText(self.translator[self.language][50])
 		self.aboutWindow.ui.label_6.setFont(self.globalFont)
+		self.aboutWindow.ui.label_6.setOpenExternalLinks(True)
 		self.aboutWindow.ui.label_7.setText(self.translator[self.language][51])
 		self.aboutWindow.ui.label_7.setFont(self.globalFont)
 		self.aboutWindow.ui.label_8.setText(self.translator[self.language][52])
@@ -307,7 +312,10 @@ class TestGame:
 		self.aboutWindow.ui.label_9.setFont(self.globalFont)
 		self.aboutWindow.ui.label_10.setText(self.translator[self.language][69])
 		self.aboutWindow.ui.label_10.setFont(self.globalFont)
-		
+		self.aboutWindow.ui.label_11.setText(self.translator[self.language][80])
+		self.aboutWindow.ui.label_11.setFont(self.globalFont)
+		self.aboutWindow.ui.label_12.setText(self.translator[self.language][81])
+		self.aboutWindow.ui.label_12.setFont(self.globalFont)
 		self.aboutWindow.exec_()
 		
 	def addWidgets(self):
@@ -1609,7 +1617,7 @@ class TestGame:
 		date = time.strftime("%d/%m/%Y")
 		end = time.time()
 		self.timeElapsed = end - self.timeElapsed 
-		self.log = open(self.user_plugin_dir + '/quiz.csv', 'a')
+		self.log = open(self.user_plugin_dir + '/quiz.log', 'a')
 		logString = '' 
 		logString = date +';'+ self.path.split('/')[len(self.path.split('/'))-1]
 		logString +=';'

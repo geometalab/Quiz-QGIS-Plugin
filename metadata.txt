@@ -11,11 +11,11 @@
 [general]
 name=Quiz
 qgisMinimumVersion=2.0
-description=test for quiz
+description=Plugin for loading and displaying quizzes written in Moodle's GIFT-format
 version=0.1
 author=rkrucker
 email=rafael_krucker@hotmail.com
-
+category=Education
 # end of mandatory metadata
 
 # Optional items:
@@ -24,14 +24,14 @@ email=rafael_krucker@hotmail.com
 # changelog=
 
 # tags are comma separated with spaces allowed
-tags=
+tags=Education, Quiz, Moodle, Test, E-Learning
 
-homepage=
+homepage=http://giswiki.hsr.ch/QGIS-Materialien
 tracker=
 repository=
 icon=icon.png
 # experimental flag
-experimental=False
+experimental=True
 
 # deprecated flag (applies to the whole plugin, not just a single version
 deprecated=False

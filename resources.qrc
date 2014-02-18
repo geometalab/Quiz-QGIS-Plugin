@@ -1,260 +1,217 @@
 <RCC>
   <qresource prefix="df">
+    <file>quiz_logo4.tif</file>
+    <file>hsrLogo.png</file>
+    <file>ifsLogo.png</file>
     <file>logoFinal.png</file>
     <file>final01_noBG.png</file>
-    <file>inst_hsr.gif</file>
-    <file>logo.png</file>
-    <file>Länder/Thurgau.png</file>
-    <file>Länder/Aargau.png</file>
-    <file>Länder/Appenzell Ausserrhoden.png</file>
-    <file>Länder/Appenzell Innerrhoden.png</file>
-    <file>Länder/Basel Land.png</file>
-    <file>Länder/Basel Stadt.png</file>
-    <file>Länder/Bern.png</file>
-    <file>Länder/Freiburg.png</file>
-    <file>Länder/Genf.png</file>
-    <file>Länder/Glarus.png</file>
-    <file>Länder/Graubünden.png</file>
-    <file>Länder/Jura.png</file>
-    <file>Länder/Luzern.png</file>
-    <file>Länder/Neuenburg.png</file>
-    <file>Länder/Nidwalden.png</file>
-    <file>Länder/Obwalden.png</file>
-    <file>Länder/Schaffhausen.png</file>
-    <file>Länder/Schwyz.png</file>
-    <file>Länder/Solothurn.png</file>
-    <file>Länder/St Gallen.png</file>
-    <file>Länder/Tessin.png</file>
-    <file>Länder/Uri.png</file>
-    <file>Länder/Waadt.png</file>
-    <file>Länder/Wallis.png</file>
-    <file>Länder/Zug.png</file>
-    <file>Länder/Zürich.png</file>
-    <file>Länder/Albanien.png</file>
-    <file>Länder/Andorra.png</file>
-    <file>Länder/Belgien.png</file>
-    <file>Länder/Bosnien.png</file>
-    <file>Länder/Bulgarien.png</file>
-    <file>Länder/Dänemark.png</file>
-    <file>Länder/Deutschland.png</file>
-    <file>Länder/England.png</file>
-    <file>Länder/Estland.png</file>
-    <file>Länder/europe-map-Start-Page.png</file>
-    <file>Länder/Finnland.png</file>
-    <file>Länder/Frankreich.png</file>
-    <file>Länder/Griechenland.png</file>
-    <file>Länder/icon.png</file>
-    <file>Länder/Irland.png</file>
-    <file>Länder/Island.png</file>
-    <file>Länder/Italien.png</file>
-    <file>Länder/Kosovo.png</file>
-    <file>Länder/Kroatien.png</file>
-    <file>Länder/Lettland.png</file>
-    <file>Länder/Litauen.png</file>
-    <file>Länder/Luxemburg.png</file>
-    <file>Länder/Malta.png</file>
-    <file>Länder/Mazedonien.png</file>
-    <file>Länder/Moldawien.png</file>
-    <file>Länder/Niederlanden.png</file>
-    <file>Länder/Norwegen.png</file>
-    <file>Länder/Österreich.png</file>
-    <file>Länder/Polen.png</file>
-    <file>Länder/Portugal.png</file>
-    <file>Länder/Rumänien.png</file>
-    <file>Länder/Russland.png</file>
-    <file>Länder/San Marino.png</file>
-    <file>Länder/Schweden.png</file>
-    <file>Länder/Schweiz.png</file>
-    <file>Länder/Serbien.png</file>
-    <file>Länder/Slowakai.png</file>
-    <file>Länder/Slowenien.png</file>
-    <file>Länder/Spanien.png</file>
-    <file>Länder/Tschechien.png</file>
-    <file>Länder/Türkei.png</file>
-    <file>Länder/Ukraine.png</file>
-    <file>Länder/Ungarn.png</file>
-    <file>Länder/Weissrussland.png</file>
-    <file>Länder/Afghanistan.png</file>
-    <file>Länder/Ägypten.png</file>
-    <file>Länder/Albanien.png</file>
-    <file>Länder/Algerien.png</file>
-    <file>Länder/Andorra.png</file>
-    <file>Länder/Angola.png</file>
-    <file>Länder/Antarktis.png</file>
-    <file>Länder/Äquatorial-Guinea.png</file>
-    <file>Länder/Argentinien.png</file>
-    <file>Länder/Armenien.png</file>
-    <file>Länder/Aserbaidschan.png</file>
-    <file>Länder/Äthopien.png</file>
-    <file>Länder/Australien.png</file>
-    <file>Länder/Bahamas.png</file>
-    <file>Länder/Bangladesch.png</file>
-    <file>Länder/Belgien.png</file>
-    <file>Länder/Belizé.png</file>
-    <file>Länder/Benim.png</file>
-    <file>Länder/Bhutan.png</file>
-    <file>Länder/Bolivien.png</file>
-    <file>Länder/Bosnien.png</file>
-    <file>Länder/Brasilien.png</file>
-    <file>Länder/Brunai.png</file>
-    <file>Länder/Bulgarien.png</file>
-    <file>Länder/Burkina Faso.png</file>
-    <file>Länder/Burundi.png</file>
-    <file>Länder/Chile.png</file>
-    <file>Länder/China.png</file>
-    <file>Länder/Costa Rica.png</file>
-    <file>Länder/Dänemark.png</file>
-    <file>Länder/Demokratische Republik Kongo.png</file>
-    <file>Länder/Deutschland.png</file>
-    <file>Länder/Domenikanische Republik.png</file>
-    <file>Länder/Dschibuti.png</file>
-    <file>Länder/Ecuador.png</file>
-    <file>Länder/Elfenbeinküste.png</file>
-    <file>Länder/England.png</file>
-    <file>Länder/Eritrea.png</file>
-    <file>Länder/Estland.png</file>
-    <file>Länder/europe-map-Start-Page.png</file>
-    <file>Länder/Fiji Inseln.png</file>
-    <file>Länder/Finnland.png</file>
-    <file>Länder/Frankreich.png</file>
-    <file>Länder/Französisch Guyana.png</file>
-    <file>Länder/Gabun.png</file>
-    <file>Länder/Gambia.png</file>
-    <file>Länder/Georgien.png</file>
-    <file>Länder/Ghana.png</file>
-    <file>Länder/Grenada.png</file>
-    <file>Länder/Griechenland.png</file>
-    <file>Länder/Grönland.png</file>
-    <file>Länder/Guatemala.png</file>
-    <file>Länder/Guinea.png</file>
-    <file>Länder/Guinea-Bissau.png</file>
-    <file>Länder/Guyana.png</file>
-    <file>Länder/Haiti.png</file>
-    <file>Länder/Honduras.png</file>
-    <file>Länder/icon.png</file>
-    <file>Länder/Indien.png</file>
-    <file>Länder/Indonesien.png</file>
-    <file>Länder/Irak.png</file>
-    <file>Länder/Iran.png</file>
-    <file>Länder/Irland.png</file>
-    <file>Länder/Island.png</file>
-    <file>Länder/Israel.png</file>
-    <file>Länder/Italien.png</file>
-    <file>Länder/Jamaika.png</file>
-    <file>Länder/Japan.png</file>
-    <file>Länder/Jemen.png</file>
-    <file>Länder/Jordanien.png</file>
-    <file>Länder/Kambodscha.png</file>
-    <file>Länder/Kamerun.png</file>
-    <file>Länder/Kanada.png</file>
-    <file>Länder/Katar.png</file>
-    <file>Länder/Kenia.png</file>
-    <file>Länder/Kirgistan.png</file>
-    <file>Länder/Kolumbien.png</file>
-    <file>Länder/Kosovo.png</file>
-    <file>Länder/Kroatien.png</file>
-    <file>Länder/Kuba.png</file>
-    <file>Länder/Kuweit.png</file>
-    <file>Länder/Laos.png</file>
-    <file>Länder/Lesotho.png</file>
-    <file>Länder/Lettland.png</file>
-    <file>Länder/Libanon.png</file>
-    <file>Länder/Liberia.png</file>
-    <file>Länder/Liechtenstein.png</file>
-    <file>Länder/Litauen.png</file>
-    <file>Länder/Luxemburg.png</file>
-    <file>Länder/Lybien.png</file>
-    <file>Länder/Madagaskar.png</file>
-    <file>Länder/Malawi.png</file>
-    <file>Länder/Malaysia.png</file>
-    <file>Länder/Mali.png</file>
-    <file>Länder/Malta.png</file>
-    <file>Länder/Marokko.png</file>
-    <file>Länder/Mauretanien.png</file>
-    <file>Länder/Mazedonien.png</file>
-    <file>Länder/Mexiko.png</file>
-    <file>Länder/Moldawien.png</file>
-    <file>Länder/Monaco.png</file>
-    <file>Länder/Mongolai.png</file>
-    <file>Länder/Montenegro.png</file>
-    <file>Länder/Mosambik.png</file>
-    <file>Länder/Myanmar.png</file>
-    <file>Länder/Nambia.png</file>
-    <file>Länder/Nepal.png</file>
-    <file>Länder/Neukaledonien.png</file>
-    <file>Länder/Neuseeland.png</file>
-    <file>Länder/Nicaragua.png</file>
-    <file>Länder/Niederlande.png</file>
-    <file>Länder/Niederlanden.png</file>
-    <file>Länder/Niger.png</file>
-    <file>Länder/Nigeria.png</file>
-    <file>Länder/Nordkorea.png</file>
-    <file>Länder/Norfolk Inseln.png</file>
-    <file>Länder/Norwegen.png</file>
-    <file>Länder/Oman.png</file>
-    <file>Länder/Ost Timor.png</file>
-    <file>Länder/Österreich.png</file>
-    <file>Länder/Pakistan.png</file>
-    <file>Länder/Palästina.png</file>
-    <file>Länder/Papa Neu Guinea.png</file>
-    <file>Länder/Paraguay.png</file>
-    <file>Länder/Peru.png</file>
-    <file>Länder/Phillipinien.png</file>
-    <file>Länder/Polen.png</file>
-    <file>Länder/Portugal.png</file>
-    <file>Länder/Puerto Rico.png</file>
-    <file>Länder/Republik Kongo.png</file>
-    <file>Länder/Ruanda.png</file>
-    <file>Länder/Rumänien.png</file>
-    <file>Länder/Russland.png</file>
-    <file>Länder/Salomon Inseln.png</file>
-    <file>Länder/Sambia.png</file>
-    <file>Länder/San Marino.png</file>
-    <file>Länder/San Salvador.png</file>
-    <file>Länder/Saudi Arabien.png</file>
-    <file>Länder/Schweden.png</file>
-    <file>Länder/Schweiz.png</file>
-    <file>Länder/Senegal.png</file>
-    <file>Länder/Serbien.png</file>
-    <file>Länder/Sierra Leone.png</file>
-    <file>Länder/Simbabwe.png</file>
-    <file>Länder/Singapur.png</file>
-    <file>Länder/Slowakai.png</file>
-    <file>Länder/Slowakei.png</file>
-    <file>Länder/Slowenien.png</file>
-    <file>Länder/Somalia.png</file>
-    <file>Länder/Spanien.png</file>
-    <file>Länder/Sri Lanka.png</file>
-    <file>Länder/Südafrika.png</file>
-    <file>Länder/Sudan.png</file>
-    <file>Länder/Südkorea.png</file>
-    <file>Länder/Südsudan.png</file>
-    <file>Länder/Surinam.png</file>
-    <file>Länder/Swasiland.png</file>
-    <file>Länder/Syrien.png</file>
-    <file>Länder/Tadschikistan.png</file>
-    <file>Länder/Taiwan.png</file>
-    <file>Länder/Tansania.png</file>
-    <file>Länder/Thailand.png</file>
-    <file>Länder/Togo.png</file>
-    <file>Länder/Tschad.png</file>
-    <file>Länder/Tschechien.png</file>
-    <file>Länder/Tunesien.png</file>
-    <file>Länder/Türkei.png</file>
-    <file>Länder/Turkmenistan.png</file>
-    <file>Länder/Uganda.png</file>
-    <file>Länder/Ukraine.png</file>
-    <file>Länder/Ungarn.png</file>
-    <file>Länder/Uruguay.png</file>
-    <file>Länder/Usbekistan.png</file>
-    <file>Länder/Vanuatu.png</file>
-    <file>Länder/Vatikanstadt.png</file>
-    <file>Länder/Venezuela.png</file>
-    <file>Länder/Vereinigte Arabische Emirate.png</file>
-    <file>Länder/Vereinigte Staaten von Amerika.png</file>
-    <file>Länder/Vietnam.png</file>
-    <file>Länder/Weissrussland.png</file>
-    <file>Länder/Westsahara.png</file>
-    <file>Länder/Zentralafrikanische Republik.png</file>
+    <file>countries/Aargau.png</file>
+    <file>countries/Afghanistan.png</file>
+    <file>countries/Ägypten.png</file>
+    <file>countries/Albanien.png</file>
+    <file>countries/Algerien.png</file>
+    <file>countries/Andorra.png</file>
+    <file>countries/Angola.png</file>
+    <file>countries/Antarktis.png</file>
+    <file>countries/Appenzell Ausserrhoden.png</file>
+    <file>countries/Appenzell Innerrhoden.png</file>
+    <file>countries/Äquatorial-Guinea.png</file>
+    <file>countries/Argentinien.png</file>
+    <file>countries/Armenien.png</file>
+    <file>countries/Aserbaidschan.png</file>
+    <file>countries/Äthopien.png</file>
+    <file>countries/Australien.png</file>
+    <file>countries/Bahamas.png</file>
+    <file>countries/Bangladesch.png</file>
+    <file>countries/Basel Land.png</file>
+    <file>countries/Basel Stadt.png</file>
+    <file>countries/Belgien.png</file>
+    <file>countries/Belizé.png</file>
+    <file>countries/Benim.png</file>
+    <file>countries/Bern.png</file>
+    <file>countries/Bhutan.png</file>
+    <file>countries/Bolivien.png</file>
+    <file>countries/Bosnien.png</file>
+    <file>countries/Brasilien.png</file>
+    <file>countries/Brunai.png</file>
+    <file>countries/Bulgarien.png</file>
+    <file>countries/Burkina Faso.png</file>
+    <file>countries/Burundi.png</file>
+    <file>countries/Chile.png</file>
+    <file>countries/China.png</file>
+    <file>countries/Costa Rica.png</file>
+    <file>countries/Dänemark.png</file>
+    <file>countries/Demokratische Republik Kongo.png</file>
+    <file>countries/Deutschland.png</file>
+    <file>countries/Domenikanische Republik.png</file>
+    <file>countries/Dschibuti.png</file>
+    <file>countries/Ecuador.png</file>
+    <file>countries/Elfenbeinküste.png</file>
+    <file>countries/England.png</file>
+    <file>countries/Eritrea.png</file>
+    <file>countries/Estland.png</file>
+    <file>countries/europe-map-Start-Page.png</file>
+    <file>countries/Fiji Inseln.png</file>
+    <file>countries/Finnland.png</file>
+    <file>countries/Frankreich.png</file>
+    <file>countries/Französisch Guyana.png</file>
+    <file>countries/Freiburg.png</file>
+    <file>countries/Gabun.png</file>
+    <file>countries/Gambia.png</file>
+    <file>countries/Genf.png</file>
+    <file>countries/Georgien.png</file>
+    <file>countries/Ghana.png</file>
+    <file>countries/Glarus.png</file>
+    <file>countries/Graubünden.png</file>
+    <file>countries/Grenada.png</file>
+    <file>countries/Griechenland.png</file>
+    <file>countries/Grönland.png</file>
+    <file>countries/Guatemala.png</file>
+    <file>countries/Guinea.png</file>
+    <file>countries/Guinea-Bissau.png</file>
+    <file>countries/Guyana.png</file>
+    <file>countries/Haiti.png</file>
+    <file>countries/Honduras.png</file>
+    <file>countries/icon.png</file>
+    <file>countries/Indien.png</file>
+    <file>countries/Indonesien.png</file>
+    <file>countries/Irak.png</file>
+    <file>countries/Iran.png</file>
+    <file>countries/Irland.png</file>
+    <file>countries/Island.png</file>
+    <file>countries/Israel.png</file>
+    <file>countries/Italien.png</file>
+    <file>countries/Jamaika.png</file>
+    <file>countries/Japan.png</file>
+    <file>countries/Jemen.png</file>
+    <file>countries/Jordanien.png</file>
+    <file>countries/Jura.png</file>
+    <file>countries/Kambodscha.png</file>
+    <file>countries/Kamerun.png</file>
+    <file>countries/Kanada.png</file>
+    <file>countries/Katar.png</file>
+    <file>countries/Kenia.png</file>
+    <file>countries/Kirgistan.png</file>
+    <file>countries/Kolumbien.png</file>
+    <file>countries/Kosovo.png</file>
+    <file>countries/Kroatien.png</file>
+    <file>countries/Kuba.png</file>
+    <file>countries/Kuweit.png</file>
+    <file>countries/Laos.png</file>
+    <file>countries/Lesotho.png</file>
+    <file>countries/Lettland.png</file>
+    <file>countries/Libanon.png</file>
+    <file>countries/Liberia.png</file>
+    <file>countries/Liechtenstein.png</file>
+    <file>countries/Litauen.png</file>
+    <file>countries/Luxemburg.png</file>
+    <file>countries/Luzern.png</file>
+    <file>countries/Lybien.png</file>
+    <file>countries/Madagaskar.png</file>
+    <file>countries/Malawi.png</file>
+    <file>countries/Malaysia.png</file>
+    <file>countries/Mali.png</file>
+    <file>countries/Malta.png</file>
+    <file>countries/Marokko.png</file>
+    <file>countries/Mauretanien.png</file>
+    <file>countries/Mazedonien.png</file>
+    <file>countries/Mexiko.png</file>
+    <file>countries/Moldawien.png</file>
+    <file>countries/Monaco.png</file>
+    <file>countries/Mongolai.png</file>
+    <file>countries/Montenegro.png</file>
+    <file>countries/Mosambik.png</file>
+    <file>countries/Myanmar.png</file>
+    <file>countries/Nambia.png</file>
+    <file>countries/Nepal.png</file>
+    <file>countries/Neuenburg.png</file>
+    <file>countries/Neukaledonien.png</file>
+    <file>countries/Neuseeland.png</file>
+    <file>countries/Nicaragua.png</file>
+    <file>countries/Nidwalden.png</file>
+    <file>countries/Niederlande.png</file>
+    <file>countries/Niederlanden.png</file>
+    <file>countries/Niger.png</file>
+    <file>countries/Nigeria.png</file>
+    <file>countries/Nordkorea.png</file>
+    <file>countries/Norfolk Inseln.png</file>
+    <file>countries/Norwegen.png</file>
+    <file>countries/Obwalden.png</file>
+    <file>countries/Oman.png</file>
+    <file>countries/Ost Timor.png</file>
+    <file>countries/Österreich.png</file>
+    <file>countries/Pakistan.png</file>
+    <file>countries/Palästina.png</file>
+    <file>countries/Papa Neu Guinea.png</file>
+    <file>countries/Paraguay.png</file>
+    <file>countries/Peru.png</file>
+    <file>countries/Phillipinien.png</file>
+    <file>countries/Polen.png</file>
+    <file>countries/Portugal.png</file>
+    <file>countries/Puerto Rico.png</file>
+    <file>countries/Republik Kongo.png</file>
+    <file>countries/Ruanda.png</file>
+    <file>countries/Rumänien.png</file>
+    <file>countries/Russland.png</file>
+    <file>countries/Salomon Inseln.png</file>
+    <file>countries/Sambia.png</file>
+    <file>countries/San Marino.png</file>
+    <file>countries/San Salvador.png</file>
+    <file>countries/Saudi Arabien.png</file>
+    <file>countries/Schaffhausen.png</file>
+    <file>countries/Schweden.png</file>
+    <file>countries/Schweiz.png</file>
+    <file>countries/Schwyz.png</file>
+    <file>countries/Senegal.png</file>
+    <file>countries/Serbien.png</file>
+    <file>countries/Sierra Leone.png</file>
+    <file>countries/Simbabwe.png</file>
+    <file>countries/Singapur.png</file>
+    <file>countries/Slowakai.png</file>
+    <file>countries/Slowakei.png</file>
+    <file>countries/Slowenien.png</file>
+    <file>countries/Solothurn.png</file>
+    <file>countries/Somalia.png</file>
+    <file>countries/Spanien.png</file>
+    <file>countries/Sri Lanka.png</file>
+    <file>countries/St Gallen.png</file>
+    <file>countries/Südafrika.png</file>
+    <file>countries/Sudan.png</file>
+    <file>countries/Südkorea.png</file>
+    <file>countries/Südsudan.png</file>
+    <file>countries/Surinam.png</file>
+    <file>countries/Swasiland.png</file>
+    <file>countries/Syrien.png</file>
+    <file>countries/Tadschikistan.png</file>
+    <file>countries/Taiwan.png</file>
+    <file>countries/Tansania.png</file>
+    <file>countries/Tessin.png</file>
+    <file>countries/Thailand.png</file>
+    <file>countries/Thurgau.png</file>
+    <file>countries/Togo.png</file>
+    <file>countries/Tschad.png</file>
+    <file>countries/Tschechien.png</file>
+    <file>countries/Tunesien.png</file>
+    <file>countries/Türkei.png</file>
+    <file>countries/Turkmenistan.png</file>
+    <file>countries/Uganda.png</file>
+    <file>countries/Ukraine.png</file>
+    <file>countries/Ungarn.png</file>
+    <file>countries/Uri.png</file>
+    <file>countries/Uruguay.png</file>
+    <file>countries/Usbekistan.png</file>
+    <file>countries/Vanuatu.png</file>
+    <file>countries/Vatikanstadt.png</file>
+    <file>countries/Venezuela.png</file>
+    <file>countries/Vereinigte Arabische Emirate.png</file>
+    <file>countries/Vereinigte Staaten von Amerika.png</file>
+    <file>countries/Vietnam.png</file>
+    <file>countries/Waadt.png</file>
+    <file>countries/Wallis.png</file>
+    <file>countries/Weissrussland.png</file>
+    <file>countries/Westsahara.png</file>
+    <file>countries/Zentralafrikanische Republik.png</file>
+    <file>countries/Zug.png</file>
+    <file>countries/Zürich.png</file>
   </qresource>
 </RCC>

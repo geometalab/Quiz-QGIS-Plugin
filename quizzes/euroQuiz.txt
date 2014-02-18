@@ -3,10 +3,10 @@
 
 //Picture-Question
 ::Q1::Welches Land ist das?
-{=Zürich ~Schweden ~Schweiz ~Frankreich }
+{=Ungarn ~Schweden ~Schweiz ~Frankreich }
 
 //Picture-Question
-::Q2:://Welches Land ist das?
+::Q2::Welches Land ist das?
 {~Serbien =Afghanistan ~Spanien ~England }
 
 //Picture-Question
