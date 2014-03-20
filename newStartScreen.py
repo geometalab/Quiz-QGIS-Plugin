@@ -276,7 +276,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Quiz", None))
-        self.startTitel.setText(_translate("MainWindow", "<html><head/><body><p><img src=\":/df/logoFinal.png\"/></p></body></html>", None))
+        self.startTitel.setText(_translate("MainWindow", "<html><head/><body><p><img src=\":/df/logos/logoFinal.png\"/></p></body></html>", None))
         self.startImage.setText(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>", None))
         self.label_5.setText(_translate("MainWindow", "TextLabel", None))
         self.label_9.setText(_translate("MainWindow", "TextLabel", None))

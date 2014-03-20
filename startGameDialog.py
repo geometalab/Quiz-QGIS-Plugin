@@ -26,19 +26,24 @@ from ui_startGame import Ui_testGame
 
 
 class StartGameDialog(QtGui.QDialog):
-	def __init__(self, quitMessage):
-		QtGui.QDialog.__init__(self)
-		# Set up the user interface from Designer.
-		self.ui = Ui_testGame()
-		self.ui.setupUi(self)
-		self.quitMessage = quitMessage
-		
-	def closeEvent(self, event):
-		quit_msg = "Are you sure you want to exit the program?"
-		reply = QtGui.QMessageBox.question(self, 'Message', 
-                     self.quitMessage, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+    def __init__(self, quitMessage):
+        QtGui.QDialog.__init__(self)
+        # Set up the user interface from Designer.
+        self.ui = Ui_testGame()
+        self.ui.setupUi(self)
+        self.quitMessage = quitMessage
 
-		if reply == QtGui.QMessageBox.Yes:
-			self.hide()
-		else:
-			event.ignore()
+    def closeEvent(self, event):
+        quit_msg = "Are you sure you want to exit the program?"
+        reply = QtGui.QMessageBox.question(
+            self,
+            'Message',
+            self.quitMessage,
+            QtGui.QMessageBox.Yes,
+            QtGui.QMessageBox.No
+            )
+
+        if reply == QtGui.QMessageBox.Yes:
+            self.hide()
+        else:
+            event.ignore()

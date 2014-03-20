@@ -20,56 +20,71 @@
  ***************************************************************************/
 """
 
+
 class Question:
-	
-	def __init__(self, title = '', answersArray = [] , boolArray=[]):
-		self.title = title
-		for i in range(len(boolArray)):
-			if boolArray[i]:
-				self.rightAnswer = answersArray[i]
-				self.rightAnswerIndex = i
-		self.answers = answersArray
-		self.nrOfAnswers = len(self.answers)
-		
+
+    def __init__(self, title='', answersArray=[], boolArray=[]):
+        self.title = title
+        for i in range(len(boolArray)):
+            if boolArray[i]:
+                self.rightAnswer = answersArray[i]
+                self.rightAnswerIndex = i
+        self.answers = answersArray
+        self.nrOfAnswers = len(self.answers)
+
+
 class MatchingQuestion(Question):
-	
-	def __init__(self, titel = '', answersArray = [] , boolArray=[]):
-		Question.__init__(self, titel, answersArray, boolArray)
-		self.answersIndexes = {}
-		for i in range(len(answersArray)):
-			self.answersIndexes[answersArray[i]] = i
-			
+
+    def __init__(self, titel='', answersArray=[], boolArray=[]):
+        Question.__init__(self, titel, answersArray, boolArray)
+        self.answersIndexes = {}
+        for i in range(len(answersArray)):
+            self.answersIndexes[answersArray[i]] = i
+
+
 class MultipleChoiceQuestion(Question):
-	
-	def __init__(self, titel = '', answersArray = [] , boolArray=[], percentages = []):
-		Question.__init__(self, titel, answersArray, boolArray)
-		self.percentages = percentages
-		self.answersChecked = []
-		self.answersIndexes = {}
-		for i in range(len(answersArray)):
-			self.answersIndexes[answersArray[i]] = i
-			self.answersChecked.append('')
-			
+
+    def __init__(
+            self,
+            titel='',
+            answersArray=[],
+            boolArray=[],
+            percentages=[]):
+        Question.__init__(self, titel, answersArray, boolArray)
+        self.percentages = percentages
+        self.answersChecked = []
+        self.answersIndexes = {}
+        for i in range(len(answersArray)):
+            self.answersIndexes[answersArray[i]] = i
+            self.answersChecked.append('')
+
+
 class PicQuestion(Question):
 
-	def __init__(self, titel = '', answersArray = [] , boolArray=[]):
-		Question.__init__(self, titel, answersArray, boolArray)
-		self.picPath = ":/df/countries/" + self.rightAnswer +".png"
+    def __init__(self, titel='', answersArray=[], boolArray=[]):
+        Question.__init__(self, titel, answersArray, boolArray)
+        self.picPath = ":/df/quizzes/images/" + self.rightAnswer + ".png"
+
 
 class MissingWordQuestion(Question):
 
-	def __init__(self, titel ='', answersArray = [], boolArray=[], textArray=[]):
-		Question.__init__(self, titel, answersArray, boolArray)
-		self.textArray = textArray
-		self.title = textArray[0]
-		for i in range(1, len(textArray)):
-			undScores = ''
-			if len(answersArray[i-1]) < 4:
-				undScores = '____'
-			elif len(answersArray[i-1]) > 20:
-				for q in range(20):
-					undScores += '_'
-			else:
-				for q in range(len(answersArray[i-1])):
-					undScores += '_'
-			self.title += ' ' + undScores +'('+ str(i) + ') ' +textArray[i]
+    def __init__(
+            self,
+            titel='',
+            answersArray=[],
+            boolArray=[],
+            textArray=[]):
+        Question.__init__(self, titel, answersArray, boolArray)
+        self.textArray = textArray
+        self.title = textArray[0]
+        for i in range(1, len(textArray)):
+            undScores = ''
+            if len(answersArray[i-1]) < 4:
+                undScores = '____'
+            elif len(answersArray[i-1]) > 20:
+                for q in range(20):
+                    undScores += '_'
+            else:
+                for q in range(len(answersArray[i-1])):
+                    undScores += '_'
+            self.title += ' ' + undScores + '(' + str(i) + ') ' + textArray[i]

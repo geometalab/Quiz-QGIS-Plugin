@@ -26,9 +26,8 @@ from newStartScreen import Ui_MainWindow
 
 
 class TestGameDialog(QtGui.QMainWindow):
-	def __init__(self):
-		QtGui.QMainWindow.__init__(self)
-		# Set up the user interface from Designer.
-		self.ui = Ui_MainWindow()
-		self.ui.setupUi(self)
-	
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+        # Set up the user interface from Designer.
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)

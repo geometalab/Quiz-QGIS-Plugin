@@ -1,5 +1,5 @@
-//Title:EuroQuiz
-//Instruction:Einfaches Quiz, bei dem du einem Bild ein Land zuordnen musst
+﻿//Title:Beispiel
+//Instruction:Beispiele
 
 //Picture-Question
 ::Q1::Welches Land ist das?
@@ -8,12 +8,15 @@
  ~Spanien  
  }
 
+//Text-Question
 ::Q2::Was ist die Hauptstadt von Pakistan?
 { =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
 
+//Multiple-Choice
 ::Q3::Diese Länder haben eine gemeinsame Grenze mit Indien:
 { ~%-100%Thailand ~%33%Bangla Desh ~%33%Pakistan ~%33%China }
 
+//Matching
 ::Q4::Ordne diesen Ländern ihre Hauptstädte zu:
 {=Surinam -> Paramarimbo 
 	=Andorra -> Andorra de la Ville 
@@ -28,6 +31,7 @@
 ::Q6::Welches Land ist das?
 { =Irland ~England ~Frankreich ~Ukraine }
 
+//Lückentext
 ::Q7::
 Momentan ist 
 { 
