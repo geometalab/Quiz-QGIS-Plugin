@@ -1,0 +1,87 @@
+﻿Démarrez le quiz
+Quiz d'entrainement
+Choisissez le quiz 
+Aide
+Langue
+Retour
+Suivant
+Résultats
+Vous trouvez sur cette page des informations concernant ce plugin
+http://giswiki.hsr.ch/QGIS-Materialien 
+Sujet:
+Version: 0.1
+Auteur: Rafael Krucher
+Contact: rkrucker@hsr.ch
+précédente question 
+Question suivante
+Quitter l'entrainement
+Résultats
+Vous avez maintenant
+Point sur
+Vous avez maintenant
+Points sur
+Votre réponse est correcte!
+Désolé, votre réponse est erronée.
+La réponse est
+La réponse correcte aurait d' être
+
+Votre réponse était correcte!
+Vérifer correction
+Question:
+de
+Taille de caractères
+Fichier
+Charge quiz
+Enregistre  les résultats
+Démearrez le quiz
+Utilisés récemment
+Options
+GeoGames en web
+Quiz en web
+Caractère
+Anglais
+Allemande
+GeoGames
+Contact (E-Mail)
+Assistance d'Internet
+Sujet ...
+Version:
+0.1
+Auteur:
+<a href="http://www.ifs.hsr.ch/Geometa-Lab.12520.0.html" >Geometa Lab - Institute for Software - HSR</a> 
+Information
+<a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Webseite</a> 
+Questions régardement le plugin:
+<a href="http://giswiki.hsr.ch/QGIS-Materialien" >Plugin-Webseite</a> 
+Questions régardement les quiz
+<a href="http://docs.moodle.org/23/en/GIFT" > Quiz-Format Regeln</a>
+Questions régardement QGIS
+<a href="http://giswiki.hsr.ch/QGIS" >QGIS-Seite</a>
+Contact:
+rkrucker@hsr.ch
+Francais
+Plus grand
+Plus petit
+Tu as
+Ce sont
+Test
+Entraînement
+Licence
+GPL
+Bravo!
+Très bien!
+Bien!
+Vous derivez practiquer un peu plus!
+Etes-vous sûr de vouloir quitter?
+Taille standard
+Quiz
+Répondu:
+Déplacez la souris sur vos erreurs afin d'apprendre la bonne réponse
+ 
+Clause de non-responsabilité
+L'auteur du plugin n'est en aucun cas responsable des dommages qui résultent de l'utilisation du plugin. Les auteurs des questionnaires sont responsables de leur contenu.
+Fichier journal:
+quiz.log dans le dossier du quiz-plugin
+syntaxe invalide
+Les blocs du quiz fichier suivants ont la syntaxe fautive:
+Les autres ont été lus avec succès dans. 
