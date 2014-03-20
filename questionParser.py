@@ -63,6 +63,12 @@ class QuestionParser:
                             elif '->' in question:
                                 currQuestion = self.makeMatchingQuestion(
                                     self.answers)
+                                for i in currQuestion.answers:
+                                    for k in currQuestion.answers:
+                                        if k == i:
+                                            self.failedBlocks.append(
+                                                str(index + 1))
+                                            pass
                             elif '~%' in question:
                                 currQuestion = self.makeMultipleChoiceQuestion(
                                     self.answers)

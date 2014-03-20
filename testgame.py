@@ -371,7 +371,8 @@ class TestGame:
         self.currWindow.ui.matchingButtonsLeft = []
         self.currWindow.ui.matchingLabelsRight = []
         self.currWindow.ui.matchingButtonsRight = []
-
+        self.currWindow.ui.checkingLabels = []
+        self.currWindow.ui.checks = []
         for i in range(12):
             horizontalLayout = PyQt4.QtGui.QHBoxLayout()
             horizontalLayout.setObjectName("horizontalLayout")
@@ -392,29 +393,51 @@ class TestGame:
             pushButton.setAutoFillBackground(True)
             self.currWindow.ui.matchingButtons.append(pushButton)
 
+            horizontalLayout2 = PyQt4.QtGui.QHBoxLayout()
+            horizontalLayout2.setObjectName("horizontalLayout2")
+            spacerItem2 = PyQt4.QtGui.QSpacerItem(
+                40,
+                20,
+                PyQt4.QtGui.QSizePolicy.Expanding,
+                PyQt4.QtGui.QSizePolicy.Minimum
+                )
+            label2 = PyQt4.QtGui.QLabel()
+            label2.setFont(self.globalFont)
+            label2.setObjectName("label2")
+            label2.setWordWrap(True)
+            label2.setText('Hello')
+            self.currWindow.ui.checkingLabels.append(label2)
+            checkBox = PyQt4.QtGui.QCheckBox()
+            checkBox.setFont(self.globalFont)
+            self.currWindow.ui.checkBoxes.append(checkBox)
+
             if i % 2 == 0:
                 horizontalLayout.addItem(spacerItem)
                 horizontalLayout.addWidget(label)
                 horizontalLayout.addWidget(pushButton)
                 self.currWindow.ui.matchingButtonsLeft.append(pushButton)
                 self.currWindow.ui.matchingLabelsLeft.append(label)
+                horizontalLayout2.addItem(spacerItem2)
+                horizontalLayout2.addWidget(label2)
+                horizontalLayout2.addWidget(checkBox)
             else:
                 horizontalLayout.addWidget(pushButton)
                 horizontalLayout.addWidget(label)
                 horizontalLayout.addItem(spacerItem)
                 self.currWindow.ui.matchingButtonsRight.append(pushButton)
                 self.currWindow.ui.matchingLabelsRight.append(label)
+                horizontalLayout2.addWidget(checkBox)
+                horizontalLayout2.addWidget(label2)
+                horizontalLayout2.addItem(spacerItem2)
 
             self.currWindow.ui.matches.append(horizontalLayout)
-            checkBox = PyQt4.QtGui.QCheckBox()
-            checkBox.setFont(self.globalFont)
-            self.currWindow.ui.checkBoxes.append(checkBox)
+            self.currWindow.ui.checks.append(horizontalLayout2)
 
         for currIndex in range(0, len(self.currWindow.ui.checkBoxes)):
             height = currIndex / 2
             width = (currIndex % 2) * 2
-            self.currWindow.ui.gridLayout.addWidget(
-                self.currWindow.ui.checkBoxes[currIndex],
+            self.currWindow.ui.gridLayout.addLayout(
+                self.currWindow.ui.checks[currIndex],
                 height,
                 width + 1,
                 1,
@@ -601,6 +624,9 @@ class TestGame:
         for i in self.currWindow.ui.editGaps:
             i.setVisible(False)
             i.setText('')
+        for i in self.currWindow.ui.checkingLabels:
+            i.setVisible(False)
+            i.setText('')
 
         if self.questionType[self.questionNumber] == 'multipleChoice':
             self.currWindow.ui.label.setText(
@@ -616,7 +642,7 @@ class TestGame:
                     self.answers[self.questionNumber].append('')
                 else:
                     for i in self.answers[self.questionNumber]:
-                        if self.currWindow.ui.checkBoxes[nr].text() == i:
+                        if self.currWindow.ui.checkingLabels[nr].text() == i:
                             self.currWindow.ui.checkBoxes[nr].setCheckState(
                                 Qt.Checked)
 
@@ -805,6 +831,9 @@ class TestGame:
             i.setEnabled(True)
         for i in self.currWindow.ui.matchingLabels:
             self.setAdditionalPropertiesByIndex(i)
+        for i in self.currWindow.ui.checkingLabels:
+            i.setVisible(True)
+            i.setText('')
         self.currMatchingButtonClicked = ''
         self.currWindow.ui.stackedWidget_2.setCurrentWidget(
             self.currWindow.ui.page_3)
@@ -821,9 +850,9 @@ class TestGame:
             if self.frameQuestionAnswered[self.questionNumber]:
                 self.currWindow.ui.pushButton_13.setEnabled(False)
                 for i in self.answers[self.questionNumber]:
-                    for k in self.currWindow.ui.checkBoxes:
+                    for ind, k in enumerate(self.currWindow.ui.checkBoxes):
                         k.setEnabled(False)
-                        if i == k.text():
+                        if i == self.currWindow.ui.checkingLabels[ind].text():
                             k.setCheckState(Qt.Checked)
                 self.updateCheckBoxesTraining()
             else:
@@ -832,7 +861,7 @@ class TestGame:
                 for nr in range(len(self.currQuestion.answers)):
                     self.currWindow.ui.checkBoxes[nr].setEnabled(True)
                     if (self.currQuestion.answersChecked[nr] ==
-                            self.currWindow.ui.checkBoxes[nr].text()):
+                            self.currWindow.ui.checkingLabels[nr].text()):
                         self.currWindow.ui.checkBoxes[nr].setCheckState(
                             Qt.Checked)
 
@@ -971,6 +1000,9 @@ class TestGame:
             i.setEnabled(True)
             i.setText('')
             i.setStyleSheet("")
+        for i in self.currWindow.ui.checkingLabels:
+            i.setVisible(False)
+            i.setText('')
         self.setupGaps()
 
         if self.questionType[self.questionNumber] == 'multipleChoice':
@@ -981,7 +1013,7 @@ class TestGame:
             for nr in range(len(self.currQuestion.answers)):
                 self.takeCareOfCheckboxesByIndex(nr)
                 if (self.currQuestion.answersChecked[nr] ==
-                        self.currWindow.ui.checkBoxes[nr].text()):
+                        self.currWindow.ui.checkingLabels[nr].text()):
                     self.currWindow.ui.checkBoxes[nr].setCheckState(Qt.Checked)
 
         if self.questionType[self.questionNumber] == 'pictureQuestion':
@@ -1141,7 +1173,6 @@ class TestGame:
             self.questionsAnswered += 1
             self.frameQuestionAnswered[self.questionNumber] = True
         if not self.trainingMode:
-            print 'heyhey'
             self.setLable3()
         else:
             self.setLable6()
@@ -1257,9 +1288,15 @@ class TestGame:
         button = self.currWindow.sender()
         scoreTemp = float(button.objectName())
         scoreDiff = scoreTemp / 100
-        index = self.currQuestion.answersIndexes[button.text()]
+        for ind, i in enumerate(self.currWindow.ui.checkBoxes):
+            if i == button:
+                index = ind
         if button.isChecked():
-            self.updateScoreCheckboxCheck(scoreDiff, index, button.text())
+            self.updateScoreCheckboxCheck(
+                scoreDiff,
+                index,
+                self.currWindow.ui.checkingLabels[index].text()
+                )
         else:
             self.updateScoreCheckboxUncheck(scoreDiff, index)
 
@@ -1361,11 +1398,12 @@ class TestGame:
             self.scorePenaltyQuiz)
 
     def takeCareOfCheckboxesByIndex(self, nr):
-        self.currWindow.ui.checkBoxes[nr].setText(
+        self.currWindow.ui.checkingLabels[nr].setText(
             self.currQuestion.answers[nr])
         self.currWindow.ui.checkBoxes[nr].setObjectName(
             str(self.currQuestion.percentages[nr]))
         self.currWindow.ui.checkBoxes[nr].setVisible(True)
+        self.currWindow.ui.checkingLabels[nr].setVisible(True)
 
     def setLablesStandarsTraining(self):
         self.currWindow.ui.label_2.setText("")
@@ -1634,11 +1672,11 @@ class TestGame:
         tempScore = 0
         self.allCorrectlyAnswered = True
         self.answers[self.questionNumber] = []
-        for i in self.currWindow.ui.checkBoxes:
+        for ind, i in enumerate(self.currWindow.ui.checkBoxes):
             i.setEnabled(False)
             if i.isChecked():
-                self.answers[self.questionNumber]
-                self.answers[self.questionNumber].append(i.text())
+                self.answers[self.questionNumber].append(
+                    self.currWindow.ui.checkingLabels[ind].text())
                 tempScore += float(i.objectName())
                 self.handleCheckByIndex(i)
             else:
@@ -1714,9 +1752,12 @@ class TestGame:
 
     def storeChecksTraining(self):
         checkBox = self.currWindow.sender()
-        index = self.currQuestion.answersIndexes[checkBox.text()]
+        for ind, i in enumerate(self.currWindow.ui.checkBoxes):
+            if i == checkBox:
+                index = ind
         if checkBox.isChecked():
-            self.currQuestion.answersChecked[index] = checkBox.text()
+            self.currQuestion.answersChecked[
+                index] = self.currWindow.ui.checkingLabels[index].text()
         else:
             self.currQuestion.answersChecked[index] = ''
 

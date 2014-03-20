@@ -55,7 +55,7 @@ class MultipleChoiceQuestion(Question):
         self.answersChecked = []
         self.answersIndexes = {}
         for i in range(len(answersArray)):
-            self.answersIndexes[answersArray[i]] = i
+            self.answersIndexes[self.percentages[i]] = i
             self.answersChecked.append('')
 
 
