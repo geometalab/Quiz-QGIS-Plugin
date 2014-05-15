@@ -19,12 +19,24 @@
  *                                                                         *
  ***************************************************************************/
 """
-from QuestionClass import *
+import traceback
+from questionClass import (
+    PicQuestion,
+    MissingWordQuestion,
+    Question,
+    MultipleChoiceQuestion,
+    MatchingQuestion
+    )
 
 
-class QuestionParser:
-
+class QuestionParser(object):
+    '''
+    Class handling the parsing of quizzes
+    '''
     def __init__(self, path):
+        '''
+        Instantiation with parsing
+        '''
         import codecs
         self.dirty = False
         self.failedBlocks = []
@@ -32,11 +44,17 @@ class QuestionParser:
         with codecs.open(self.path, 'r', 'utf-8') as f:
             allQuests = []
             self.questionType = []
-            input = f.read()
-            if '\r\n\r\n' in input:
-                allQuestions = input.split('\r\n\r\n')
+            lines = []
+            for index, line in enumerate(f):
+                if line.strip() == '':
+                    line = line.replace('\t', '')
+                    line = line.replace(' ', '')
+                lines.append(line)
+            input_text = ''.join(lines)
+            if '\r\n\r\n' in input_text:
+                allQuestions = input_text.split('\r\n\r\n')
             else:
-                allQuestions = input.split('\n\n')
+                allQuestions = input_text.split('\n\n')
             self.instruction = ''
             self.quizTitle = ''
             for index, question in enumerate(allQuestions):
@@ -63,12 +81,15 @@ class QuestionParser:
                             elif '->' in question:
                                 currQuestion = self.makeMatchingQuestion(
                                     self.answers)
+                                if len(currQuestion.answers) > 12:
+                                    self.failedBlocks.append(
+                                        str(index + 1) +
+                                        ' Too many match-options')
                                 for i in currQuestion.answers:
                                     for k in currQuestion.answers:
                                         if k == i:
                                             self.failedBlocks.append(
                                                 str(index + 1))
-                                            pass
                             elif '~%' in question:
                                 currQuestion = self.makeMultipleChoiceQuestion(
                                     self.answers)
@@ -85,15 +106,19 @@ class QuestionParser:
                     else:
                         for line in question.split('\r\n'):
                             if "//Title" in line:
-                                self.quizTitle = line[8:]
+                                self.quizTitle = line[9:]
                             if "//Instruction" in line:
                                 self.instruction = line[14:]
                 except:
+                    traceback.print_exc()
                     self.dirty = True
                     self.failedBlocks.append(str(index + 1))
         self.allQuestions = allQuests
 
     def makePictureQuestion(self, answers):
+        '''
+        Generates a picture question
+        '''
         correct = answers.split('=')
         leftHalf = correct[0].split('~')[1:]
         rightHalf = correct[1].split('~')
@@ -116,16 +141,19 @@ class QuestionParser:
             )
 
     def makeMissingWordQuestion(self, answers, question):
+        '''
+        Generates a fill-in-the-gap question
+        '''
         tempTuples = question.split('::')[2].strip()
         tempTuples = tempTuples.split('{')
         self.textArray.append(tempTuples[0].strip())
-        for tuple in tempTuples[1:]:
-            tuple = tuple.split('}')
+        for currentTuple in tempTuples[1:]:
+            currentTuple = currentTuple.split('}')
             self.answersArray.append(
-                tuple[0].split('=')[1].split(
+                currentTuple[0].split('=')[1].split(
                     '~')[0].strip())
-            if len(tuple) > 1:
-                self.textArray.append(tuple[1].strip())
+            if len(currentTuple) > 1:
+                self.textArray.append(currentTuple[1].strip())
         self.questionType.append('missingWord')
         return MissingWordQuestion(
             '',
@@ -135,6 +163,9 @@ class QuestionParser:
             )
 
     def makeStringQuestion(self, answers):
+        '''
+        Generates a normal string question
+        '''
         correct = answers.split('=')
         leftHalf = correct[0].split('~')[1:]
         rightHalf = correct[1].split('~')
@@ -160,6 +191,9 @@ class QuestionParser:
             )
 
     def makeMultipleChoiceQuestion(self, answers):
+        '''
+        Generates a multiple choice question
+        '''
         options = answers.split('~')
         for i in options[1:]:
             part = i.split('%')
@@ -174,6 +208,9 @@ class QuestionParser:
             )
 
     def makeMatchingQuestion(self, answers):
+        '''
+        Generatues a matching question
+        '''
         pairs = answers.split('=')
         for i in pairs:
             if '->' in i:
@@ -186,6 +223,3 @@ class QuestionParser:
             self.answersArray,
             []
             )
-
-    def isDirty(self):
-        return self.dirty

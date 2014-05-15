@@ -1,35 +1,159 @@
 <html>
 <body style='background-color:##D7ECF8;'>
-<h3>quiz-plugin</h3>
+<h2>Quiz</h2>
 <div id='help' style='font-size:.9em;'>
-This plugin enables the usage of moodle-quizzes in QGIS<br>
 
-<p>
-<b>What you can do:</b>
-<ol>
-	<li>Take normal moodle tests in QGIS
-	<li>Train quizzes for optimal progress
-	<li>Import moodle-quizzes from anywhere on your harddrive
+<h3>Introduction</h3>
+
+<p>The QGIS plugin "Quiz" reads the data-format GIFT used by moodle and supports different question types (see below).
+It works on its own, it hardly interacts with QGIS and doesnt need an internet connection at all.
+However, it logs quiz scores and stores the for evaluation (in schools etc).
+</p>
+<p>Here a couple of use cases:</p>
+<ul>
+<li>Quizzes are used primarily in geography classes, either for lecture-relevant topics or to get to know QGIS itself.</li>
+<li>The plugin can be used for students to do tests or to practice / train.</li>
+<li>A lecturer can discuss questions, while pupils follow him in trainig mode.</li>
+<li>Multiple choice questions can be used to do surveys in classes.</li> 
+</ul>
+
+<p>Following software supports editing GIFT-files:<p>
+<ul>
+<li>LibreOffice Writer with Templates (Hot Potatoes Homepage)</li>
+<li>MS Excel with Makros</li>
+<li>Moodle</li>
+</ul>
+<h3>Quiz Syntax</h3>
+
+<p>A quiz consists of:</p>
+<ul>
+<li>An optional //Title: block, which sets the title of the quiz</li>
+<li>An optional //Instruction: block, which sets instructions for the quiz</li>
+<li>An arbitrary amount of question-blocks, which have to be one of the following: <br>
+<ul>
+<li>Picture Question:<br>
+A picture is displayed, along with a question with multiple possible answers regarding it. The picture must be in png format, has to be named the same as the correct answer, and should reside in the /quizzes/images directory. 
+</li>
+<li>
+Text Question:<br>
+A simple text question with exactly one correct answer
+</li>
+<li>
+Multiple Choice Question:<br>
+Text question with multiple possible correct answers, that all can have individual weightage.
+</li>
+<li>
+Matching Question:<br>
+A question / instruction, followed by two rows of elements, of which always two have to be matched together.
+</li>
+<li>
+Fill In The Gap Question:<br>
+A fill in the gap question with an arbitrary amount of gaps that have to be filled.
+
+</li>
+</ul>
+</li>
 </ul>
 <p>
-<b>Supported questiontypes:</b>
-<ol>
-    <li>Multiple choice
-    <li>Missing word / Fill in the gap
-    <li>Matching
-    <li>Questions with pictures
-    <li>Shortanswers</b>
-
-</ul>
-</div>
-<div style='font-size:.9em;'>
-<p> License: GPL
+These blocks have to be seperated by an empty line from eachother. When the quiz is created, one can open it via the plugin. For an example of a quiz with all question types look below.
 </p>
+<h3>Instruction for creating a quiz</h3>
 <p>
-For more information, see the plugin-homepage at:
-<a href="http://giswiki.hsr.ch/QGIS-Materialien">http://giswiki.hsr.ch/QGIS-Materialien</a>.
+Goal of this instruction is to create an own quiz using opensource software. After finishing, one can either use the quiz in moodle or in QGIS.
 </p>
-</div>
 
+<h4>The typical workflow of creating a quiz is:</h4>
+<ul>
+<li>Prepare software</li>
+<li>Creating the quiz</li>
+<li>Testing the quiz</li>
+<li>Publishing the quiz</li>
+</ul>
+
+<h4>Preparation</h4>
+<p>
+A programming- or normal text-editor can be used to create a quiz. There are templates for creating quizzes in LibreOffice<br>
+Additional preparation is not necessary. 
+</p>
+
+<h4>Infos:</h4>
+<p>
+The question types are all also described in this <a href="http://docs.moodle.org/23/en/GIFT">GIFT-Documentation</a>
+</p>
+
+<h4>Creating a quiz</h4>
+<p>
+Use a simple editor to write a quiz.
+</p>
+
+<h4>Testing a quiz</h4>
+<p>
+Use this plugin or the Moodle-platform to test your quiz. 
+</p>
+
+<h4>Quiz publizieren</h4>
+<p>
+Load your quiz to this <a href="http://giswiki.hsr.ch/QGIS_Quiz_Plugin">Wiki-page</a>
+</p>
+
+<h3>Example of a quiz</h3>
+<pre>
+   //Title:Example
+   //Instruction:Answer the questions
+
+   //Picture-Question
+   ::Q1::Which country is being displayed?
+   { ~Serbia
+    =Afghanistan 
+    ~Spain 
+    }
+
+   //Text-Question
+   ::Q2::What's the capital of Islamabad?
+   { =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
+
+   //Multiple-Choice
+   ::Q3::These countries have a shared border with India:
+   { ~%-100%Thailand ~%33%Bangla Desh ~%33%Pakistan ~%33%China }
+
+   //Matching
+   ::Q4::Match these countries with their capitals:
+   {=Surinam -> Paramarimbo 
+       =Andorra -> Andorra de la Ville 
+       =China ->Peking 
+       =Afghanistan -> Kabul }
+
+   //Picture-Question
+   ::Q5::Which country is being displayed?
+   { ~Finnland ~Estonia =Lettland ~Albania }
+
+   //Picture-Question
+   ::Q6::Which country is this?
+   { =Irland ~England ~France ~Ukraine }
+
+   //Lückentext
+   ::Q7::
+   At the moment, 
+   { 
+   ~Iran =Indonesia ~Saudi Arabia ~Pakistan 
+   }
+    is the most populous country that's mainly muslim.
+   Off course, south of it is
+   {
+    =Australia
+    }
+    .One can catch cangaroos there, using a 
+   {
+    =net
+    }
+    .
+
+   //Picture-Question
+   ::Q8::Which country is being displayed?
+   {~Serbia 
+       ~Kosovo 
+       ~Germany
+       =Bosnien}
+</pre>
 </body>
 </html>

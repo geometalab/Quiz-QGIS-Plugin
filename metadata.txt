@@ -13,7 +13,7 @@ name=Quiz
 qgisMinimumVersion=2.0
 description=Plugin for loading and displaying quizzes written in Moodle's GIFT-format
 version=0.1
-author=rkrucker
+author=Rafael Krucker
 email=rafael_krucker@hotmail.com
 category=Education
 # end of mandatory metadata
@@ -27,8 +27,8 @@ category=Education
 tags=Education, Quiz, Moodle, Test, E-Learning
 
 homepage=http://giswiki.hsr.ch/QGIS-Materialien
-tracker=
-repository=
+tracker=https://git.hsr.ch/git/qgis_Quiz
+repository=https://git.hsr.ch/git/qgis_Quiz
 icon=icon.png
 # experimental flag
 experimental=True

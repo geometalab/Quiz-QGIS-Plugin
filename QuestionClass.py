@@ -21,9 +21,14 @@
 """
 
 
-class Question:
-
-    def __init__(self, title='', answersArray=[], boolArray=[]):
+class Question(object):
+    '''
+    Base class for all questiontypes
+    '''
+    def __init__(self, title=None, answersArray=None, boolArray=None):
+        '''
+        Instantiation
+        '''
         self.title = title
         for i in range(len(boolArray)):
             if boolArray[i]:
@@ -34,8 +39,13 @@ class Question:
 
 
 class MatchingQuestion(Question):
-
-    def __init__(self, titel='', answersArray=[], boolArray=[]):
+    '''
+    Class representing matching questions
+    '''
+    def __init__(self, titel=None, answersArray=None, boolArray=None):
+        '''
+        Instantiation
+        '''
         Question.__init__(self, titel, answersArray, boolArray)
         self.answersIndexes = {}
         for i in range(len(answersArray)):
@@ -43,13 +53,17 @@ class MatchingQuestion(Question):
 
 
 class MultipleChoiceQuestion(Question):
-
+    '''
+    Class representing multiple choice questions
+    '''
     def __init__(
             self,
-            titel='',
-            answersArray=[],
-            boolArray=[],
-            percentages=[]):
+            titel=None,
+            answersArray=None,
+            boolArray=None,
+            percentages=None):
+        '''Instantiation
+        '''
         Question.__init__(self, titel, answersArray, boolArray)
         self.percentages = percentages
         self.answersChecked = []
@@ -60,31 +74,41 @@ class MultipleChoiceQuestion(Question):
 
 
 class PicQuestion(Question):
-
-    def __init__(self, titel='', answersArray=[], boolArray=[]):
+    '''
+    Class representing picture question
+    '''
+    def __init__(self, titel=None, answersArray=None, boolArray=None):
+        '''
+        Instantiation
+        '''
         Question.__init__(self, titel, answersArray, boolArray)
         self.picPath = ":/df/quizzes/images/" + self.rightAnswer + ".png"
 
 
 class MissingWordQuestion(Question):
-
+    '''
+    Class representing missing word questions
+    '''
     def __init__(
             self,
-            titel='',
-            answersArray=[],
-            boolArray=[],
-            textArray=[]):
+            titel=None,
+            answersArray=None,
+            boolArray=None,
+            textArray=None):
+        '''
+        Instantiation
+        '''
         Question.__init__(self, titel, answersArray, boolArray)
         self.textArray = textArray
         self.title = textArray[0]
         for i in range(1, len(textArray)):
-            undScores = ''
+            underscores = ''
             if len(answersArray[i-1]) < 4:
-                undScores = '____'
+                underscores = '____'
             elif len(answersArray[i-1]) > 20:
                 for q in range(20):
-                    undScores += '_'
+                    underscores += '_'
             else:
                 for q in range(len(answersArray[i-1])):
-                    undScores += '_'
-            self.title += ' ' + undScores + '(' + str(i) + ') ' + textArray[i]
+                    underscores += '_'
+            self.title += ' ' + underscores + '(' + str(i) + ') ' + textArray[i]

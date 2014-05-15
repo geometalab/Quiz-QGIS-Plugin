@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- TestGame
+quiz
                                  A QGIS plugin
- test for quiz
                              -------------------
         begin                : 2013-12-19
         copyright            : (C) 2013 by rkrucker
@@ -23,6 +22,6 @@
 
 
 def classFactory(iface):
-    # load TestGame class from file TestGame
-    from testgame import TestGame
-    return TestGame(iface)
+    # load Quiz class from file quiz
+    from quiz import Quiz
+    return Quiz(iface)
