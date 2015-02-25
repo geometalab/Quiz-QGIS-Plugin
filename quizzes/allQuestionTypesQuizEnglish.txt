@@ -25,24 +25,24 @@
 
    //Picture-Question
    ::Q5::Which country is being displayed?
-   { ~Finnland ~Estonia =Lettland ~Albania }
+   { ~Finland ~Estonia =Latvia ~Albania }
 
    //Picture-Question
    ::Q6::Which country is this?
-   { =Irland ~England ~France ~Ukraine }
+   { =Ireland ~England ~France ~Ukraine }
 
-   //Lückentext
+   //Cloze
    ::Q7::
    At the moment, 
    { 
    ~Iran =Indonesia ~Saudi Arabia ~Pakistan 
    }
-    is the most populous country that's mainly muslim.
+    is the most populated country that's mainly muslim.
    Off course, south of it is
    {
     =Australia
     }
-    .One can catch cangaroos there, using a 
+    .One can catch kangaroo there, using a 
    {
     =net
     }
@@ -53,4 +53,4 @@
    {~Serbia 
        ~Kosovo 
        ~Germany
-       =Bosnien}
+       =Bosnia}
