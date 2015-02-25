@@ -20,7 +20,7 @@
  ***************************************************************************/
 """
 import traceback
-from questionClass import (
+from QuestionClass import (
     PicQuestion,
     MissingWordQuestion,
     Question,

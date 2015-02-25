@@ -19,12 +19,12 @@
  *                                                                         *
  ***************************************************************************/
 """
+from __future__ import unicode_literals
 import os.path
 import time
 import sys
 import codecs
 import random
-from __future__ import unicode_literals
 import PyQt4
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -80,7 +80,7 @@ class Quiz(object):
         localePath = os.path.join(
             self.plugin_dir, 'i18n', 'testgame_{}.qm'.format(locale))
         self.user_plugin_dir = QFileInfo(
-            QgsApplication.qgisUserDbFilePath()).path() + "python/plugins/Quiz"
+            QgsApplication.qgisUserDbFilePath()).path() + "python/plugins/Quiz-QGIS-Plugin"
 
         if os.path.exists(localePath):
             self.translator = QTranslator()
