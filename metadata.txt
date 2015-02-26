@@ -27,7 +27,7 @@ category=Education
 tags=Education, Quiz, Moodle, Test, E-Learning
 
 homepage=http://giswiki.hsr.ch/QGIS-Materialien
-tracker=https://git.hsr.ch/git/qgis_Quiz
+tracker=https://github.com/geometalab/Quiz-QGIS-Plugin/issues
 repository=https://github.com/geometalab/Quiz-QGIS-Plugin
 icon=icon.png
 # experimental flag
