@@ -185,7 +185,7 @@ class Quiz(object):
         self.dlg.ui.label_9.setText(self.translator[self.language][59])
         self.dlg.ui.label_9.setFont(self.globalFont)
         self.dlg.ui.label_10.setText(
-            "<a href='mailto:rkrucker@hsr.ch'>Rafael Krucker</a>")
+            "<a href='mailto:rkrucker@hsr.ch'>Stefan Keller</a>")
         self.dlg.ui.label_10.setOpenExternalLinks(True)
         self.dlg.ui.label_10.setFont(self.globalFont)
 
@@ -232,7 +232,7 @@ class Quiz(object):
                 QUrl("http://giswiki.hsr.ch/QGIS-Materialien")))
         self.dlg.ui.actionContact.setText(self.translator[self.language][44])
         self.dlg.ui.actionContact.triggered.connect(
-            lambda: QDesktopServices.openUrl(QUrl("mailto:rkrucker@hsr.ch")))
+            lambda: QDesktopServices.openUrl(QUrl("mailto:sfkeller@hsr.ch")))
         self.dlg.ui.actionSmaller.setText(self.translator[self.language][63])
         self.dlg.ui.actionSmaller.triggered.connect(self.fontSmaller)
         self.dlg.ui.actionBigger.setText(self.translator[self.language][62])

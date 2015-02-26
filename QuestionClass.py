@@ -19,7 +19,7 @@
  *                                                                         *
  ***************************************************************************/
 """
-
+import os
 
 class Question(object):
     '''
@@ -82,7 +82,7 @@ class PicQuestion(Question):
         Instantiation
         '''
         Question.__init__(self, titel, answersArray, boolArray)
-        self.picPath = ":/df/quizzes/images/" + self.rightAnswer + ".png"
+        self.picPath = os.path.dirname(__file__) + "/quizzes/images/" + self.rightAnswer + ".png"
 
 
 class MissingWordQuestion(Question):
