@@ -11,7 +11,7 @@
 
 //Picture-Question
 ::Q3::Welches Land ist das?
-{~Ungarn ~Russland ~Italien =Rumänien }
+{~Ungarn ~Russland ~Italien =Rumaenien }
 
 //Picture-Question
 ::Q4::Welches Land ist das?
@@ -27,7 +27,7 @@
 
 //Picture-Question
 ::Q7::Welches Land ist das? 
-{~Rumänien ~Türkei =Griechenland ~Norwegen }
+{~Rumaenien ~Tuerkei =Griechenland ~Norwegen }
 
 //Picture-Question
 ::Q8::Welches Land ist das? 
