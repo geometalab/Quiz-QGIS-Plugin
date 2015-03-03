@@ -79,8 +79,7 @@ class Quiz(object):
         locale = QSettings().value("locale/userLocale")[0:2]
         localePath = os.path.join(
             self.plugin_dir, 'i18n', 'testgame_{}.qm'.format(locale))
-        self.user_plugin_dir = QFileInfo(
-            QgsApplication.qgisUserDbFilePath()).path() + "python/plugins/Quiz-QGIS-Plugin"
+        self.user_plugin_dir = self.plugin_dir
 
         if os.path.exists(localePath):
             self.translator = QTranslator()
