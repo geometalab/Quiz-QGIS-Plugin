@@ -1,56 +1,56 @@
-   //Title:Example
-   //Instruction:Answer the questions
+//Title:Example
+//Instruction:Answer the questions
 
-   //Picture-Question
-   ::Q1::Which country is being displayed?
-   { ~Serbia
-    =Afghanistan 
-    ~Spain 
-    }
+//Picture-Question
+::Q1::Which country is being displayed?
+{ ~Serbia
+=Afghanistan 
+~Spain 
+}
 
-   //Text-Question
-   ::Q2::What's the capital of Islamabad?
-   { =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
+//Text-Question
+::Q2::What's the capital of Islamabad?
+{ =Islamabad ~Kabul ~Ulang Bator ~Doha ~Dehli ~Vientanne ~Riad }
 
-   //Multiple-Choice
-   ::Q3::These countries have a shared border with India:
-   { ~%-100%Thailand ~%33%Bangla Desh ~%33%Pakistan ~%33%China }
+//Multiple-Choice
+::Q3::These countries have a shared border with India:
+{ ~%-100%Thailand ~%33%Bangla Desh ~%33%Pakistan ~%33%China }
 
-   //Matching
-   ::Q4::Match these countries with their capitals:
-   {=Surinam -> Paramarimbo 
-       =Andorra -> Andorra de la Ville 
-       =China ->Peking 
-       =Afghanistan -> Kabul }
+//Matching
+::Q4::Match these countries with their capitals:
+{=Surinam -> Paramarimbo 
+   =Andorra -> Andorra de la Ville 
+   =China ->Peking 
+   =Afghanistan -> Kabul }
 
-   //Picture-Question
-   ::Q5::Which country is being displayed?
-   { ~Finland ~Estonia =Latvia ~Albania }
+//Picture-Question
+::Q5::Which country is being displayed?
+{ ~Finland ~Estonia =Latvia ~Albania }
 
-   //Picture-Question
-   ::Q6::Which country is this?
-   { =Ireland ~England ~France ~Ukraine }
+//Picture-Question
+::Q6::Which country is this?
+{ =Ireland ~England ~France ~Ukraine }
 
-   //Cloze
-   ::Q7::
-   At the moment, 
-   { 
-   ~Iran =Indonesia ~Saudi Arabia ~Pakistan 
-   }
-    is the most populated country that's mainly muslim.
-   Off course, south of it is
-   {
-    =Australia
-    }
-    .One can catch kangaroo there, using a 
-   {
-    =net
-    }
-    .
+//Cloze
+::Q7::
+At the moment, 
+{ 
+~Iran =Indonesia ~Saudi Arabia ~Pakistan 
+}
+is the most populated country that's mainly muslim.
+Off course, south of it is
+{
+=Australia
+}
+.One can catch kangaroo there, using a 
+{
+=net
+}
+.
 
-   //Picture-Question
-   ::Q8::Which country is being displayed?
-   {~Serbia 
-       ~Kosovo 
-       ~Germany
-       =Bosnia}
+//Picture-Question
+::Q8::Which country is being displayed?
+{~Serbia 
+   ~Kosovo 
+   ~Germany
+   =Bosnia}
