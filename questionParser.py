@@ -41,80 +41,96 @@ class QuestionParser(object):
         self.dirty = False
         self.failedBlocks = []
         self.path = path
-        with codecs.open(self.path, 'r', 'utf-8') as f:
-            allQuests = []
-            self.questionType = []
-            lines = []
-            for index, line in enumerate(f):
-                if line.strip() == '':
-                    line = line.replace('\t', '')
-                    line = line.replace(' ', '')
-                lines.append(line)
-            input_text = ''.join(lines)
-            if '\r\n\r\n' in input_text:
-                allQuestions = input_text.split('\r\n\r\n')
-            else:
-                allQuestions = input_text.split('\n\n')
-            self.instruction = ''
-            self.quizTitle = ''
-            for index, question in enumerate(allQuestions):
+        encodings = ['utf-8', 'mbcs']
+        
+        success = False
+        for encoding in encodings:
+            with codecs.open(self.path, 'r', encoding) as f:
                 try:
-                    self.answersArray = []
-                    self.boolArray = []
-                    self.percentages = []
-                    self.textArray = []
-                    self.title = ''
-                    if question.count('{') >= 1:
-                        if question.count('}') == 1:
-                            if '::' in question:
-                                titleSplit = question.split('::')
-                                titleAndAnswers = titleSplit[2].split('{')
-                                self.title = titleAndAnswers[0]
-                                self.answers = titleAndAnswers[1].split('}')[0]
-                            else:
-                                titleSplit = question.split('{')
-                                self.title = titleSplit[0]
-                                self.answers = titleSplit[1].split('}')[0]
-                            if '//Picture-Question' in question:
-                                currQuestion = self.makePictureQuestion(
-                                    self.answers)
-                            elif '->' in question:
-                                currQuestion = self.makeMatchingQuestion(
-                                    self.answers)
-                                if len(currQuestion.answers) > 12:
-                                    self.failedBlocks.append(
-                                        str(index + 1) +
-                                        ' Too many match-options')
-                                for i in currQuestion.answers:
-                                    for k in currQuestion.answers:
-                                        if k == i:
-                                            self.failedBlocks.append(
-                                                str(index + 1))
-                            elif '~%' in question:
-                                currQuestion = self.makeMultipleChoiceQuestion(
-                                    self.answers)
-                            elif not '~' in question:
-                                currQuestion = self.makeMissingWordQuestion(
-                                    self.answers, question)
-                            else:
-                                currQuestion = self.makeStringQuestion(
-                                    self.answers)
-                        else:
-                            currQuestion = self.makeMissingWordQuestion(
-                                self.answers, question)
-                        allQuests.append(currQuestion)
-                    else:
-                        for line in question.split('\r\n'):
-                            if "//Title" in line:
-                                self.quizTitle = line[9:]
-                            if "//Instruction" in line:
-                                self.instruction = line[14:]
+                    allQuests = self.parse_file(f)
+                    success = True
                 except:
-                    traceback.print_exc()
-                    self.dirty = True
-                    self.failedBlocks.append(str(index + 1))
+                    # TODO error popup
+                    pass
+        if not success:
+            # TODO error popup
+            pass
         self.allQuestions = allQuests
 
+    def parse_file(self, f):
+        allQuests = []
+        self.questionType = []
+        lines = []
+        for index, line in enumerate(f):
+            if line.strip() == '':
+                line = line.replace('\t', '')
+                line = line.replace(' ', '')
+            lines.append(line)
+        input_text = ''.join(lines)
+        if '\r\n\r\n' in input_text:
+            allQuestions = input_text.split('\r\n\r\n')
+        else:
+            allQuestions = input_text.split('\n\n')
+        self.instruction = ''
+        self.quizTitle = ''
+        for index, question in enumerate(allQuestions):
+            try:
+                self.answersArray = []
+                self.boolArray = []
+                self.percentages = []
+                self.textArray = []
+                self.title = ''
+                if question.count('{') >= 1:
+                    if question.count('}') == 1:
+                        if '::' in question:
+                            titleSplit = question.split('::')
+                            titleAndAnswers = titleSplit[2].split('{')
+                            self.title = titleAndAnswers[0]
+                            self.answers = titleAndAnswers[1].split('}')[0]
+                        else:
+                            titleSplit = question.split('{')
+                            self.title = titleSplit[0]
+                            self.answers = titleSplit[1].split('}')[0]
+                        if '//Picture-Question' in question:
+                            currQuestion = self.makePictureQuestion(
+                                self.answers)
+                        elif '->' in question:
+                            currQuestion = self.makeMatchingQuestion(
+                                self.answers)
+                            if len(currQuestion.answers) > 12:
+                                self.failedBlocks.append(
+                                    str(index + 1) +
+                                    ' Too many match-options')
+                            for i in currQuestion.answers:
+                                for k in currQuestion.answers:
+                                    if k == i:
+                                        self.failedBlocks.append(
+                                            str(index + 1))
+                        elif '~%' in question:
+                            currQuestion = self.makeMultipleChoiceQuestion(
+                                self.answers)
+                        elif not '~' in question:
+                            currQuestion = self.makeMissingWordQuestion(
+                                self.answers, question)
+                        else:
+                            currQuestion = self.makeStringQuestion(
+                                self.answers)
+                    else:
+                        currQuestion = self.makeMissingWordQuestion(
+                            self.answers, question)
+                    allQuests.append(currQuestion)
+                else:
+                    for line in question.split('\r\n'):
+                        if "//Title" in line:
+                            self.quizTitle = line.split(':')[1]
+                        if "//Instruction" in line:
+                            self.instruction = line[14:]
+            except:
+                traceback.print_exc()
+                self.dirty = True
+                self.failedBlocks.append(str(index + 1))
+        return allQuests
+    
     def makePictureQuestion(self, answers):
         '''
         Generates a picture question
