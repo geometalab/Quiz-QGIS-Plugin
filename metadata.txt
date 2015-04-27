@@ -13,8 +13,8 @@ name=Quiz
 qgisMinimumVersion=2.0
 description=Plugin for loading and displaying quizzes written in Moodle's GIFT-format
 version=0.1
-author=Stefan Keller
-email=sfkeller@hsr.ch
+author=geometalab
+email=geometalab@gmail.com
 category=Education
 # end of mandatory metadata
 
