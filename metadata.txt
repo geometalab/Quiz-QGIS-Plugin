@@ -26,7 +26,7 @@ category=Education
 # tags are comma separated with spaces allowed
 tags=Education, Quiz, Moodle, Test, E-Learning
 
-homepage=http://giswiki.hsr.ch/QGIS-Materialien
+homepage=http://giswiki.hsr.ch/QGIS_Quiz_Plugin
 tracker=https://github.com/geometalab/Quiz-QGIS-Plugin/issues
 repository=https://github.com/geometalab/Quiz-QGIS-Plugin
 icon=icon.png
